@@ -1,0 +1,38 @@
+<svg width="2000" height="2000" viewBox="0 0 2000 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- T-Shirt Mockup - Peach -->
+  <rect width="2000" height="2000" fill="transparent"/>
+  
+  <!-- T-Shirt Body -->
+  <path d="M600 500 L500 700 L500 1600 Q500 1650 550 1650 L1450 1650 Q1500 1650 1500 1600 L1500 700 L1400 500 L1200 550 L1000 500 L800 550 L600 500 Z" 
+        fill="#f4a89f" 
+        stroke="#ed9a8e" 
+        stroke-width="2"/>
+  
+  <!-- Sleeves -->
+  <ellipse cx="550" cy="650" rx="120" ry="80" fill="#f4a89f" stroke="#ed9a8e" stroke-width="2"/>
+  <ellipse cx="1450" cy="650" rx="120" ry="80" fill="#f4a89f" stroke="#ed9a8e" stroke-width="2"/>
+  
+  <!-- Collar -->
+  <path d="M900 500 Q1000 480 1100 500 L1100 550 Q1000 530 900 550 Z" 
+        fill="#ed9a8e" 
+        stroke="#e68c7e" 
+        stroke-width="1"/>
+  
+  <!-- Print Area Guide (invisible in production) -->
+  <rect x="750" y="700" width="500" height="500" fill="none" stroke="#d07060" stroke-width="2" stroke-dasharray="10,10" opacity="0.3"/>
+  
+  <!-- Shadow/Highlight for depth -->
+  <ellipse cx="1000" cy="1100" rx="350" ry="400" fill="url(#shadow)" opacity="0.1"/>
+  
+  <defs>
+    <radialGradient id="shadow">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Placeholder Text -->
+  <text x="1000" y="1900" font-family="Arial, sans-serif" font-size="24" fill="#999999" text-anchor="middle">
+    Peach T-Shirt Mockup - Replace with real image
+  </text>
+</svg>
