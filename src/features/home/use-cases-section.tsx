@@ -108,7 +108,7 @@ export function UseCasesSection() {
             Perfect For <span className="text-white">Every Occasion</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            From corporate branding to personal projects, we've got you covered.
+            From corporate branding to personal projects, we&apos;ve got you covered.
           </p>
         </motion.div>
       </div>
@@ -226,7 +226,7 @@ export function UseCasesSection() {
             Ready to Start Your Project?
           </h3>
           <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto">
-            Whether you need 10 or 10,000 pieces, we're here to help bring your vision to life.
+            Whether you need 10 or 10,000 pieces, we&apos;re here to help bring your vision to life.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

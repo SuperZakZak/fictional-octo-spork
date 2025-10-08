@@ -153,7 +153,7 @@ export function QuizSection() {
             Not Sure Which <span className="gradient-text">Method to Choose?</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Take our quick quiz and we'll recommend the perfect printing method for your project.
+            Take our quick quiz and we&apos;ll recommend the perfect printing method for your project.
           </p>
         </motion.div>
 

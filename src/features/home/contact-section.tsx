@@ -88,7 +88,7 @@ export function ContactSection() {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to start your project? Fill out the form below and we'll get back to you within 24 hours.
+            Ready to start your project? Fill out the form below and we&apos;ll get back to you within 24 hours.
           </p>
         </motion.div>
 
@@ -113,7 +113,7 @@ export function ContactSection() {
                   </div>
                   <h4 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h4>
                   <p className="text-gray-600">
-                    We've received your message and will get back to you soon.
+                    We&apos;ve received your message and will get back to you soon.
                   </p>
                 </motion.div>
               ) : (
