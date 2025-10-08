@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Cookie Consent</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+        }
+        button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 8px;
+        }
+        button:hover {
+            background: #333;
+        }
+        .success {
+            color: green;
+            margin-top: 1rem;
+            display: none;
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-size: 12px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍪 Cookie Consent Manager</h1>
+        <p>Clear cookie consent to test the banner again</p>
+        
+        <button onclick="clearConsent()">Clear Cookie Consent</button>
+        <button onclick="checkStatus()">Check Status</button>
+        
+        <div class="success" id="success">
+            ✅ Cookie consent cleared! Reload the page to see the banner.
+        </div>
+        
+        <div class="info" id="status">
+            Click "Check Status" to see current state
+        </div>
+        
+        <hr style="margin: 2rem 0; border: none; border-top: 1px solid #e0e0e0;">
+        
+        <button onclick="goToHome()">Go to Homepage</button>
+    </div>
+
+    <script>
+        function clearConsent() {
+            localStorage.removeItem('blooma_cookie_consent');
+            document.getElementById('success').style.display = 'block';
+            checkStatus();
+        }
+
+        function checkStatus() {
+            const consent = localStorage.getItem('blooma_cookie_consent');
+            const statusDiv = document.getElementById('status');
+            
+            if (consent) {
+                const data = JSON.parse(consent);
+                statusDiv.innerHTML = `
+                    <strong>Current Status:</strong><br>
+                    Has Consented: ${data.hasConsented}<br>
+                    Timestamp: ${new Date(data.timestamp).toLocaleString()}<br>
+                    <br>
+                    <strong>Preferences:</strong><br>
+                    Essential: ${data.preferences.necessary}<br>
+                    Analytics: ${data.preferences.analytics}<br>
+                    Marketing: ${data.preferences.marketing}<br>
+                    Preferences: ${data.preferences.preferences}
+                `;
+            } else {
+                statusDiv.innerHTML = '<strong>No cookie consent found</strong><br>The banner will appear on next page load.';
+            }
+        }
+
+        function goToHome() {
+            window.location.href = '/';
+        }
+
+        // Check status on load
+        checkStatus();
+    </script>
+</body>
+</html>

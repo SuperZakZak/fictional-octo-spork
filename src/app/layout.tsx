@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { CookieConsentManager } from "@/components/cookie-consent-manager";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <CookieConsentManager />
       </body>
     </html>
   );

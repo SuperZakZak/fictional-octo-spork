@@ -1,11 +1,13 @@
 "use client";
 
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Cookie } from "lucide-react";
 import Image from "next/image";
 import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
+import { useCookieSettings } from "@/hooks/use-cookie-settings";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { open: openCookieSettings } = useCookieSettings();
 
   return (
     <footer className="bg-black text-white border-t-4 border-white">
@@ -87,17 +89,24 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
             © {currentYear} Blooma. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
               Privacy Policy
             </a>
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
               Terms of Service
             </a>
+            <button
+              onClick={openCookieSettings}
+              className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors group"
+            >
+              <Cookie size={16} className="group-hover:rotate-12 transition-transform" />
+              Cookie Settings
+            </button>
           </div>
         </div>
       </div>

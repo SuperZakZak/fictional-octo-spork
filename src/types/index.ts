@@ -215,3 +215,27 @@ export interface SEOConfig {
   ogImage?: string;
   canonical?: string;
 }
+
+// Cookie Consent Types
+export type CookieCategory = "necessary" | "analytics" | "marketing" | "preferences";
+
+export interface CookiePreferences {
+  necessary: boolean; // Always true, can't be disabled
+  analytics: boolean;
+  marketing: boolean;
+  preferences: boolean;
+}
+
+export interface CookieConsentState {
+  hasConsented: boolean;
+  preferences: CookiePreferences;
+  timestamp: number;
+}
+
+export interface CookieCategoryInfo {
+  id: CookieCategory;
+  name: string;
+  description: string;
+  required: boolean;
+  examples: string[];
+}

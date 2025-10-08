@@ -43,6 +43,7 @@ const toteColors = [
 export function ConfiguratorSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
@@ -106,6 +107,14 @@ export function ConfiguratorSection() {
     },
     maxFiles: 1,
   });
+
+  const handleUploadClick = () => {
+    // Trigger file input click programmatically
+    const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (input) {
+      input.click();
+    }
+  };
 
   const handleDownloadQuote = () => {
     // In a real app, this would generate a PDF
@@ -203,10 +212,14 @@ export function ConfiguratorSection() {
 
                 {/* Instructions Overlay */}
                 {!uploadedImage && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center text-gray-600 bg-white/80 backdrop-blur-sm rounded-2xl p-8">
+                  <div 
+                    className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                    onClick={handleUploadClick}
+                  >
+                    <div className="text-center text-gray-600 bg-white/80 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/90 transition-all">
                       <Upload size={48} className="mx-auto mb-4 text-primary-500" />
                       <p className="font-medium">Upload your design to preview</p>
+                      <p className="text-sm text-gray-500 mt-2">Click here to upload</p>
                     </div>
                   </div>
                 )}

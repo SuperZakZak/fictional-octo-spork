@@ -46,6 +46,7 @@ const products = [
     colors: ["#000000", "#FFFFFF", "#1a1a2e", "#d1d1d1", "#f5e6d3", "#FFB6C1"],
     sizes: ["S", "M", "L", "XL", "XXL"],
     description: "Comfortable heavyweight hoodie with kangaroo pocket",
+    priceFrom: "43",
   },
   {
     id: "tote",
@@ -191,8 +192,8 @@ export function ProductsSection() {
                   {selectedProduct.name}
                 </h3>
                 {selectedProduct.priceFrom && (
-                  <div className="bg-vibrant-yellow text-black px-4 py-2 rounded-full font-bold text-lg">
-                    от €{selectedProduct.priceFrom}
+                  <div className="bg-white border-2 border-black text-black px-6 py-3 rounded-full font-medium transition-all hover:bg-gray-100">
+                    from €{selectedProduct.priceFrom}
                   </div>
                 )}
               </div>
