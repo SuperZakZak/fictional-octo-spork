@@ -6,7 +6,7 @@ const downloadPriceListSchema = z.object({
   email: z.string().email("Invalid email address"),
   siteLocale: z.string().optional(),
   browserLocale: z.string().optional(),
-  googleDriveUrl: z.string().url("Invalid Google Drive URL"),
+  googleDriveUrl: z.string().optional(), // Made optional - will validate later if provided
 });
 
 // Webhook URL
@@ -15,9 +15,11 @@ const WEBHOOK_URL = "https://n8n-production-9d5d.up.railway.app/webhook/price-as
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log("📥 Received request body:", body);
 
     // Validate input
     const validatedData = downloadPriceListSchema.parse(body);
+    console.log("✅ Validation passed:", validatedData);
 
     // Send webhook with event information
     try {
@@ -30,6 +32,9 @@ export async function POST(request: NextRequest) {
         userAgent: request.headers.get("user-agent") || "unknown",
       };
 
+      console.log("🚀 Sending webhook to:", WEBHOOK_URL);
+      console.log("📦 Webhook payload:", webhookPayload);
+
       const webhookResponse = await fetch(WEBHOOK_URL, {
         method: "POST",
         headers: {
@@ -38,12 +43,17 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify(webhookPayload),
       });
 
+      console.log("📡 Webhook response status:", webhookResponse.status);
+
       if (!webhookResponse.ok) {
-        console.error("Webhook failed:", await webhookResponse.text());
+        const errorText = await webhookResponse.text();
+        console.error("❌ Webhook failed:", errorText);
         // Don't fail the entire request if webhook fails
+      } else {
+        console.log("✅ Webhook sent successfully!");
       }
     } catch (webhookError) {
-      console.error("Webhook error:", webhookError);
+      console.error("❌ Webhook error:", webhookError);
       // Don't fail the entire request if webhook fails
     }
 
@@ -52,7 +62,7 @@ export async function POST(request: NextRequest) {
       {
         success: true,
         message: "Price list download initiated",
-        downloadUrl: validatedData.googleDriveUrl,
+        downloadUrl: validatedData.googleDriveUrl || null,
       },
       { status: 200 }
     );
