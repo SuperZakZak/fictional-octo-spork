@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { FileText, ShoppingCart, CreditCard, Truck, RotateCcw, Shield, Scale, AlertCircle } from "lucide-react";
+import { FileText, ShoppingCart, Package, RefreshCw, Shield, AlertCircle, CreditCard, Truck, RotateCcw, Scale } from "lucide-react";
+import { PrintButton } from "@/components/print-button";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -459,12 +460,7 @@ export default function TermsPage() {
 
           {/* Print Button */}
           <div className="mt-12 pt-8 border-t border-gray-200 flex justify-center print:hidden">
-            <button
-              onClick={() => window.print()}
-              className="px-6 py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-all font-medium shadow-lg hover:shadow-xl"
-            >
-              Print This Page
-            </button>
+            <PrintButton />
           </div>
         </div>
       </div>

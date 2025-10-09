@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Cookie, Shield, Settings, ExternalLink } from "lucide-react";
+import { PrintButton } from "@/components/print-button";
 
 export const metadata: Metadata = {
   title: "Cookie Policy | Blooma",
@@ -298,12 +299,7 @@ export default function CookiePolicyPage() {
 
           {/* Print Button */}
           <div className="mt-12 pt-8 border-t border-gray-200 flex justify-center print:hidden">
-            <button
-              onClick={() => window.print()}
-              className="px-6 py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-all font-medium shadow-lg hover:shadow-xl"
-            >
-              Print This Page
-            </button>
+            <PrintButton />
           </div>
         </div>
       </div>
