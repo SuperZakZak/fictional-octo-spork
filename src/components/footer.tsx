@@ -94,11 +94,17 @@ export function Footer() {
             © {currentYear} Blooma. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <a href="/legal-notice" className="text-gray-400 hover:text-white text-sm transition-colors">
+              Legal Notice
+            </a>
+            <a href="/privacy-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Terms of Service
+            <a href="/cookie-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
+              Cookie Policy
+            </a>
+            <a href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+              Terms & Conditions
             </a>
             <button
               onClick={openCookieSettings}

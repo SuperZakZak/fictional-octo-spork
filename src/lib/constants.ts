@@ -159,7 +159,7 @@ export const VINYL_FEATURES = [
   { text: "Perfect for simple designs", available: true },
   { text: "Matte finish", available: true },
   { text: "Durable and long-lasting", available: true },
-  { text: "Limited color gradients", available: false },
+  { text: "Special effect options (Velvet, metallic, reflective and more)", available: true },
   { text: "Best for 1-3 colors", available: true },
   { text: "No photo-realistic prints", available: false },
 ] as const;
@@ -190,6 +190,17 @@ export const SUCCESS_MESSAGES = {
   FORM_SUBMITTED: "Thank you! We'll get back to you soon.",
   FILE_UPLOADED: "File uploaded successfully.",
   QUOTE_GENERATED: "Your quote has been generated.",
+} as const;
+
+// Price List Configuration
+export const PRICE_LIST_CONFIG = {
+  // Replace this URL with your actual Google Drive direct download link
+  // To get a direct download link from Google Drive:
+  // 1. Right-click on the file in Google Drive
+  // 2. Get link -> Anyone with the link can view
+  // 3. Copy the file ID from the URL (https://drive.google.com/file/d/FILE_ID/view)
+  // 4. Use format: https://drive.google.com/uc?export=download&id=FILE_ID
+  googleDriveUrl: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_HERE",
 } as const;
 
 // Meta Tags

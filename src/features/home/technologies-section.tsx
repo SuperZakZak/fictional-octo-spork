@@ -14,7 +14,7 @@ const vinylFeatures = [
   { text: "Perfect for simple designs", available: true },
   { text: "Matte finish", available: true },
   { text: "Durable and long-lasting", available: true },
-  { text: "Limited color gradients", available: false },
+  { text: "Special effect options (Velvet, metallic, reflective and more)", available: true },
   { text: "Best for 1-3 colors", available: true },
   { text: "No photo-realistic prints", available: false },
 ];

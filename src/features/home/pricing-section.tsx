@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Calculator, TrendingDown, Zap, AlertCircle } from "lucide-react";
+import { Calculator, TrendingDown, Zap, AlertCircle, Download, Mail } from "lucide-react";
 import {
   PrintSize,
   SIZE_DIMENSIONS,
@@ -10,6 +10,8 @@ import {
   requiresCustomQuote,
   getDiscountPercentage,
 } from "@/lib/pricing";
+import { getLocaleInfo } from "@/lib/locale-utils";
+import { PRICE_LIST_CONFIG } from "@/lib/constants";
 
 const sizes: Array<{ id: string; name: PrintSize }> = [
   { id: "a5", name: "A5" },
@@ -24,6 +26,10 @@ export function PricingSection() {
   
   const [selectedSize, setSelectedSize] = useState(sizes[1]); // Default A4
   const [quantity, setQuantity] = useState(20);
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   // Calculate prices using the new pricing system
   const priceComparison = comparePrices(selectedSize.name, quantity);
@@ -35,6 +41,63 @@ export function PricingSection() {
   const cheaperOption = priceComparison.cheaperMethod;
   const savings = priceComparison.savings.toFixed(2);
   const sizeDimensions = SIZE_DIMENSIONS[selectedSize.name];
+
+  const handleDownloadPriceList = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Get locale information
+      const localeInfo = getLocaleInfo();
+
+      // Send request to API endpoint (sends webhook and returns download URL)
+      const response = await fetch('/api/download-price-list', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          siteLocale: localeInfo.siteLocale,
+          browserLocale: localeInfo.browserLocale,
+          googleDriveUrl: PRICE_LIST_CONFIG.googleDriveUrl,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to process request');
+      }
+
+      // Trigger download from Google Drive
+      if (data.downloadUrl) {
+        // Open Google Drive link in new tab to trigger download
+        window.open(data.downloadUrl, '_blank');
+      }
+
+      setEmailSubmitted(true);
+      setEmail("");
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        setShowEmailForm(false);
+        setEmailSubmitted(false);
+      }, 3000);
+
+    } catch (error) {
+      console.error('Download error:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section
@@ -162,7 +225,7 @@ export function PricingSection() {
                     €{vinylTotal.toFixed(2)}
                   </div>
                   <div className="text-sm text-gray-600">
-                    €{priceComparison.vinyl.perUnit.toFixed(2)} per unit
+                    €{priceComparison.vinyl.perUnit.toFixed(2)} per print
                   </div>
                   <div className="text-xs text-gray-500 mt-2">
                     Clean one-color graphics
@@ -192,7 +255,7 @@ export function PricingSection() {
                     €{dtfTotal.toFixed(2)}
                   </div>
                   <div className="text-sm text-gray-600">
-                    €{priceComparison.dtf.perUnit.toFixed(2)} per unit
+                    €{priceComparison.dtf.perUnit.toFixed(2)} per print
                   </div>
                   <div className="text-xs text-gray-500 mt-2">
                     Full-color, even photos
@@ -218,29 +281,81 @@ export function PricingSection() {
               </motion.div>
             )}
 
-            {/* Bulk Discounts Info */}
+            {/* Get Full Price List */}
             <div className="bg-gray-50 border-2 border-black rounded-2xl p-6">
-              <h4 className="font-bold text-black mb-4">Volume Pricing Tiers</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <div className={`p-3 rounded-lg ${quantity >= 5 && quantity <= 10 ? 'bg-vibrant-yellow/20 border-2 border-vibrant-yellow' : ''}`}>
-                  <div className="text-2xl font-bold text-vibrant-pink">Tier 1</div>
-                  <div className="text-sm text-gray-600">5-10 units</div>
-                  <div className="text-xs text-gray-500 mt-1">Standard pricing</div>
+              {!showEmailForm ? (
+                <div className="text-center">
+                  <h4 className="font-bold text-black mb-3">Want to see all pricing options?</h4>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Get our complete price list with all sizes and volume discounts
+                  </p>
+                  <button
+                    onClick={() => setShowEmailForm(true)}
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-all font-medium"
+                  >
+                    <Download size={20} />
+                    <span>Get Full Price List</span>
+                  </button>
                 </div>
-                <div className={`p-3 rounded-lg ${quantity >= 11 && quantity <= 20 ? 'bg-vibrant-yellow/20 border-2 border-vibrant-yellow' : ''}`}>
-                  <div className="text-2xl font-bold text-vibrant-purple">Tier 2</div>
-                  <div className="text-sm text-gray-600">11-20 units</div>
-                  <div className="text-xs text-gray-500 mt-1">Better rates</div>
+              ) : (
+                <div>
+                  {!emailSubmitted ? (
+                    <form onSubmit={handleDownloadPriceList} className="space-y-4">
+                      <div>
+                        <h4 className="font-bold text-black mb-2">Enter your email to download</h4>
+                        <p className="text-sm text-gray-600 mb-4">
+                          We'll send you the complete price list right away
+                        </p>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="flex-1 relative">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                          <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="your@email.com"
+                            required
+                            className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-full focus:border-black focus:outline-none"
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <span className="animate-spin">⏳</span>
+                              <span>Sending...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Download size={20} />
+                              <span>Download</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowEmailForm(false)}
+                        className="text-sm text-gray-600 hover:text-black transition-colors"
+                      >
+                        ← Back
+                      </button>
+                    </form>
+                  ) : (
+                    <div className="text-center py-4">
+                      <div className="text-4xl mb-3">✅</div>
+                      <h4 className="font-bold text-black mb-2">Price list downloaded!</h4>
+                      <p className="text-sm text-gray-600">
+                        Check your downloads folder for the complete price list
+                      </p>
+                    </div>
+                  )}
                 </div>
-                <div className={`p-3 rounded-lg ${quantity >= 21 && quantity <= 50 ? 'bg-vibrant-yellow/20 border-2 border-vibrant-yellow' : ''}`}>
-                  <div className="text-2xl font-bold text-vibrant-blue">Tier 3</div>
-                  <div className="text-sm text-gray-600">21-50 units</div>
-                  <div className="text-xs text-gray-500 mt-1">Best value</div>
-                </div>
-              </div>
-              <div className="mt-4 text-center text-sm text-gray-600">
-                <span className="font-medium">51+ units:</span> Contact us for custom pricing
-              </div>
+              )}
             </div>
 
             {/* CTA */}

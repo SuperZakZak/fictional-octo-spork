@@ -4,6 +4,8 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Send, Mail, Phone, MapPin, MessageSquare, CheckCircle } from "lucide-react";
 import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
+import { PrivacyConsentCheckbox } from "@/components/privacy-consent-checkbox";
+import { MarketingConsentCheckbox } from "@/components/marketing-consent-checkbox";
 
 interface FormData {
   name: string;
@@ -12,6 +14,8 @@ interface FormData {
   product: string;
   quantity: string;
   message: string;
+  privacyConsent: boolean;
+  marketingConsent: boolean;
 }
 
 export function ContactSection() {
@@ -25,10 +29,13 @@ export function ContactSection() {
     product: "",
     quantity: "",
     message: "",
+    privacyConsent: false,
+    marketingConsent: false,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showPrivacyError, setShowPrivacyError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -39,6 +46,14 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate privacy consent
+    if (!formData.privacyConsent) {
+      setShowPrivacyError(true);
+      return;
+    }
+    
+    setShowPrivacyError(false);
     setIsSubmitting(true);
 
     // Simulate API call - In production, integrate with AmoCRM/HubSpot
@@ -57,6 +72,8 @@ export function ContactSection() {
           product: "",
           quantity: "",
           message: "",
+          privacyConsent: false,
+          marketingConsent: false,
         });
       }, 3000);
     }, 1500);
@@ -222,6 +239,23 @@ export function ContactSection() {
                     />
                   </div>
 
+                  {/* Privacy Consent */}
+                  <PrivacyConsentCheckbox
+                    checked={formData.privacyConsent}
+                    onChange={(checked) => {
+                      setFormData({ ...formData, privacyConsent: checked });
+                      if (checked) setShowPrivacyError(false);
+                    }}
+                    error={showPrivacyError}
+                    required={true}
+                  />
+
+                  {/* Marketing Consent */}
+                  <MarketingConsentCheckbox
+                    checked={formData.marketingConsent}
+                    onChange={(checked) => setFormData({ ...formData, marketingConsent: checked })}
+                  />
+
                   {/* Submit Button */}
                   <button
                     type="submit"
@@ -253,42 +287,122 @@ export function ContactSection() {
             className="space-y-8"
           >
             {/* Contact Information */}
-            <div className="bg-gradient-to-br from-primary-500 to-accent-500 rounded-3xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+            <div className="relative bg-black rounded-3xl p-8 text-white overflow-hidden border-4 border-black">
+              {/* Animated Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <motion.path
+                    d="M0,50 Q25,30 50,50 T100,50"
+                    stroke="white"
+                    strokeWidth="0.5"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={isInView ? { pathLength: 1 } : {}}
+                    transition={{ duration: 2, ease: "easeInOut" }}
+                  />
+                </svg>
+              </div>
 
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail size={20} />
-                  </div>
-                  <div>
-                    <div className="font-medium mb-1">Email</div>
-                    <a href={`mailto:${SITE_CONFIG.email}`} className="text-white/90 hover:text-white break-all">
-                      {SITE_CONFIG.email}
-                    </a>
-                  </div>
-                </div>
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone size={20} />
-                  </div>
-                  <div>
-                    <div className="font-medium mb-1">Phone / WhatsApp / Telegram</div>
-                    <a href={`tel:${SITE_CONFIG.phone}`} className="text-white/90 hover:text-white">
-                      {SITE_CONFIG.phone}
-                    </a>
-                  </div>
-                </div>
+                <div className="space-y-4">
+                  {/* Email */}
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={isInView ? { x: 0, opacity: 1 } : {}}
+                    transition={{ delay: 0.1, duration: 0.4 }}
+                    className="p-6 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10"
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Mail size={20} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium mb-1 text-gray-300">Email</div>
+                        <a href={`mailto:${SITE_CONFIG.email}`} className="text-white hover:text-primary-400 transition-colors break-all">
+                          {SITE_CONFIG.email}
+                        </a>
+                      </div>
+                    </div>
+                    {/* Animated line */}
+                    <motion.div
+                      className="mt-4 h-0.5 bg-white/20 rounded-full overflow-hidden"
+                      initial={{ width: 0 }}
+                      animate={isInView ? { width: "100%" } : {}}
+                      transition={{ duration: 1, delay: 0.3 }}
+                    >
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-primary-400 to-primary-600"
+                        animate={{ x: ["-100%", "100%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      />
+                    </motion.div>
+                  </motion.div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin size={20} />
-                  </div>
-                  <div>
-                    <div className="font-medium mb-1">Location</div>
-                    <p className="text-white/90">{SITE_CONFIG.location}</p>
-                  </div>
+                  {/* Phone / WhatsApp / Telegram */}
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={isInView ? { x: 0, opacity: 1 } : {}}
+                    transition={{ delay: 0.2, duration: 0.4 }}
+                    className="p-6 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10"
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Phone size={20} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium mb-1 text-gray-300">Phone / WhatsApp / Telegram</div>
+                        <a href={`tel:${SITE_CONFIG.phone}`} className="text-white hover:text-primary-400 transition-colors">
+                          {SITE_CONFIG.phone}
+                        </a>
+                      </div>
+                    </div>
+                    {/* Animated line */}
+                    <motion.div
+                      className="mt-4 h-0.5 bg-white/20 rounded-full overflow-hidden"
+                      initial={{ width: 0 }}
+                      animate={isInView ? { width: "100%" } : {}}
+                      transition={{ duration: 1, delay: 0.4 }}
+                    >
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-green-400 to-green-600"
+                        animate={{ x: ["-100%", "100%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                      />
+                    </motion.div>
+                  </motion.div>
+
+                  {/* Location */}
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={isInView ? { x: 0, opacity: 1 } : {}}
+                    transition={{ delay: 0.3, duration: 0.4 }}
+                    className="p-6 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10"
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <MapPin size={20} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium mb-1 text-gray-300">Location</div>
+                        <p className="text-white">{SITE_CONFIG.location}</p>
+                      </div>
+                    </div>
+                    {/* Animated line */}
+                    <motion.div
+                      className="mt-4 h-0.5 bg-white/20 rounded-full overflow-hidden"
+                      initial={{ width: 0 }}
+                      animate={isInView ? { width: "100%" } : {}}
+                      transition={{ duration: 1, delay: 0.5 }}
+                    >
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-accent-400 to-accent-600"
+                        animate={{ x: ["-100%", "100%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 1 }}
+                      />
+                    </motion.div>
+                  </motion.div>
                 </div>
               </div>
             </div>
