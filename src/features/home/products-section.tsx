@@ -143,12 +143,12 @@ export function ProductsSection() {
               </motion.div>
             </div>
 
-            {/* Floating Badge */}
+            {/* Floating Badge - Hidden on mobile */}
             <motion.div
               initial={{ scale: 0 }}
               animate={isInView ? { scale: 1 } : {}}
               transition={{ delay: 0.5, type: "spring" }}
-              className="absolute top-4 right-4 bg-black text-white rounded-full px-4 py-2 shadow-lg flex items-center space-x-2"
+              className="hidden md:flex absolute top-4 right-4 bg-black text-white rounded-full px-4 py-2 shadow-lg items-center space-x-2"
             >
               <Palette className="text-vibrant-yellow" size={16} />
               <span className="text-sm font-medium">Premium Quality</span>
@@ -187,17 +187,14 @@ export function ProductsSection() {
 
             {/* Product Info */}
             <div className="mb-8">
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="text-3xl font-bold text-gray-900">
-                  {selectedProduct.name}
-                </h3>
-                {selectedProduct.priceFrom && (
-                  <div className="bg-white border-2 border-black text-black px-6 py-3 rounded-full font-medium transition-all hover:bg-gray-100">
-                    from €{selectedProduct.priceFrom}
-                  </div>
-                )}
-              </div>
-              <p className="text-lg text-gray-600 mb-1">{selectedProduct.brand}</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                {selectedProduct.name} • {selectedProduct.brand}
+              </h3>
+              {selectedProduct.priceFrom && (
+                <p className="text-lg text-gray-600 mb-3">
+                  from €{selectedProduct.priceFrom}
+                </p>
+              )}
               <p className="text-gray-600">{selectedProduct.description}</p>
             </div>
 

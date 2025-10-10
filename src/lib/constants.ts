@@ -203,6 +203,17 @@ export const PRICE_LIST_CONFIG = {
   googleDriveUrl: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_HERE",
 } as const;
 
+// Quote Request Configuration
+export const QUOTE_REQUEST_CONFIG = {
+  // n8n webhook URL for quote requests
+  webhookUrl: "https://n8n-production-9d5d.up.railway.app/webhook/quote-request",
+  // Maximum screenshot size (in pixels)
+  maxScreenshotWidth: 1200,
+  maxScreenshotHeight: 1200,
+  // Screenshot quality (0-1)
+  screenshotQuality: 0.85,
+} as const;
+
 // Meta Tags
 export const DEFAULT_SEO = {
   title: "Blooma - Custom Printed Clothing & Accessories | DTF & Vinyl Printing",

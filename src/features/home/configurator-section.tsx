@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
-import { Upload, Download, Send, Shirt, ShoppingBag, X, Wind } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Upload, Download, Send, Shirt, ShoppingBag, X, Wind, Phone, CheckCircle2 } from "lucide-react";
 import { useDropzone } from "react-dropzone";
+import html2canvas from "html2canvas";
+import { parsePhoneNumber, isValidPhoneNumber } from "libphonenumber-js";
 
 const products = [
   { id: "tshirt", name: "T-Shirt", icon: Shirt, mockup: "👕" },
@@ -51,6 +53,13 @@ export function ConfiguratorSection() {
   const [designPosition, setDesignPosition] = useState({ x: 50, y: 40 });
   const [designSize, setDesignSize] = useState(30);
   const [mockupImageSrc, setMockupImageSrc] = useState<string>("");
+  const [quantity, setQuantity] = useState<number>(10);
+  const [showPhoneInput, setShowPhoneInput] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   // Get colors based on selected product
   const availableColors = 
@@ -116,9 +125,104 @@ export function ConfiguratorSection() {
     }
   };
 
-  const handleDownloadQuote = () => {
-    // In a real app, this would generate a PDF
-    alert("Quote PDF would be generated and downloaded!");
+  const handleSendMeQuote = () => {
+    if (!uploadedImage) {
+      alert("Please upload a design first!");
+      return;
+    }
+    setShowPhoneInput(true);
+    setSubmitSuccess(false);
+    setSubmitError(null);
+  };
+
+  const captureScreenshot = async (): Promise<string> => {
+    if (!previewRef.current) {
+      throw new Error("Preview element not found");
+    }
+
+    try {
+      const canvas = await html2canvas(previewRef.current, {
+        backgroundColor: "#ffffff",
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+      });
+
+      // Convert to base64 with quality optimization
+      return canvas.toDataURL("image/jpeg", 0.85);
+    } catch (error) {
+      console.error("Screenshot capture failed:", error);
+      throw new Error("Failed to capture design screenshot");
+    }
+  };
+
+  const handleSubmitQuote = async () => {
+    // Validate phone number
+    if (!phoneNumber.trim()) {
+      setSubmitError("Please enter your phone number");
+      return;
+    }
+
+    if (!isValidPhoneNumber(phoneNumber)) {
+      setSubmitError("Please enter a valid phone number");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Capture screenshot
+      const screenshot = await captureScreenshot();
+
+      // Get locale information
+      const browserLocale = navigator.language || "en-US";
+      const siteLocale = document.documentElement.lang || "en";
+
+      // Send request to API
+      const response = await fetch("/api/request-quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          phone: phoneNumber,
+          product: selectedProduct.name,
+          color: selectedColor.name,
+          quantity: quantity,
+          designScreenshot: screenshot,
+          siteLocale,
+          browserLocale,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Failed to send quote request");
+      }
+
+      // Success!
+      setSubmitSuccess(true);
+      setPhoneNumber("");
+      
+      // Hide form after 5 seconds
+      setTimeout(() => {
+        setShowPhoneInput(false);
+        setSubmitSuccess(false);
+      }, 5000);
+
+    } catch (error) {
+      console.error("Quote submission error:", error);
+      setSubmitError(
+        error instanceof Error 
+          ? error.message 
+          : "Failed to send quote request. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSendToWhatsApp = () => {
@@ -165,6 +269,7 @@ export function ConfiguratorSection() {
           >
             <div className="sticky top-24">
               <div
+                ref={previewRef}
                 className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white"
               >
                 {/* Product Mockup */}
@@ -339,31 +444,30 @@ export function ConfiguratorSection() {
               </p>
             </div>
 
-            {/* Upload Design */}
+            {/* Hidden file input for upload */}
+            <div className="hidden">
+              <input {...getInputProps()} />
+            </div>
+
+            {/* Quantity Input */}
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">3. Upload Design</h3>
-              <div
-                {...getRootProps()}
-                className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${
-                  isDragActive
-                    ? "border-primary-500 bg-primary-50"
-                    : "border-gray-300 hover:border-primary-400 hover:bg-gray-50"
-                }`}
-              >
-                <input {...getInputProps()} />
-                <Upload size={48} className="mx-auto mb-4 text-primary-500" />
-                {isDragActive ? (
-                  <p className="text-gray-700 font-medium">Drop your design here...</p>
-                ) : (
-                  <>
-                    <p className="text-gray-700 font-medium mb-2">
-                      Drag & drop your design here
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      or click to browse (PNG, JPG, SVG)
-                    </p>
-                  </>
-                )}
+              <h3 className="text-lg font-bold text-gray-900 mb-4">3. Enter Quantity</h3>
+              <div className="bg-white border-2 border-gray-300 rounded-2xl p-6">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Number of items
+                </label>
+                <input
+                  type="number"
+                  min="5"
+                  max="1000"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Math.max(5, parseInt(e.target.value) || 5))}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-lg font-medium text-gray-900 focus:border-primary-500 focus:outline-none transition-colors"
+                  placeholder="Enter quantity"
+                />
+                <p className="mt-3 text-sm text-gray-500">
+                  Minimum order: 5 items
+                </p>
               </div>
             </div>
 
@@ -371,32 +475,121 @@ export function ConfiguratorSection() {
             <div>
               <h3 className="text-lg font-bold text-gray-900 mb-4">4. Get Your Quote</h3>
               <div className="space-y-3">
-                <button
-                  onClick={handleDownloadQuote}
-                  disabled={!uploadedImage}
-                  className="w-full px-6 py-4 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-all font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                >
-                  <Download size={20} />
-                  <span>Download PDF Quote</span>
-                </button>
-
-                <div className="grid grid-cols-2 gap-3">
+                {/* Main Quote Button */}
+                {!showPhoneInput && (
                   <button
-                    onClick={handleSendToWhatsApp}
-                    className="px-6 py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-all font-medium flex items-center justify-center space-x-2"
+                    onClick={handleSendMeQuote}
+                    disabled={!uploadedImage}
+                    className="w-full px-6 py-4 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-all font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                   >
-                    <Send size={18} />
-                    <span>WhatsApp</span>
+                    <Send size={20} />
+                    <span>Send Me Quote</span>
                   </button>
+                )}
 
-                  <button
-                    onClick={handleSendToTelegram}
-                    className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all font-medium flex items-center justify-center space-x-2"
-                  >
-                    <Send size={18} />
-                    <span>Telegram</span>
-                  </button>
-                </div>
+                {/* Phone Input Form */}
+                <AnimatePresence>
+                  {showPhoneInput && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      {!submitSuccess ? (
+                        <div className="bg-white border-2 border-primary-200 rounded-2xl p-6 space-y-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <Phone size={16} className="inline mr-2" />
+                              Your Phone Number
+                            </label>
+                            <input
+                              type="tel"
+                              value={phoneNumber}
+                              onChange={(e) => {
+                                setPhoneNumber(e.target.value);
+                                setSubmitError(null);
+                              }}
+                              placeholder="+351 922 280 992"
+                              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-gray-900 focus:border-primary-500 focus:outline-none transition-colors"
+                              disabled={isSubmitting}
+                            />
+                            {submitError && (
+                              <p className="mt-2 text-sm text-red-600">{submitError}</p>
+                            )}
+                          </div>
+
+                          <div className="flex space-x-3">
+                            <button
+                              onClick={handleSubmitQuote}
+                              disabled={isSubmitting}
+                              className="flex-1 px-6 py-3 bg-primary-500 text-white rounded-xl hover:bg-primary-600 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                            >
+                              {isSubmitting ? (
+                                <>
+                                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                  <span>Sending...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Send size={18} />
+                                  <span>Send</span>
+                                </>
+                              )}
+                            </button>
+                            <button
+                              onClick={() => {
+                                setShowPhoneInput(false);
+                                setPhoneNumber("");
+                                setSubmitError(null);
+                              }}
+                              disabled={isSubmitting}
+                              className="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 transition-all font-medium disabled:opacity-50"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <motion.div
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-2xl p-6 text-center"
+                        >
+                          <CheckCircle2 size={48} className="mx-auto mb-4 text-green-600" />
+                          <h4 className="text-xl font-bold text-gray-900 mb-2">
+                            Quote Request Sent!
+                          </h4>
+                          <p className="text-gray-700">
+                            We'll contact you soon with a personalized quote for your design.
+                          </p>
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Alternative Contact Methods */}
+                {!showPhoneInput && (
+                  <div className="grid grid-cols-2 gap-3">
+                    <button
+                      onClick={handleSendToWhatsApp}
+                      className="px-6 py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-all font-medium flex items-center justify-center space-x-2"
+                    >
+                      <Send size={18} />
+                      <span>WhatsApp</span>
+                    </button>
+
+                    <button
+                      onClick={handleSendToTelegram}
+                      className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all font-medium flex items-center justify-center space-x-2"
+                    >
+                      <Send size={18} />
+                      <span>Telegram</span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
