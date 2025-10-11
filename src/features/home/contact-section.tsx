@@ -36,6 +36,7 @@ export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showPrivacyError, setShowPrivacyError] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -54,15 +55,40 @@ export function ContactSection() {
     }
     
     setShowPrivacyError(false);
+    setSubmitError(null);
     setIsSubmitting(true);
 
-    // Simulate API call - In production, integrate with AmoCRM/HubSpot
-    setTimeout(() => {
-      console.log("Form submitted:", formData);
-      setIsSubmitting(false);
+    try {
+      // Send to API endpoint
+      console.log("Submitting form data:", formData);
+      
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      console.log("API response:", data);
+
+      if (!response.ok) {
+        // Show validation errors if available
+        if (data.errors) {
+          console.error("Validation errors:", data.errors);
+          const errorMessages = data.errors.map((err: any) => 
+            `${err.path.join('.')}: ${err.message}`
+          ).join(', ');
+          throw new Error(errorMessages || data.message || "Validation failed");
+        }
+        throw new Error(data.message || "Failed to submit form");
+      }
+
+      // Success
       setIsSubmitted(true);
 
-      // Reset form after 3 seconds
+      // Reset form after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({
@@ -75,8 +101,17 @@ export function ContactSection() {
           privacyConsent: false,
           marketingConsent: false,
         });
-      }, 3000);
-    }, 1500);
+      }, 5000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitError(
+        error instanceof Error 
+          ? error.message 
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleWhatsAppClick = () => {
@@ -129,8 +164,11 @@ export function ContactSection() {
                     <CheckCircle className="text-green-500" size={40} />
                   </div>
                   <h4 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h4>
-                  <p className="text-gray-600">
-                    We&apos;ve received your message and will get back to you soon.
+                  <p className="text-gray-600 mb-2">
+                    We&apos;ve received your message and will contact you soon.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Thank you for reaching out to us!
                   </p>
                 </motion.div>
               ) : (
@@ -255,6 +293,17 @@ export function ContactSection() {
                     checked={formData.marketingConsent}
                     onChange={(checked) => setFormData({ ...formData, marketingConsent: checked })}
                   />
+
+                  {/* Error Message */}
+                  {submitError && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-red-50 border border-red-200 rounded-xl"
+                    >
+                      <p className="text-sm text-red-600">{submitError}</p>
+                    </motion.div>
+                  )}
 
                   {/* Submit Button */}
                   <button

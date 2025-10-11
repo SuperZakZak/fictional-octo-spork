@@ -1,72 +1,89 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { CONTACT_FORM_CONFIG } from "@/lib/constants";
+import { detectBrowserLocale, detectSiteLocale } from "@/lib/locale-utils";
 
 // Validation schema
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
+  phone: z.string().optional().or(z.literal("")),
   product: z.string().min(1, "Please select a product"),
   quantity: z.string().min(1, "Please select a quantity"),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  privacyConsent: z.boolean().refine((val) => val === true, {
+    message: "Privacy consent is required",
+  }),
+  marketingConsent: z.boolean().optional().default(false),
 });
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log("Received contact form data:", body);
 
     // Validate input
     const validatedData = contactSchema.parse(body);
+    console.log("Validated data:", validatedData);
 
-    // TODO: Integrate with your CRM (AmoCRM, HubSpot, etc.)
-    // Example for webhook integration:
-    /*
-    const crmResponse = await fetch('YOUR_CRM_WEBHOOK_URL', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.CRM_API_KEY}`,
+    // Detect locale information
+    const browserLocale = detectBrowserLocale(request);
+    const siteLocale = detectSiteLocale(request);
+
+    // Get user metadata
+    const userAgent = request.headers.get("user-agent") || "Unknown";
+    const referer = request.headers.get("referer") || "";
+    const ip = request.headers.get("x-forwarded-for") || 
+               request.headers.get("x-real-ip") || 
+               "Unknown";
+
+    // Prepare webhook payload
+    const webhookPayload = {
+      event: "contact_form_submission",
+      timestamp: new Date().toISOString(),
+      contact: {
+        name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone || null,
       },
-      body: JSON.stringify({
-        contact: {
-          name: validatedData.name,
-          email: validatedData.email,
-          phone: validatedData.phone,
-        },
-        deal: {
-          product: validatedData.product,
-          quantity: validatedData.quantity,
-          notes: validatedData.message,
-        },
-      }),
-    });
+      inquiry: {
+        product: validatedData.product,
+        quantity: validatedData.quantity,
+        message: validatedData.message,
+      },
+      consent: {
+        privacy: validatedData.privacyConsent,
+        marketing: validatedData.marketingConsent || false,
+      },
+      locale: {
+        site: siteLocale,
+        browser: browserLocale,
+      },
+      metadata: {
+        ip,
+        referer,
+        userAgent,
+      },
+    };
 
-    if (!crmResponse.ok) {
-      throw new Error('CRM integration failed');
+    // Send to n8n webhook
+    try {
+      const webhookResponse = await fetch(CONTACT_FORM_CONFIG.webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookPayload),
+      });
+
+      if (!webhookResponse.ok) {
+        console.error("Webhook failed:", await webhookResponse.text());
+        // Don't throw error - we still want to show success to user
+      }
+    } catch (webhookError) {
+      console.error("Webhook error:", webhookError);
+      // Don't throw error - we still want to show success to user
     }
-    */
-
-    // TODO: Send email notification
-    // Example using a service like SendGrid, Resend, or Nodemailer:
-    /*
-    await sendEmail({
-      to: 'hey.b1001ma@gmail.com',
-      subject: `New Contact Form Submission from ${validatedData.name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${validatedData.name}</p>
-        <p><strong>Email:</strong> ${validatedData.email}</p>
-        <p><strong>Phone:</strong> ${validatedData.phone || 'Not provided'}</p>
-        <p><strong>Product:</strong> ${validatedData.product}</p>
-        <p><strong>Quantity:</strong> ${validatedData.quantity}</p>
-        <p><strong>Message:</strong></p>
-        <p>${validatedData.message}</p>
-      `,
-    });
-    */
-
-    // For now, just log the data (remove in production)
-    console.log("Contact form submission:", validatedData);
 
     return NextResponse.json(
       {

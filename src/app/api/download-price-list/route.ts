@@ -6,7 +6,7 @@ const downloadPriceListSchema = z.object({
   email: z.string().email("Invalid email address"),
   siteLocale: z.string().optional(),
   browserLocale: z.string().optional(),
-  googleDriveUrl: z.string().optional(), // Made optional - will validate later if provided
+  googleDriveFolderUrl: z.string().url("Invalid Google Drive URL"),
 });
 
 // Webhook URL
@@ -57,12 +57,12 @@ export async function POST(request: NextRequest) {
       // Don't fail the entire request if webhook fails
     }
 
-    // Return success with the Google Drive URL for download
+    // Return success with the Google Drive folder URL
     return NextResponse.json(
       {
         success: true,
-        message: "Price list download initiated",
-        downloadUrl: validatedData.googleDriveUrl || null,
+        message: "Opening price list folder",
+        folderUrl: validatedData.googleDriveFolderUrl,
       },
       { status: 200 }
     );

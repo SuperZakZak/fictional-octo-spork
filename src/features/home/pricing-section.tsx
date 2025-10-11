@@ -56,7 +56,7 @@ export function PricingSection() {
       // Get locale information
       const localeInfo = getLocaleInfo();
 
-      // Send request to API endpoint (sends webhook and returns download URL)
+      // Send request to API endpoint (sends webhook and returns folder URL)
       const response = await fetch('/api/download-price-list', {
         method: 'POST',
         headers: {
@@ -66,7 +66,7 @@ export function PricingSection() {
           email,
           siteLocale: localeInfo.siteLocale,
           browserLocale: localeInfo.browserLocale,
-          googleDriveUrl: PRICE_LIST_CONFIG.googleDriveUrl,
+          googleDriveFolderUrl: PRICE_LIST_CONFIG.googleDriveFolderUrl,
         }),
       });
 
@@ -76,10 +76,9 @@ export function PricingSection() {
         throw new Error(data.message || 'Failed to process request');
       }
 
-      // Trigger download from Google Drive
-      if (data.downloadUrl) {
-        // Open Google Drive link in new tab to trigger download
-        window.open(data.downloadUrl, '_blank');
+      // Open Google Drive folder in new tab
+      if (data.folderUrl) {
+        window.open(data.folderUrl, '_blank');
       }
 
       setEmailSubmitted(true);
@@ -348,9 +347,9 @@ export function PricingSection() {
                   ) : (
                     <div className="text-center py-4">
                       <div className="text-4xl mb-3">✅</div>
-                      <h4 className="font-bold text-black mb-2">Price list downloaded!</h4>
+                      <h4 className="font-bold text-black mb-2">Opening price list folder!</h4>
                       <p className="text-sm text-gray-600">
-                        Check your downloads folder for the complete price list
+                        A new tab has been opened with our complete price list
                       </p>
                     </div>
                   )}

@@ -194,13 +194,9 @@ export const SUCCESS_MESSAGES = {
 
 // Price List Configuration
 export const PRICE_LIST_CONFIG = {
-  // Replace this URL with your actual Google Drive direct download link
-  // To get a direct download link from Google Drive:
-  // 1. Right-click on the file in Google Drive
-  // 2. Get link -> Anyone with the link can view
-  // 3. Copy the file ID from the URL (https://drive.google.com/file/d/FILE_ID/view)
-  // 4. Use format: https://drive.google.com/uc?export=download&id=FILE_ID
-  googleDriveUrl: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_HERE",
+  // Google Drive folder URL where price lists are stored
+  // This will open in a new tab for users to view/download files
+  googleDriveFolderUrl: "https://drive.google.com/drive/folders/1bI5JDOa_zjMhtQzwwS0qlx5-XHvyLsTf?usp=sharing",
 } as const;
 
 // Quote Request Configuration
@@ -212,6 +208,12 @@ export const QUOTE_REQUEST_CONFIG = {
   maxScreenshotHeight: 1200,
   // Screenshot quality (0-1)
   screenshotQuality: 0.85,
+} as const;
+
+// Contact Form Configuration
+export const CONTACT_FORM_CONFIG = {
+  // n8n webhook URL for contact form submissions
+  webhookUrl: "https://n8n-production-9d5d.up.railway.app/webhook/formblooma",
 } as const;
 
 // Meta Tags
