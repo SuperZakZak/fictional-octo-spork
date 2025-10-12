@@ -36,7 +36,7 @@ const products = [
     colors: ["#000000", "#FFFFFF", "#1a1a2e", "#d1d1d1", "#f5e6d3", "#f4a89f"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     description: "Premium organic cotton t-shirt, perfect for any design",
-    priceFrom: "18",
+    priceFrom: "10",
   },
   {
     id: "hoodie",
