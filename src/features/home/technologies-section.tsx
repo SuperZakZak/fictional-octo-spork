@@ -78,19 +78,22 @@ export function TechnologiesSection() {
     <section
       id="technologies"
       ref={sectionRef}
-      className="section-padding bg-gradient-to-b from-white to-gray-50"
+      className="section-padding bg-gradient-to-b from-glass-50 to-glass-100 relative overflow-hidden"
     >
-      <div className="container-custom">
+      {/* Background Glass Orbs */}
+      <div className="absolute top-0 right-20 w-96 h-96 bg-white/20 rounded-full blur-3xl animate-liquid"></div>
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-glass-200/30 rounded-full blur-3xl animate-liquid" style={{animationDelay: '2s'}}></div>
+      <div className="container-custom relative z-10">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-            Choose Your <span className="text-black">Technology</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
+            Choose Your <span className="gradient-text">Technology</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
             We offer two professional printing methods, each with unique advantages.
             Let us help you choose the perfect one for your project.
           </p>
@@ -100,14 +103,14 @@ export function TechnologiesSection() {
           {/* Vinyl Printing Card */}
           <div
             ref={vinylCardRef}
-            className="relative bg-black rounded-3xl p-8 text-white overflow-hidden border-4 border-black"
+            className="relative glass-card rounded-3xl p-8 text-charcoal overflow-hidden shadow-2xl border border-white/30"
           >
             {/* Animated Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 opacity-5">
               <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <motion.path
                   d="M0,50 Q25,30 50,50 T100,50"
-                  stroke="white"
+                  stroke="currentColor"
                   strokeWidth="0.5"
                   fill="none"
                   initial={{ pathLength: 0 }}
@@ -119,30 +122,30 @@ export function TechnologiesSection() {
 
             <div className="relative z-10">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-charcoal rounded-full flex items-center justify-center">
                   <Scissors className="text-white" size={24} />
                 </div>
-                <h3 className="text-3xl font-bold">Vinyl Printing</h3>
+                <h3 className="text-3xl font-bold text-charcoal">Vinyl Printing</h3>
               </div>
 
-              <p className="text-gray-300 mb-8 text-lg">
+              <p className="text-glass-700 mb-8 text-lg">
                 Perfect for bold, simple designs with solid colors. Ideal for text, logos, and geometric patterns.
               </p>
 
               {/* Animated Cutting Process */}
-              <div className="mb-4 p-6 bg-white/5 rounded-2xl backdrop-blur-sm">
+              <div className="mb-4 p-6 glass-card rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-sm text-gray-300">Cutting Process</span>
+                  <div className="w-2 h-2 bg-charcoal rounded-full animate-pulse" />
+                  <span className="text-sm text-charcoal font-medium">Cutting Process</span>
                 </div>
                 <motion.div
-                  className="h-2 bg-white/20 rounded-full overflow-hidden"
+                  className="h-2 bg-glass-200 rounded-full overflow-hidden"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: "100%" } : {}}
                   transition={{ duration: 2, delay: 0.5 }}
                 >
                   <motion.div
-                    className="h-full bg-gradient-to-r from-primary-400 to-primary-600"
+                    className="h-full bg-gradient-to-r from-charcoal to-charcoal-light"
                     animate={{ x: ["-100%", "100%"] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                   />
@@ -150,14 +153,14 @@ export function TechnologiesSection() {
               </div>
 
               {/* Animated Heat Transfer Process */}
-              <div className="mb-8 p-6 bg-white/5 rounded-2xl backdrop-blur-sm">
+              <div className="mb-8 p-6 glass-card rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-2 h-2 bg-vibrant-orange rounded-full animate-pulse" />
-                  <span className="text-sm text-gray-300">Heat Transfer Process</span>
+                  <div className="w-2 h-2 bg-charcoal rounded-full animate-pulse" />
+                  <span className="text-sm text-charcoal font-medium">Heat Transfer Process</span>
                 </div>
-                <div className="relative h-2 bg-white/20 rounded-full overflow-hidden">
+                <div className="relative h-2 bg-glass-200 rounded-full overflow-hidden">
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-vibrant-yellow via-vibrant-orange to-accent-600"
+                    className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal-light to-glass-700"
                     animate={{ x: ["-100%", "100%"] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                   />
@@ -174,23 +177,23 @@ export function TechnologiesSection() {
                     className="flex items-center space-x-3"
                   >
                     {feature.available ? (
-                      <Check className="text-green-400 flex-shrink-0" size={20} />
+                      <Check className="text-charcoal flex-shrink-0" size={20} />
                     ) : (
-                      <X className="text-red-400 flex-shrink-0" size={20} />
+                      <X className="text-glass-500 flex-shrink-0" size={20} />
                     )}
-                    <span className={feature.available ? "text-white" : "text-gray-400"}>
+                    <span className={feature.available ? "text-charcoal" : "text-glass-500"}>
                       {feature.text}
                     </span>
                   </motion.li>
                 ))}
               </ul>
 
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <div className="text-sm text-gray-400 mb-2">Best for:</div>
+              <div className="mt-8 pt-6 border-t border-glass-300">
+                <div className="text-sm text-glass-700 mb-2 font-medium">Best for:</div>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-white/10 rounded-full text-sm">Logos</span>
-                  <span className="px-3 py-1 bg-white/10 rounded-full text-sm">Text</span>
-                  <span className="px-3 py-1 bg-white/10 rounded-full text-sm">Simple Graphics</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Logos</span>
+                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">Text</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Simple Graphics</span>
                 </div>
               </div>
             </div>
@@ -199,7 +202,7 @@ export function TechnologiesSection() {
           {/* DTF Printing Card */}
           <div
             ref={dtfCardRef}
-            className="relative bg-white rounded-3xl p-8 text-black overflow-hidden border-4 border-black"
+            className="relative glass-card rounded-3xl p-8 text-charcoal overflow-hidden shadow-2xl border border-white/30"
           >
             {/* Animated Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -218,25 +221,25 @@ export function TechnologiesSection() {
 
             <div className="relative z-10">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-vibrant-orange rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-charcoal rounded-full flex items-center justify-center">
                   <Printer className="text-white" size={24} />
                 </div>
-                <h3 className="text-3xl font-bold text-black">DTF Printing</h3>
+                <h3 className="text-3xl font-bold text-charcoal">DTF Printing</h3>
               </div>
 
-              <p className="text-gray-700 mb-8 text-lg">
+              <p className="text-glass-700 mb-8 text-lg">
                 Advanced direct-to-film technology for photo-realistic, full-color designs with unlimited detail.
               </p>
 
               {/* DTF Preparation */}
-              <div className="mb-4 p-6 bg-gray-100 rounded-2xl border-2 border-gray-200">
+              <div className="mb-4 p-6 glass-card rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="w-2 h-2 bg-vibrant-blue rounded-full animate-pulse" />
-                  <span className="text-sm text-gray-700 font-medium">DTF Preparation</span>
+                  <span className="text-sm text-charcoal font-medium">DTF Preparation</span>
                 </div>
-                <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="relative h-2 bg-glass-200 rounded-full overflow-hidden">
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-vibrant-blue to-vibrant-purple"
+                    className="absolute inset-0 bg-gradient-to-r from-charcoal to-charcoal-light"
                     animate={{ x: ["-100%", "100%"] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                   />
@@ -244,14 +247,14 @@ export function TechnologiesSection() {
               </div>
 
               {/* Animated Heat Transfer Process */}
-              <div className="mb-8 p-6 bg-gray-100 rounded-2xl border-2 border-gray-200">
+              <div className="mb-8 p-6 glass-card rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-2 h-2 bg-vibrant-orange rounded-full animate-pulse" />
-                  <span className="text-sm text-gray-700 font-medium">Heat Transfer Process</span>
+                  <div className="w-2 h-2 bg-charcoal rounded-full animate-pulse" />
+                  <span className="text-sm text-charcoal font-medium">Heat Transfer Process</span>
                 </div>
-                <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="relative h-2 bg-glass-200 rounded-full overflow-hidden">
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-vibrant-yellow via-vibrant-orange to-accent-600"
+                    className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal-light to-glass-700"
                     animate={{ x: ["-100%", "100%"] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                   />
@@ -267,19 +270,19 @@ export function TechnologiesSection() {
                     transition={{ delay: 0.1 * index, duration: 0.4 }}
                     className="flex items-center space-x-3"
                   >
-                    <Check className="text-vibrant-green flex-shrink-0" size={20} />
-                    <span className="text-black">{feature.text}</span>
+                    <Check className="text-charcoal flex-shrink-0" size={20} />
+                    <span className="text-charcoal">{feature.text}</span>
                   </motion.li>
                 ))}
               </ul>
 
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <div className="text-sm text-gray-600 mb-2 font-medium">Best for:</div>
+              <div className="mt-8 pt-6 border-t border-glass-300">
+                <div className="text-sm text-glass-700 mb-2 font-medium">Best for:</div>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-vibrant-pink text-white rounded-full text-sm font-medium">Photos</span>
-                  <span className="px-3 py-1 bg-vibrant-purple text-white rounded-full text-sm font-medium">Complex Art</span>
-                  <span className="px-3 py-1 bg-vibrant-blue text-white rounded-full text-sm font-medium">Gradients</span>
-                  <span className="px-3 py-1 bg-vibrant-orange text-white rounded-full text-sm font-medium">Full Color</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Photos</span>
+                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">Complex Art</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Gradients</span>
+                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">Full Color</span>
                 </div>
               </div>
             </div>
@@ -295,7 +298,7 @@ export function TechnologiesSection() {
         >
           <a
             href="#quiz"
-            className="inline-flex items-center space-x-2 px-8 py-4 bg-black text-white rounded-full hover:bg-gray-900 transition-all font-medium shadow-lg hover:shadow-xl"
+            className="inline-flex items-center space-x-2 px-8 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium shadow-xl hover:shadow-2xl"
           >
             <span>Not sure? Take our quiz</span>
             <motion.span

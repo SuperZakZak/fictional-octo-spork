@@ -78,19 +78,23 @@ export function ProductsSection() {
     <section
       id="products"
       ref={sectionRef}
-      className="section-padding bg-white"
+      className="section-padding bg-gradient-to-b from-glass-50 to-glass-100 relative overflow-hidden"
     >
-      <div className="container-custom">
+      {/* Background Glass Orbs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-glass-200/30 rounded-full blur-3xl"></div>
+      
+      <div className="container-custom relative z-10">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
             Premium <span className="gradient-text">Products</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
             We use only the highest quality blanks from trusted brands like Stanley/Stella and WATC.
           </p>
         </motion.div>
@@ -103,7 +107,7 @@ export function ProductsSection() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl glass-card">
               <motion.div
                 key={`${selectedProduct.id}-${selectedColor}`}
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -148,10 +152,10 @@ export function ProductsSection() {
               initial={{ scale: 0 }}
               animate={isInView ? { scale: 1 } : {}}
               transition={{ delay: 0.5, type: "spring" }}
-              className="hidden md:flex absolute top-4 right-4 bg-black text-white rounded-full px-4 py-2 shadow-lg items-center space-x-2"
+              className="hidden md:flex absolute top-4 right-4 glass-morphism rounded-full px-4 py-2 shadow-lg items-center space-x-2"
             >
-              <Palette className="text-vibrant-yellow" size={16} />
-              <span className="text-sm font-medium">Premium Quality</span>
+              <Palette className="text-charcoal" size={16} />
+              <span className="text-sm font-medium text-charcoal">Premium Quality</span>
             </motion.div>
           </motion.div>
 
@@ -172,10 +176,10 @@ export function ProductsSection() {
                       setSelectedProduct(product);
                       setSelectedColor(product.colors[0]);
                     }}
-                    className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all ${
+                    className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                       selectedProduct.id === product.id
-                        ? "bg-black text-white shadow-lg"
-                        : "bg-white border-2 border-black text-black hover:bg-gray-100"
+                        ? "bg-charcoal text-white shadow-xl"
+                        : "glass-card text-charcoal hover:bg-white/60"
                     }`}
                   >
                     <Icon size={18} />
@@ -187,20 +191,20 @@ export function ProductsSection() {
 
             {/* Product Info */}
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              <h3 className="text-2xl font-bold text-charcoal mb-2">
                 {selectedProduct.name} • {selectedProduct.brand}
               </h3>
               {selectedProduct.priceFrom && (
-                <p className="text-lg text-gray-600 mb-3">
+                <p className="text-lg text-glass-700 mb-3">
                   from €{selectedProduct.priceFrom}
                 </p>
               )}
-              <p className="text-gray-600">{selectedProduct.description}</p>
+              <p className="text-glass-700">{selectedProduct.description}</p>
             </div>
 
             {/* Color Picker */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-charcoal mb-3">
                 Choose Color
               </label>
               <div className="flex flex-wrap gap-3">
@@ -208,31 +212,31 @@ export function ProductsSection() {
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`w-12 h-12 rounded-full border-4 transition-all hover:scale-110 ${
+                    className={`w-12 h-12 rounded-full border-4 transition-all duration-300 hover:scale-110 ${
                       selectedColor === color
-                        ? "border-black shadow-lg ring-2 ring-offset-2 ring-black"
-                        : "border-gray-300"
+                        ? "border-charcoal shadow-xl ring-2 ring-offset-2 ring-charcoal"
+                        : "border-glass-300 hover:border-glass-500"
                     }`}
                     style={{ backgroundColor: color }}
                     aria-label={`Select ${color} color`}
                   />
                 ))}
               </div>
-              <p className="mt-3 text-sm text-gray-500 italic">
+              <p className="mt-3 text-sm text-glass-600 italic">
                 💡 Need other colors or models? Just ask us!
               </p>
             </div>
 
             {/* Sizes */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-charcoal mb-3">
                 Available Sizes
               </label>
               <div className="flex flex-wrap gap-2">
                 {selectedProduct.sizes.map((size) => (
                   <div
                     key={size}
-                    className="px-4 py-2 bg-gray-100 rounded-lg text-gray-700 font-medium"
+                    className="px-4 py-2 glass-card rounded-xl text-charcoal font-medium hover:bg-white/60 transition-all duration-300"
                   >
                     {size}
                   </div>
@@ -241,23 +245,23 @@ export function ProductsSection() {
             </div>
 
             {/* Features */}
-            <div className="bg-gray-50 border-2 border-black rounded-2xl p-6 mb-8">
-              <h4 className="font-bold text-black mb-4">Product Features</h4>
-              <ul className="space-y-2 text-gray-700">
+            <div className="glass-card rounded-3xl p-6 mb-8 border border-white/30">
+              <h4 className="font-bold text-charcoal mb-4">Product Features</h4>
+              <ul className="space-y-2 text-glass-700">
                 <li className="flex items-start space-x-2">
-                  <span className="text-vibrant-green mt-1">✓</span>
+                  <span className="text-charcoal mt-1">✓</span>
                   <span>100% organic cotton (or premium canvas for bags)</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="text-vibrant-green mt-1">✓</span>
+                  <span className="text-charcoal mt-1">✓</span>
                   <span>Ethically sourced and sustainably produced</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="text-vibrant-green mt-1">✓</span>
+                  <span className="text-charcoal mt-1">✓</span>
                   <span>Pre-shrunk and machine washable</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="text-vibrant-green mt-1">✓</span>
+                  <span className="text-charcoal mt-1">✓</span>
                   <span>Perfect for DTF and Vinyl printing</span>
                 </li>
               </ul>
@@ -266,7 +270,7 @@ export function ProductsSection() {
             {/* CTA */}
             <a
               href="#configurator"
-              className="block w-full text-center px-8 py-4 bg-black text-white rounded-full hover:bg-gray-900 transition-all font-medium shadow-lg hover:shadow-xl"
+              className="block w-full text-center px-8 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium shadow-xl hover:shadow-2xl"
             >
               Customize This Product
             </a>

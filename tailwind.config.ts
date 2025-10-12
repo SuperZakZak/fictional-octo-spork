@@ -10,39 +10,42 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Liquid Glass Monochrome Palette (4 colors)
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: {
-          50: "#f9fafb",
-          100: "#f3f4f6",
-          200: "#e5e7eb",
-          300: "#d1d5db",
-          400: "#9ca3af",
-          500: "#6b7280",
-          600: "#4b5563",
-          700: "#374151",
-          800: "#1f2937",
-          900: "#111827",
+        
+        // Color 1: Pure White (glass base)
+        glass: {
+          white: "#FFFFFF",
+          light: "#F8F9FA",
         },
+        
+        // Color 2: Soft Gray (glass tint)
+        glass: {
+          50: "#FAFAFA",
+          100: "#F5F5F5",
+          200: "#EEEEEE",
+          300: "#E0E0E0",
+          400: "#BDBDBD",
+          500: "#9E9E9E",
+          600: "#757575",
+          700: "#616161",
+          800: "#424242",
+          900: "#212121",
+        },
+        
+        // Color 3: Deep Charcoal (contrast)
+        charcoal: {
+          DEFAULT: "#1A1A1A",
+          light: "#2D2D2D",
+          dark: "#0A0A0A",
+        },
+        
+        // Color 4: Subtle Accent (minimal color)
         accent: {
-          50: "#fef2f2",
-          100: "#fee2e2",
-          200: "#fecaca",
-          300: "#fca5a5",
-          400: "#f87171",
-          500: "#ef4444",
-          600: "#dc2626",
-          700: "#b91c1c",
-          800: "#991b1b",
-          900: "#7f1d1d",
-        },
-        vibrant: {
-          yellow: "#fbbf24",
-          orange: "#f97316",
-          pink: "#ec4899",
-          purple: "#a855f7",
-          blue: "#3b82f6",
-          green: "#10b981",
+          DEFAULT: "#E8E8E8",
+          light: "#F0F0F0",
+          dark: "#D0D0D0",
         },
       },
       fontFamily: {
@@ -55,6 +58,9 @@ const config: Config = {
         "slide-down": "slideDown 0.8s ease-out",
         "scale-in": "scaleIn 0.5s ease-out",
         "float": "float 3s ease-in-out infinite",
+        "liquid": "liquid 8s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
+        "glow": "glow 3s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -77,6 +83,27 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
         },
+        liquid: {
+          "0%, 100%": { 
+            borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
+            transform: "rotate(0deg) scale(1)",
+          },
+          "50%": { 
+            borderRadius: "30% 60% 70% 40% / 50% 60% 30% 60%",
+            transform: "rotate(180deg) scale(1.05)",
+          },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% center" },
+          "100%": { backgroundPosition: "200% center" },
+        },
+        glow: {
+          "0%, 100%": { opacity: "0.5" },
+          "50%": { opacity: "1" },
+        },
+      },
+      backdropBlur: {
+        xs: "2px",
       },
     },
   },

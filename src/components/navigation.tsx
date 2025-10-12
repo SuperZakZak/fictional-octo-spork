@@ -39,9 +39,12 @@ export function Navigation() {
         opacity: isVisible ? 1 : 0
       }}
       transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg shadow-lg"
+      className="fixed top-0 left-0 right-0 z-50 glass-morphism border-b border-white/20"
+      style={{
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%)',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center">
@@ -61,9 +64,10 @@ export function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-gray-700 hover:text-black font-medium transition-colors whitespace-nowrap text-sm"
+                className="text-charcoal/80 hover:text-charcoal font-medium transition-all duration-300 whitespace-nowrap text-sm relative group"
               >
                 {link.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-charcoal transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
           </div>
@@ -72,7 +76,7 @@ export function Navigation() {
           <div className="hidden lg:flex items-center space-x-4">
             <a
               href="#configurator"
-              className="px-5 py-1.5 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium whitespace-nowrap text-sm"
+              className="px-6 py-2 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium whitespace-nowrap text-sm shadow-lg hover:shadow-xl"
             >
               Create Design
             </a>
@@ -81,7 +85,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-black"
+            className="lg:hidden p-2 text-charcoal/80 hover:text-charcoal transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -96,15 +100,15 @@ export function Navigation() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden mt-4 pb-4"
+              className="lg:hidden mt-4 pb-4 glass-card rounded-2xl p-4"
             >
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-3">
                 {navLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-gray-700 hover:text-black font-medium transition-colors py-2"
+                    className="text-charcoal/80 hover:text-charcoal font-medium transition-all duration-300 py-2 px-4 rounded-xl hover:bg-white/40"
                   >
                     {link.label}
                   </a>
@@ -112,7 +116,7 @@ export function Navigation() {
                 <a
                   href="#configurator"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium text-center"
+                  className="px-6 py-3 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium text-center shadow-lg"
                 >
                   Create Design
                 </a>

@@ -10,7 +10,7 @@ export function Footer() {
   const { open: openCookieSettings } = useCookieSettings();
 
   return (
-    <footer className="bg-black text-white border-t-4 border-white">
+    <footer className="bg-charcoal text-white border-t border-glass-300">
       <div className="container-custom section-padding">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -24,7 +24,7 @@ export function Footer() {
                 className="h-8 w-auto"
               />
             </a>
-            <p className="text-gray-400 text-sm">
+            <p className="text-glass-400 text-sm">
               Professional DTF and Vinyl printing services for custom apparel and accessories.
             </p>
           </div>
@@ -33,10 +33,10 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#technologies" className="text-gray-400 hover:text-white transition-colors">Technologies</a></li>
-              <li><a href="#products" className="text-gray-400 hover:text-white transition-colors">Products</a></li>
-              <li><a href="#pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#configurator" className="text-gray-400 hover:text-white transition-colors">Configurator</a></li>
+              <li><a href="#technologies" className="text-glass-400 hover:text-white transition-all duration-300">Technologies</a></li>
+              <li><a href="#products" className="text-glass-400 hover:text-white transition-all duration-300">Products</a></li>
+              <li><a href="#pricing" className="text-glass-400 hover:text-white transition-all duration-300">Pricing</a></li>
+              <li><a href="#configurator" className="text-glass-400 hover:text-white transition-all duration-300">Configurator</a></li>
             </ul>
           </div>
 
@@ -44,10 +44,10 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Services</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">DTF Printing</li>
-              <li className="text-gray-400">Vinyl Printing</li>
-              <li className="text-gray-400">Custom Apparel</li>
-              <li className="text-gray-400">Corporate Branding</li>
+              <li className="text-glass-400">DTF Printing</li>
+              <li className="text-glass-400">Vinyl Printing</li>
+              <li className="text-glass-400">Custom Apparel</li>
+              <li className="text-glass-400">Corporate Branding</li>
             </ul>
           </div>
 
@@ -55,19 +55,19 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Contact</h3>
             <ul className="space-y-3">
-              <li className="flex items-start space-x-2 text-gray-400">
+              <li className="flex items-start space-x-2 text-glass-400">
                 <Mail size={18} className="mt-1 flex-shrink-0" />
-                <a href={`mailto:${SITE_CONFIG.email}`} className="hover:text-white transition-colors">
+                <a href={`mailto:${SITE_CONFIG.email}`} className="hover:text-white transition-all duration-300">
                   {SITE_CONFIG.email}
                 </a>
               </li>
-              <li className="flex items-start space-x-2 text-gray-400">
+              <li className="flex items-start space-x-2 text-glass-400">
                 <Phone size={18} className="mt-1 flex-shrink-0" />
-                <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-white transition-colors">
+                <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-white transition-all duration-300">
                   {SITE_CONFIG.phone}
                 </a>
               </li>
-              <li className="flex items-start space-x-2 text-gray-400">
+              <li className="flex items-start space-x-2 text-glass-400">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
                 <span>{SITE_CONFIG.location}</span>
               </li>
@@ -75,13 +75,13 @@ export function Footer() {
             
             {/* Social Links */}
             <div className="flex space-x-4 mt-4">
-              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-glass-400 hover:text-white transition-all duration-300">
                 <Instagram size={20} />
               </a>
-              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-glass-400 hover:text-white transition-all duration-300">
                 <Facebook size={20} />
               </a>
-              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-glass-400 hover:text-white transition-all duration-300">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -89,26 +89,26 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-glass-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-glass-400 text-sm">
             © {currentYear} Blooma. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-            <a href="/legal-notice" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <a href="/legal-notice" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
               Legal Notice
             </a>
-            <a href="/privacy-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <a href="/privacy-policy" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
               Privacy Policy
             </a>
-            <a href="/cookie-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <a href="/cookie-policy" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
               Cookie Policy
             </a>
-            <a href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <a href="/terms" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
               Terms & Conditions
             </a>
             <button
               onClick={openCookieSettings}
-              className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors group"
+              className="flex items-center gap-2 text-glass-400 hover:text-white text-sm transition-all duration-300 group"
             >
               <Cookie size={16} className="group-hover:rotate-12 transition-transform" />
               Cookie Settings

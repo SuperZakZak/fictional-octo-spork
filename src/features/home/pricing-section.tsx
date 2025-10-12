@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Calculator, TrendingDown, Zap, AlertCircle, Download, Mail } from "lucide-react";
+import { Calculator, TrendingDown, AlertCircle, Download, Mail } from "lucide-react";
 import {
   PrintSize,
   SIZE_DIMENSIONS,
@@ -39,7 +39,6 @@ export function PricingSection() {
   const vinylTotal = priceComparison.vinyl.total;
   const dtfTotal = priceComparison.dtf.total;
   const cheaperOption = priceComparison.cheaperMethod;
-  const savings = priceComparison.savings.toFixed(2);
   const sizeDimensions = SIZE_DIMENSIONS[selectedSize.name];
 
   const handleDownloadPriceList = async (e: React.FormEvent) => {
@@ -102,19 +101,22 @@ export function PricingSection() {
     <section
       id="pricing"
       ref={sectionRef}
-      className="section-padding bg-gradient-to-b from-gray-50 to-white"
+      className="section-padding bg-gradient-to-b from-glass-100 to-glass-50 relative overflow-hidden"
     >
-      <div className="container-custom">
+      {/* Background Glass Orbs */}
+      <div className="absolute top-20 left-0 w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-glass-200/30 rounded-full blur-3xl"></div>
+      <div className="container-custom relative z-10">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-            Transparent <span className="text-black">Pricing</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
+            Transparent <span className="gradient-text">Pricing</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
             Calculate your project cost instantly. No hidden fees, no surprises.
           </p>
         </motion.div>
@@ -124,19 +126,19 @@ export function PricingSection() {
             initial={{ y: 30, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="bg-white rounded-3xl shadow-2xl p-8 md:p-12"
+            className="glass-card rounded-3xl shadow-2xl p-8 md:p-12 border border-white/30"
           >
             {/* Calculator Header */}
             <div className="flex items-center space-x-3 mb-8">
-              <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                <Calculator className="text-vibrant-yellow" size={24} />
+              <div className="w-12 h-12 bg-charcoal rounded-full flex items-center justify-center">
+                <Calculator className="text-white" size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-black">Price Calculator</h3>
+              <h3 className="text-2xl font-bold text-charcoal">Price Calculator</h3>
             </div>
 
             {/* Size Selection */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-4">
+              <label className="block text-sm font-medium text-charcoal mb-4">
                 Select Print Size
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -146,19 +148,19 @@ export function PricingSection() {
                     <button
                       key={size.id}
                       onClick={() => setSelectedSize(size)}
-                      className={`p-4 rounded-xl border-2 transition-all ${
+                      className={`p-4 rounded-xl border-2 transition-all duration-300 ${
                         selectedSize.id === size.id
-                          ? "border-black bg-black text-white"
-                          : "border-gray-300 hover:border-black"
+                          ? "border-charcoal bg-charcoal text-white shadow-xl"
+                          : "border-glass-300 hover:border-charcoal glass-card"
                       }`}
                     >
                       <div className={`font-bold text-lg ${
-                        selectedSize.id === size.id ? "text-white" : "text-gray-900"
+                        selectedSize.id === size.id ? "text-white" : "text-charcoal"
                       }`}>
                         {size.name}
                       </div>
                       <div className={`text-sm ${
-                        selectedSize.id === size.id ? "text-gray-300" : "text-gray-600"
+                        selectedSize.id === size.id ? "text-glass-300" : "text-glass-700"
                       }`}>
                         {dims.width} × {dims.height} mm
                       </div>
@@ -171,10 +173,10 @@ export function PricingSection() {
             {/* Quantity Slider */}
             <div className="mb-8">
               <div className="flex justify-between items-center mb-4">
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm font-medium text-charcoal">
                   Quantity
                 </label>
-                <div className="text-2xl font-bold text-black">{quantity}</div>
+                <div className="text-2xl font-bold text-charcoal">{quantity}</div>
               </div>
               <input
                 type="range"
@@ -182,15 +184,15 @@ export function PricingSection() {
                 max="100"
                 value={quantity}
                 onChange={(e) => setQuantity(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-black"
+                className="w-full h-2 bg-glass-200 rounded-lg appearance-none cursor-pointer accent-charcoal"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-2">
+              <div className="flex justify-between text-xs text-glass-600 mt-2">
                 <span>5</span>
                 <span>20</span>
                 <span>50</span>
                 <span>100+</span>
               </div>
-              <div className="text-xs text-gray-500 mt-2 text-center">
+              <div className="text-xs text-glass-600 mt-2 text-center">
                 {needsQuote && (
                   <div className="flex items-center justify-center gap-1 text-vibrant-purple font-medium">
                     <AlertCircle size={14} />
@@ -262,23 +264,6 @@ export function PricingSection() {
                 </div>
               </motion.div>
             </div>
-
-            {/* Savings Badge */}
-            {parseFloat(savings) > 0 && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="bg-vibrant-green text-white rounded-2xl p-6 text-center mb-8"
-              >
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <Zap size={24} />
-                  <span className="text-lg font-bold">You save €{savings}</span>
-                </div>
-                <div className="text-sm opacity-90">
-                  by choosing {cheaperOption === "vinyl" ? "Vinyl" : "DTF"} printing for this project
-                </div>
-              </motion.div>
-            )}
 
             {/* Get Full Price List */}
             <div className="bg-gray-50 border-2 border-black rounded-2xl p-6">

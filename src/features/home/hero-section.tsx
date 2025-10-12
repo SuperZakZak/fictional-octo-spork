@@ -48,11 +48,11 @@ export function HeroSection() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw gradient background (subtle gray)
+      // Draw liquid glass gradient background
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, "rgba(249, 250, 251, 0.5)");
-      gradient.addColorStop(0.5, "rgba(243, 244, 246, 0.3)");
-      gradient.addColorStop(1, "rgba(249, 250, 251, 0.5)");
+      gradient.addColorStop(0, "rgba(250, 250, 250, 0.8)");
+      gradient.addColorStop(0.5, "rgba(245, 245, 245, 0.6)");
+      gradient.addColorStop(1, "rgba(238, 238, 238, 0.8)");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -67,10 +67,10 @@ export function HeroSection() {
         if (particle.y < 0) particle.y = canvas.height;
         if (particle.y > canvas.height) particle.y = 0;
 
-        // Draw particle (black/gray)
+        // Draw particle (monochrome)
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(17, 24, 39, ${particle.opacity * 0.3})`;
+        ctx.fillStyle = `rgba(26, 26, 26, ${particle.opacity * 0.2})`;
         ctx.fill();
       });
 
@@ -124,22 +124,26 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section id="home" ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-glass-50 via-glass-100 to-glass-200">
       {/* Animated Canvas Background */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full opacity-60"
       />
+      
+      {/* Liquid Glass Orbs */}
+      <div className="absolute top-20 left-10 w-96 h-96 bg-white/30 rounded-full blur-3xl animate-liquid"></div>
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-glass-200/40 rounded-full blur-3xl animate-liquid" style={{animationDelay: '2s'}}></div>
 
       {/* Content */}
       <div className="relative z-10 container-custom section-padding text-center">
-        <h1 className="hero-title text-5xl md:text-7xl font-bold mb-6 text-black">
+        <h1 className="hero-title text-5xl md:text-7xl font-bold mb-6 text-charcoal">
           We print your vision.
           <br />
-          <span className="text-black">Beautifully.</span>
+          <span className="gradient-text">Beautifully.</span>
         </h1>
 
-        <p className="hero-subtitle text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
+        <p className="hero-subtitle text-xl md:text-2xl text-glass-700 mb-12 max-w-3xl mx-auto">
           Custom DTF and Vinyl printing for t-shirts, hoodies, and accessories.
           <br />
           High quality. Fast turnaround. Stunning results.
@@ -148,7 +152,7 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#configurator"
-            className="hero-cta group px-8 py-4 bg-black text-white rounded-full hover:bg-gray-900 transition-all font-medium shadow-lg hover:shadow-xl flex items-center space-x-2"
+            className="hero-cta group px-8 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium shadow-2xl hover:shadow-3xl flex items-center space-x-2"
           >
             <Palette size={20} />
             <span>Create Design</span>
@@ -157,14 +161,14 @@ export function HeroSection() {
 
           <a
             href="#pricing"
-            className="hero-cta px-8 py-4 bg-white text-black border-2 border-black rounded-full hover:bg-black hover:text-white transition-all font-medium shadow-lg hover:shadow-xl flex items-center space-x-2"
+            className="hero-cta glass-card px-8 py-4 text-charcoal border border-white/30 rounded-full hover:bg-white/60 transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
           >
             <span>Get Quote</span>
           </a>
 
           <a
             href="#contact"
-            className="hero-cta px-8 py-4 bg-vibrant-pink text-white rounded-full hover:bg-vibrant-purple transition-all font-medium shadow-lg hover:shadow-xl flex items-center space-x-2"
+            className="hero-cta glass-card px-8 py-4 text-charcoal border border-white/30 rounded-full hover:bg-white/60 transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
           >
             <Package size={20} />
             <span>Order Samples</span>
@@ -177,30 +181,30 @@ export function HeroSection() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="bg-white border-2 border-black rounded-2xl p-6 hover:bg-black hover:text-white transition-all"
+            className="glass-card rounded-3xl p-8 hover:bg-white/50 transition-all duration-300 group"
           >
-            <div className="text-4xl font-bold text-vibrant-yellow mb-2">100+</div>
-            <div className="text-gray-600 group-hover:text-white">Happy Clients</div>
+            <div className="text-5xl font-bold text-charcoal mb-2">100+</div>
+            <div className="text-glass-700">Happy Clients</div>
           </motion.div>
 
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.6 }}
-            className="bg-white border-2 border-black rounded-2xl p-6 hover:bg-black hover:text-white transition-all"
+            className="glass-card rounded-3xl p-8 hover:bg-white/50 transition-all duration-300 group"
           >
-            <div className="text-4xl font-bold text-vibrant-pink mb-2">5k+</div>
-            <div className="text-gray-600 group-hover:text-white">Products Printed</div>
+            <div className="text-5xl font-bold text-charcoal mb-2">5k+</div>
+            <div className="text-glass-700">Products Printed</div>
           </motion.div>
 
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.0, duration: 0.6 }}
-            className="bg-white border-2 border-black rounded-2xl p-6 hover:bg-black hover:text-white transition-all"
+            className="glass-card rounded-3xl p-8 hover:bg-white/50 transition-all duration-300 group"
           >
-            <div className="text-4xl font-bold text-vibrant-blue mb-2">48h</div>
-            <div className="text-gray-600 group-hover:text-white">Fast Turnaround</div>
+            <div className="text-5xl font-bold text-charcoal mb-2">48h</div>
+            <div className="text-glass-700">Fast Turnaround</div>
           </motion.div>
         </div>
       </div>
@@ -212,11 +216,11 @@ export function HeroSection() {
         transition={{ delay: 1.2, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+        <div className="w-6 h-10 border-2 border-glass-500 rounded-full flex justify-center backdrop-blur-sm bg-white/20">
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2"
+            className="w-1.5 h-1.5 bg-charcoal rounded-full mt-2"
           />
         </div>
       </motion.div>
