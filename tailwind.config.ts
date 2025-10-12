@@ -14,14 +14,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         
-        // Color 1: Pure White (glass base)
+        // Color 1 & 2: Glass (white base + gray tint)
         glass: {
           white: "#FFFFFF",
           light: "#F8F9FA",
-        },
-        
-        // Color 2: Soft Gray (glass tint)
-        glass: {
           50: "#FAFAFA",
           100: "#F5F5F5",
           200: "#EEEEEE",
