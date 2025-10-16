@@ -77,20 +77,18 @@ export function GallerySection() {
     const scrollContainer = scrollContainerRef.current;
     const section = sectionRef.current;
     
-    // Only enable horizontal scroll on desktop (768px and above)
-    const isMobile = window.innerWidth < 768;
-    
-    if (isMobile) {
-      // On mobile, just allow normal horizontal scroll without GSAP
-      return;
-    }
-    
     // Wait for images to load and calculate proper width
     const setupAnimation = () => {
       // Calculate total scroll width including all images and gaps
       const totalWidth = scrollContainer.scrollWidth;
       const viewportWidth = window.innerWidth;
       const scrollDistance = totalWidth - viewportWidth;
+      
+      // Adjust end distance based on screen size
+      const isMobile = window.innerWidth < 768;
+      const endDistance = isMobile 
+        ? scrollDistance + 100  // Shorter scroll distance on mobile
+        : scrollDistance + 500; // Longer scroll distance on desktop
       
       // Create horizontal scroll animation triggered by vertical scroll
       const scrollTween = gsap.to(scrollContainer, {
@@ -99,7 +97,7 @@ export function GallerySection() {
         scrollTrigger: {
           trigger: section,
           start: "top 0%", // Start when section reaches top of viewport
-          end: () => `+=${scrollDistance + 500}`, // Add extra space to ensure full scroll
+          end: () => `+=${endDistance}`, // Adaptive end distance
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -154,7 +152,7 @@ export function GallerySection() {
         </motion.div>
 
         {/* Gallery - Single Row with Horizontal Scroll on Vertical Scroll */}
-        <div className="w-full overflow-visible md:overflow-visible overflow-x-auto">
+        <div className="w-full overflow-visible">
           <div ref={scrollContainerRef} className="flex gap-4 md:gap-8 will-change-transform px-4 md:px-8">
             {galleryItems.map((item, index) => (
               <motion.div
