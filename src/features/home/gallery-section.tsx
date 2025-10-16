@@ -77,18 +77,20 @@ export function GallerySection() {
     const scrollContainer = scrollContainerRef.current;
     const section = sectionRef.current;
     
+    // Only enable GSAP scroll on desktop
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // On mobile, use native scroll (no GSAP)
+      return;
+    }
+    
     // Wait for images to load and calculate proper width
     const setupAnimation = () => {
       // Calculate total scroll width including all images and gaps
       const totalWidth = scrollContainer.scrollWidth;
       const viewportWidth = window.innerWidth;
       const scrollDistance = totalWidth - viewportWidth;
-      
-      // Adjust end distance based on screen size
-      const isMobile = window.innerWidth < 768;
-      const endDistance = isMobile 
-        ? scrollDistance + 100  // Shorter scroll distance on mobile
-        : scrollDistance + 500; // Longer scroll distance on desktop
       
       // Create horizontal scroll animation triggered by vertical scroll
       const scrollTween = gsap.to(scrollContainer, {
@@ -97,7 +99,7 @@ export function GallerySection() {
         scrollTrigger: {
           trigger: section,
           start: "top 0%", // Start when section reaches top of viewport
-          end: () => `+=${endDistance}`, // Adaptive end distance
+          end: () => `+=${scrollDistance + 500}`, // Add extra space to ensure full scroll
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -152,15 +154,15 @@ export function GallerySection() {
         </motion.div>
 
         {/* Gallery - Single Row with Horizontal Scroll on Vertical Scroll */}
-        <div className="w-full overflow-visible">
-          <div ref={scrollContainerRef} className="flex gap-4 md:gap-8 will-change-transform px-4 md:px-8">
+        <div className="w-full overflow-x-auto md:overflow-visible scrollbar-hide snap-x snap-mandatory">
+          <div ref={scrollContainerRef} className="flex gap-4 md:gap-8 will-change-transform px-4 md:px-8 pr-16 md:pr-8">
             {galleryItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group relative flex-shrink-0 w-[333px] h-[333px] md:w-[500px] md:h-[500px] cursor-pointer overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+                className="group relative flex-shrink-0 w-[calc(100vw-5rem)] md:w-[500px] h-[calc(100vw-5rem)] md:h-[500px] max-w-[333px] max-h-[333px] md:max-w-none md:max-h-none cursor-pointer overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 snap-start"
                 onClick={() => setSelectedImage(item)}
               >
                 <div className="relative w-full h-full">
