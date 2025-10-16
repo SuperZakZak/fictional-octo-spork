@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Play, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from 'next-intl';
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -64,6 +65,7 @@ const galleryItems = [
 ];
 
 export function GallerySection() {
+  const t = useTranslations('gallery');
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
@@ -88,7 +90,7 @@ export function GallerySection() {
         ease: "none",
         scrollTrigger: {
           trigger: section,
-          start: "top -20%", // Start before section reaches top (early trigger)
+          start: "top 0%", // Start when section reaches top of viewport
           end: () => `+=${scrollDistance + 500}`, // Add extra space to ensure full scroll
           scrub: 1,
           pin: true,
@@ -139,24 +141,20 @@ export function GallerySection() {
           className="text-center mb-8 container-custom"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-charcoal">
-            Our <span className="gradient-text">Portfolio</span>
+            <span className="gradient-text">{t('title')}</span>
           </h2>
-          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
-            Explore our collection of stunning custom merchandise designs that
-            bring brands to life
-          </p>
         </motion.div>
 
         {/* Gallery - Single Row with Horizontal Scroll on Vertical Scroll */}
         <div className="w-full overflow-visible">
-          <div ref={scrollContainerRef} className="flex gap-8 will-change-transform px-8">
+          <div ref={scrollContainerRef} className="flex gap-4 md:gap-8 will-change-transform px-4 md:px-8">
             {galleryItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group relative flex-shrink-0 w-[500px] h-[500px] cursor-pointer overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+                className="group relative flex-shrink-0 w-[333px] h-[333px] md:w-[500px] md:h-[500px] cursor-pointer overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300"
                 onClick={() => setSelectedImage(item)}
               >
                 <div className="relative w-full h-full">
@@ -165,12 +163,12 @@ export function GallerySection() {
                     alt={item.alt}
                     fill
                     className="object-cover transition-all duration-500 group-hover:scale-105"
-                    sizes="500px"
+                    sizes="(max-width: 768px) 333px, 500px"
                     priority={index < 2}
                   />
 
                   {/* Hover Border Effect - No text overlay */}
-                  <div className="absolute inset-0 border-4 border-transparent group-hover:border-white/60 rounded-3xl transition-all duration-300"></div>
+                  <div className="absolute inset-0 border-4 border-transparent group-hover:border-white/60 rounded-2xl md:rounded-3xl transition-all duration-300"></div>
                 </div>
               </motion.div>
             ))}

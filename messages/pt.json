@@ -1,0 +1,169 @@
+{
+  "navigation": {
+    "home": "Início",
+    "technologies": "Tecnologias",
+    "products": "Produtos",
+    "pricing": "Preços",
+    "useCases": "Casos de Uso",
+    "configurator": "Configurador",
+    "contact": "Contacto",
+    "createDesign": "Criar Design"
+  },
+  "hero": {
+    "title": "Imprimimos a sua visão.",
+    "titleHighlight": "Lindamente.",
+    "subtitle": "Impressão DTF e Vinil personalizada para t-shirts, hoodies e acessórios.",
+    "subtitleSecond": "Alta qualidade. Entrega rápida. Resultados impressionantes.",
+    "createDesign": "Criar Design",
+    "getQuote": "Pedir Orçamento",
+    "orderSamples": "Encomendar Amostras",
+    "stats": {
+      "clients": "Clientes Satisfeitos",
+      "products": "Produtos Impressos",
+      "turnaround": "Entrega Rápida"
+    }
+  },
+  "technologies": {
+    "title": "As Nossas Tecnologias de Impressão",
+    "subtitle": "Escolha o método perfeito para o seu projeto",
+    "dtf": {
+      "title": "Impressão DTF",
+      "description": "Tecnologia Direct-to-Film para impressões vibrantes e detalhadas em qualquer cor de tecido. Perfeito para designs complexos com múltiplas cores.",
+      "features": {
+        "colors": "Cores Ilimitadas",
+        "detail": "Alto Detalhe",
+        "durability": "Excelente Durabilidade",
+        "fabrics": "Funciona em Todos os Tecidos"
+      }
+    },
+    "vinyl": {
+      "title": "Impressão em Vinil",
+      "description": "Vinil de transferência térmica para designs arrojados e sólidos. Ideal para texto, logótipos e gráficos simples com um acabamento premium.",
+      "features": {
+        "finish": "Mate ou Brilhante",
+        "bold": "Cores Vibrantes",
+        "professional": "Aspeto Profissional",
+        "quick": "Produção Rápida"
+      }
+    }
+  },
+  "products": {
+    "title": "Os Nossos Produtos",
+    "subtitle": "Vestuário e acessórios de qualidade premium",
+    "tshirt": {
+      "name": "T-Shirts",
+      "description": "100% algodão orgânico, qualidade Stanley/Stella"
+    },
+    "hoodie": {
+      "name": "Hoodies",
+      "description": "Sweatshirts macias, quentes e duráveis"
+    },
+    "tote": {
+      "name": "Sacos Tote",
+      "description": "Sacos de lona ecológicos para uso diário"
+    },
+    "viewDetails": "Ver Detalhes",
+    "startFrom": "A partir de"
+  },
+  "pricing": {
+    "title": "Preços Transparentes",
+    "subtitle": "Sem taxas ocultas. Descontos por volume disponíveis.",
+    "downloadPriceList": "Descarregar Lista de Preços Completa",
+    "requestQuote": "Solicitar Orçamento Personalizado",
+    "perUnit": "por unidade",
+    "quantity": "Quantidade",
+    "pricePerUnit": "Preço por Unidade"
+  },
+  "benefits": {
+    "title": "Porquê Escolher Merchandising Personalizado?",
+    "brandRecognition": {
+      "title": "Reconhecimento da Marca",
+      "description": "Destaque-se com designs personalizados que tornam a sua marca memorável"
+    },
+    "teamUnity": {
+      "title": "Unidade da Equipa",
+      "description": "Construa espírito de equipa com vestuário e acessórios coordenados"
+    },
+    "marketingPower": {
+      "title": "Poder de Marketing",
+      "description": "Transforme clientes em anúncios ambulantes da sua marca"
+    },
+    "customerLoyalty": {
+      "title": "Fidelização de Clientes",
+      "description": "Crie conexões duradouras com merchandising de marca"
+    },
+    "eventImpact": {
+      "title": "Impacto em Eventos",
+      "description": "Torne os seus eventos inesquecíveis com equipamento personalizado"
+    },
+    "professionalImage": {
+      "title": "Imagem Profissional",
+      "description": "Eleve a imagem do seu negócio com artigos de marca de qualidade"
+    },
+    "qualityGuarantee": {
+      "title": "Garantia de Qualidade",
+      "description": "Materiais premium e impressão que dura"
+    },
+    "revenueStream": {
+      "title": "Fonte de Receita",
+      "description": "Crie rendimento adicional vendendo merchandising de marca"
+    }
+  },
+  "gallery": {
+    "title": "O Nosso Portfólio"
+  },
+  "configurator": {
+    "title": "Desenhe o Seu Produto",
+    "subtitle": "Crie designs personalizados em tempo real",
+    "selectProduct": "Selecionar Produto",
+    "selectColor": "Selecionar Cor",
+    "uploadDesign": "Carregar Design",
+    "addText": "Adicionar Texto",
+    "preview": "Pré-visualizar",
+    "saveDesign": "Guardar Design",
+    "orderNow": "Encomendar Agora"
+  },
+  "quiz": {
+    "title": "Encontre o Seu Produto Perfeito",
+    "subtitle": "Responda a algumas perguntas para obter recomendações personalizadas",
+    "startQuiz": "Iniciar Questionário"
+  },
+  "contact": {
+    "title": "Entre em Contacto",
+    "subtitle": "Tem questões? Estamos aqui para ajudar!",
+    "name": "Nome",
+    "email": "Email",
+    "phone": "Telefone",
+    "message": "Mensagem",
+    "send": "Enviar Mensagem",
+    "sending": "A enviar...",
+    "success": "Mensagem enviada com sucesso!",
+    "error": "Falha ao enviar mensagem. Por favor, tente novamente."
+  },
+  "footer": {
+    "tagline": "Imprimimos a sua visão. Lindamente.",
+    "quickLinks": "Links Rápidos",
+    "legal": "Legal",
+    "contact": "Contacto",
+    "followUs": "Siga-nos",
+    "privacyPolicy": "Política de Privacidade",
+    "termsOfService": "Termos de Serviço",
+    "cookiePolicy": "Política de Cookies",
+    "legalNotice": "Aviso Legal",
+    "allRightsReserved": "Todos os direitos reservados."
+  },
+  "cookies": {
+    "title": "Definições de Cookies",
+    "description": "Utilizamos cookies para melhorar a sua experiência de navegação e analisar o nosso tráfego. Pode personalizar as suas preferências abaixo.",
+    "necessary": "Cookies Necessários",
+    "necessaryDescription": "Essenciais para o funcionamento adequado do website. Não podem ser desativados.",
+    "analytics": "Cookies de Análise",
+    "analyticsDescription": "Ajudam-nos a compreender como os visitantes interagem com o nosso website.",
+    "marketing": "Cookies de Marketing",
+    "marketingDescription": "Utilizados para rastrear visitantes através de websites para exibir anúncios relevantes.",
+    "acceptAll": "Aceitar Todos",
+    "rejectAll": "Rejeitar Todos",
+    "savePreferences": "Guardar Preferências",
+    "manageSettings": "Gerir Definições de Cookies"
+  }
+}

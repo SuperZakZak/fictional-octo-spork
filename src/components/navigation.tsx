@@ -4,21 +4,24 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#technologies", label: "Technologies" },
-  { href: "#products", label: "Products" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#use-cases", label: "Use Cases" },
-  { href: "#configurator", label: "Configurator" },
-  { href: "#contact", label: "Contact" },
-];
+import { useTranslations } from 'next-intl';
+import { LanguageSwitcher } from "./language-switcher";
 
 export function Navigation() {
+  const t = useTranslations('navigation');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "#home", label: t('home') },
+    { href: "#technologies", label: t('technologies') },
+    { href: "#products", label: t('products') },
+    { href: "#pricing", label: t('pricing') },
+    { href: "#use-cases", label: t('useCases') },
+    { href: "#configurator", label: t('configurator') },
+    { href: "#contact", label: t('contact') },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,11 +77,12 @@ export function Navigation() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
+            <LanguageSwitcher />
             <a
               href="#configurator"
               className="px-6 py-2 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium whitespace-nowrap text-sm shadow-lg hover:shadow-xl"
             >
-              Create Design
+              {t('createDesign')}
             </a>
           </div>
 
@@ -113,12 +117,18 @@ export function Navigation() {
                     {link.label}
                   </a>
                 ))}
+                
+                {/* Language Switcher - Mobile Version */}
+                <div className="border-t border-glass-300 pt-3 mt-2">
+                  <LanguageSwitcher isMobile={true} />
+                </div>
+                
                 <a
                   href="#configurator"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="px-6 py-3 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium text-center shadow-lg"
                 >
-                  Create Design
+                  {t('createDesign')}
                 </a>
               </div>
             </motion.div>

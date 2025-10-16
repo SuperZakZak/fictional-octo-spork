@@ -4,8 +4,10 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Palette, Package } from "lucide-react";
 import gsap from "gsap";
+import { useTranslations } from 'next-intl';
 
 export function HeroSection() {
+  const t = useTranslations('hero');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -138,15 +140,15 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 container-custom section-padding text-center">
         <h1 className="hero-title text-5xl md:text-7xl font-bold mb-6 text-charcoal">
-          We print your vision.
+          {t('title')}
           <br />
-          <span className="gradient-text">Beautifully.</span>
+          <span className="gradient-text">{t('titleHighlight')}</span>
         </h1>
 
         <p className="hero-subtitle text-xl md:text-2xl text-glass-700 mb-12 max-w-3xl mx-auto">
-          Custom DTF and Vinyl printing for t-shirts, hoodies, and accessories.
+          {t('subtitle')}
           <br />
-          High quality. Fast turnaround. Stunning results.
+          {t('subtitleSecond')}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -155,7 +157,7 @@ export function HeroSection() {
             className="hero-cta group px-8 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium shadow-2xl hover:shadow-3xl flex items-center space-x-2"
           >
             <Palette size={20} />
-            <span>Create Design</span>
+            <span>{t('createDesign')}</span>
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </a>
 
@@ -163,7 +165,7 @@ export function HeroSection() {
             href="#pricing"
             className="hero-cta glass-card px-8 py-4 text-charcoal border border-white/30 rounded-full hover:bg-white/60 transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
           >
-            <span>Get Quote</span>
+            <span>{t('getQuote')}</span>
           </a>
 
           <a
@@ -171,7 +173,7 @@ export function HeroSection() {
             className="hero-cta glass-card px-8 py-4 text-charcoal border border-white/30 rounded-full hover:bg-white/60 transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
           >
             <Package size={20} />
-            <span>Order Samples</span>
+            <span>{t('orderSamples')}</span>
           </a>
         </div>
 
@@ -184,7 +186,7 @@ export function HeroSection() {
             className="glass-card rounded-3xl p-8 hover:bg-white/50 transition-all duration-300 group"
           >
             <div className="text-5xl font-bold text-charcoal mb-2">100+</div>
-            <div className="text-glass-700">Happy Clients</div>
+            <div className="text-glass-700">{t('stats.clients')}</div>
           </motion.div>
 
           <motion.div
@@ -194,7 +196,7 @@ export function HeroSection() {
             className="glass-card rounded-3xl p-8 hover:bg-white/50 transition-all duration-300 group"
           >
             <div className="text-5xl font-bold text-charcoal mb-2">5k+</div>
-            <div className="text-glass-700">Products Printed</div>
+            <div className="text-glass-700">{t('stats.products')}</div>
           </motion.div>
 
           <motion.div
@@ -204,7 +206,7 @@ export function HeroSection() {
             className="glass-card rounded-3xl p-8 hover:bg-white/50 transition-all duration-300 group"
           >
             <div className="text-5xl font-bold text-charcoal mb-2">48h</div>
-            <div className="text-glass-700">Fast Turnaround</div>
+            <div className="text-glass-700">{t('stats.turnaround')}</div>
           </motion.div>
         </div>
       </div>

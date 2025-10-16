@@ -4,8 +4,10 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Cookie } from "luci
 import Image from "next/image";
 import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
 import { useCookieSettings } from "@/hooks/use-cookie-settings";
+import { useTranslations } from 'next-intl';
 
 export function Footer() {
+  const t = useTranslations('footer');
   const currentYear = new Date().getFullYear();
   const { open: openCookieSettings } = useCookieSettings();
 
@@ -25,13 +27,13 @@ export function Footer() {
               />
             </a>
             <p className="text-glass-400 text-sm">
-              Professional DTF and Vinyl printing services for custom apparel and accessories.
+              {t('tagline')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-4">{t('quickLinks')}</h3>
             <ul className="space-y-2">
               <li><a href="#technologies" className="text-glass-400 hover:text-white transition-all duration-300">Technologies</a></li>
               <li><a href="#products" className="text-glass-400 hover:text-white transition-all duration-300">Products</a></li>
@@ -53,7 +55,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Contact</h3>
+            <h3 className="font-bold text-lg mb-4">{t('contact')}</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-2 text-glass-400">
                 <Mail size={18} className="mt-1 flex-shrink-0" />
@@ -91,27 +93,27 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-glass-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-glass-400 text-sm">
-            © {currentYear} Blooma. All rights reserved.
+            © {currentYear} Blooma. {t('allRightsReserved')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <a href="/legal-notice" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
-              Legal Notice
+              {t('legalNotice')}
             </a>
             <a href="/privacy-policy" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
-              Privacy Policy
+              {t('privacyPolicy')}
             </a>
             <a href="/cookie-policy" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
-              Cookie Policy
+              {t('cookiePolicy')}
             </a>
             <a href="/terms" className="text-glass-400 hover:text-white text-sm transition-all duration-300">
-              Terms & Conditions
+              {t('termsOfService')}
             </a>
             <button
               onClick={openCookieSettings}
               className="flex items-center gap-2 text-glass-400 hover:text-white text-sm transition-all duration-300 group"
             >
               <Cookie size={16} className="group-hover:rotate-12 transition-transform" />
-              Cookie Settings
+              {t('cookiePolicy')}
             </button>
           </div>
         </div>

@@ -1,0 +1,169 @@
+{
+  "navigation": {
+    "home": "Home",
+    "technologies": "Technologies",
+    "products": "Products",
+    "pricing": "Pricing",
+    "useCases": "Use Cases",
+    "configurator": "Configurator",
+    "contact": "Contact",
+    "createDesign": "Create Design"
+  },
+  "hero": {
+    "title": "We print your vision.",
+    "titleHighlight": "Beautifully.",
+    "subtitle": "Custom DTF and Vinyl printing for t-shirts, hoodies, and accessories.",
+    "subtitleSecond": "High quality. Fast turnaround. Stunning results.",
+    "createDesign": "Create Design",
+    "getQuote": "Get Quote",
+    "orderSamples": "Order Samples",
+    "stats": {
+      "clients": "Happy Clients",
+      "products": "Products Printed",
+      "turnaround": "Fast Turnaround"
+    }
+  },
+  "technologies": {
+    "title": "Our Printing Technologies",
+    "subtitle": "Choose the perfect method for your project",
+    "dtf": {
+      "title": "DTF Printing",
+      "description": "Direct-to-Film technology for vibrant, detailed prints on any fabric color. Perfect for complex designs with multiple colors.",
+      "features": {
+        "colors": "Unlimited Colors",
+        "detail": "High Detail",
+        "durability": "Excellent Durability",
+        "fabrics": "Works on All Fabrics"
+      }
+    },
+    "vinyl": {
+      "title": "Vinyl Printing",
+      "description": "Heat-transfer vinyl for bold, solid designs. Ideal for text, logos, and simple graphics with a premium feel.",
+      "features": {
+        "finish": "Matte or Glossy",
+        "bold": "Bold Colors",
+        "professional": "Professional Look",
+        "quick": "Quick Production"
+      }
+    }
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Premium quality apparel and accessories",
+    "tshirt": {
+      "name": "T-Shirts",
+      "description": "100% organic cotton, Stanley/Stella quality"
+    },
+    "hoodie": {
+      "name": "Hoodies",
+      "description": "Soft, warm, and durable sweatshirts"
+    },
+    "tote": {
+      "name": "Tote Bags",
+      "description": "Eco-friendly canvas bags for everyday use"
+    },
+    "viewDetails": "View Details",
+    "startFrom": "Starting from"
+  },
+  "pricing": {
+    "title": "Transparent Pricing",
+    "subtitle": "No hidden fees. Volume discounts available.",
+    "downloadPriceList": "Download Full Price List",
+    "requestQuote": "Request Custom Quote",
+    "perUnit": "per unit",
+    "quantity": "Quantity",
+    "pricePerUnit": "Price per Unit"
+  },
+  "benefits": {
+    "title": "Why Choose Custom Merchandise?",
+    "brandRecognition": {
+      "title": "Brand Recognition",
+      "description": "Stand out with custom designs that make your brand memorable"
+    },
+    "teamUnity": {
+      "title": "Team Unity",
+      "description": "Build team spirit with matching apparel and accessories"
+    },
+    "marketingPower": {
+      "title": "Marketing Power",
+      "description": "Turn customers into walking advertisements for your brand"
+    },
+    "customerLoyalty": {
+      "title": "Customer Loyalty",
+      "description": "Create lasting connections with branded merchandise"
+    },
+    "eventImpact": {
+      "title": "Event Impact",
+      "description": "Make your events unforgettable with custom gear"
+    },
+    "professionalImage": {
+      "title": "Professional Image",
+      "description": "Elevate your business image with quality branded items"
+    },
+    "qualityGuarantee": {
+      "title": "Quality Guarantee",
+      "description": "Premium materials and printing that lasts"
+    },
+    "revenueStream": {
+      "title": "Revenue Stream",
+      "description": "Create additional income by selling branded merchandise"
+    }
+  },
+  "gallery": {
+    "title": "Our Portfolio"
+  },
+  "configurator": {
+    "title": "Design Your Product",
+    "subtitle": "Create custom designs in real-time",
+    "selectProduct": "Select Product",
+    "selectColor": "Select Color",
+    "uploadDesign": "Upload Design",
+    "addText": "Add Text",
+    "preview": "Preview",
+    "saveDesign": "Save Design",
+    "orderNow": "Order Now"
+  },
+  "quiz": {
+    "title": "Find Your Perfect Product",
+    "subtitle": "Answer a few questions to get personalized recommendations",
+    "startQuiz": "Start Quiz"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have questions? We're here to help!",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again."
+  },
+  "footer": {
+    "tagline": "We print your vision. Beautifully.",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "legalNotice": "Legal Notice",
+    "allRightsReserved": "All rights reserved."
+  },
+  "cookies": {
+    "title": "Cookie Settings",
+    "description": "We use cookies to enhance your browsing experience and analyze our traffic. You can customize your preferences below.",
+    "necessary": "Necessary Cookies",
+    "necessaryDescription": "Essential for the website to function properly. Cannot be disabled.",
+    "analytics": "Analytics Cookies",
+    "analyticsDescription": "Help us understand how visitors interact with our website.",
+    "marketing": "Marketing Cookies",
+    "marketingDescription": "Used to track visitors across websites to display relevant advertisements.",
+    "acceptAll": "Accept All",
+    "rejectAll": "Reject All",
+    "savePreferences": "Save Preferences",
+    "manageSettings": "Manage Cookie Settings"
+  }
+}

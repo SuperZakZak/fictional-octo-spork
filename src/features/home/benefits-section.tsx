@@ -12,75 +12,21 @@ import {
   Award,
   Target,
 } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
-const benefits = [
-  {
-    id: 1,
-    icon: Sparkles,
-    title: "Brand Recognition",
-    description:
-      "Stand out from the crowd with unique, eye-catching designs that make your brand unforgettable",
-    gradient: "from-pink-500 to-rose-500",
-  },
-  {
-    id: 2,
-    icon: Users,
-    title: "Team Unity",
-    description:
-      "Build stronger connections and foster team spirit with custom merchandise everyone loves to wear",
-    gradient: "from-purple-500 to-indigo-500",
-  },
-  {
-    id: 3,
-    icon: TrendingUp,
-    title: "Marketing Power",
-    description:
-      "Turn every customer into a walking billboard with merchandise that promotes your brand organically",
-    gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    id: 4,
-    icon: Heart,
-    title: "Customer Loyalty",
-    description:
-      "Create lasting impressions and build emotional connections through thoughtful branded gifts",
-    gradient: "from-red-500 to-pink-500",
-  },
-  {
-    id: 5,
-    icon: Zap,
-    title: "Event Impact",
-    description:
-      "Make your events memorable with custom merchandise that attendees will treasure long after",
-    gradient: "from-yellow-500 to-orange-500",
-  },
-  {
-    id: 6,
-    icon: Shield,
-    title: "Professional Image",
-    description:
-      "Elevate your company's professional appearance with high-quality, consistent branded apparel",
-    gradient: "from-green-500 to-emerald-500",
-  },
-  {
-    id: 7,
-    icon: Award,
-    title: "Quality Assurance",
-    description:
-      "Premium materials and printing techniques ensure your merchandise looks great and lasts longer",
-    gradient: "from-indigo-500 to-purple-500",
-  },
-  {
-    id: 8,
-    icon: Target,
-    title: "Revenue Stream",
-    description:
-      "Transform your brand into a profitable merchandise line with our retail-ready solutions",
-    gradient: "from-orange-500 to-red-500",
-  },
+const benefitIcons = [
+  { id: 1, icon: Sparkles, gradient: "from-pink-500 to-rose-500", key: "brandRecognition" },
+  { id: 2, icon: Users, gradient: "from-purple-500 to-indigo-500", key: "teamUnity" },
+  { id: 3, icon: TrendingUp, gradient: "from-blue-500 to-cyan-500", key: "marketingPower" },
+  { id: 4, icon: Heart, gradient: "from-red-500 to-pink-500", key: "customerLoyalty" },
+  { id: 5, icon: Zap, gradient: "from-yellow-500 to-orange-500", key: "eventImpact" },
+  { id: 6, icon: Shield, gradient: "from-green-500 to-emerald-500", key: "professionalImage" },
+  { id: 7, icon: Award, gradient: "from-indigo-500 to-purple-500", key: "qualityGuarantee" },
+  { id: 8, icon: Target, gradient: "from-orange-500 to-red-500", key: "revenueStream" },
 ];
 
 export function BenefitsSection() {
+  const t = useTranslations('benefits');
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
@@ -106,17 +52,13 @@ export function BenefitsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-charcoal">
-            Why Choose <span className="gradient-text">Custom Merchandise</span>
+            {t('title')}
           </h2>
-          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
-            From building brand awareness to creating lasting impressions, custom
-            merchandise is a powerful tool for your business success
-          </p>
         </motion.div>
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => {
+          {benefitIcons.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
               <motion.div
@@ -142,12 +84,12 @@ export function BenefitsSection() {
 
                   {/* Title */}
                   <h3 className="text-xl font-bold text-charcoal mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-charcoal group-hover:to-glass-700 transition-all duration-300">
-                    {benefit.title}
+                    {t(`${benefit.key}.title`)}
                   </h3>
 
                   {/* Description */}
                   <p className="text-glass-600 text-sm leading-relaxed">
-                    {benefit.description}
+                    {t(`${benefit.key}.description`)}
                   </p>
 
                   {/* Decorative Line */}
@@ -157,27 +99,6 @@ export function BenefitsSection() {
             );
           })}
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={isInView ? { y: 0, opacity: 1 } : {}}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="text-center mt-16"
-        >
-          <div className="inline-flex flex-col items-center space-y-4 glass-card rounded-3xl p-8 border border-white/30 shadow-xl">
-            <p className="text-lg text-glass-700 max-w-2xl">
-              Ready to unlock the full potential of custom merchandise for your
-              brand?
-            </p>
-            <a
-              href="#configurator"
-              className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full hover:from-pink-600 hover:to-purple-600 transition-all duration-300 font-medium shadow-xl hover:shadow-2xl hover:scale-105"
-            >
-              Start Designing Now
-            </a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
