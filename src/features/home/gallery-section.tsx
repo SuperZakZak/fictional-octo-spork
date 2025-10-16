@@ -77,6 +77,14 @@ export function GallerySection() {
     const scrollContainer = scrollContainerRef.current;
     const section = sectionRef.current;
     
+    // Only enable horizontal scroll on desktop (768px and above)
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // On mobile, just allow normal horizontal scroll without GSAP
+      return;
+    }
+    
     // Wait for images to load and calculate proper width
     const setupAnimation = () => {
       // Calculate total scroll width including all images and gaps
@@ -146,7 +154,7 @@ export function GallerySection() {
         </motion.div>
 
         {/* Gallery - Single Row with Horizontal Scroll on Vertical Scroll */}
-        <div className="w-full overflow-visible">
+        <div className="w-full overflow-visible md:overflow-visible overflow-x-auto">
           <div ref={scrollContainerRef} className="flex gap-4 md:gap-8 will-change-transform px-4 md:px-8">
             {galleryItems.map((item, index) => (
               <motion.div
