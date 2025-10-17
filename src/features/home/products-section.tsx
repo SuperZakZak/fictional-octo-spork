@@ -94,8 +94,8 @@ export function ProductsSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
             Premium <span className="gradient-text">Products</span>
           </h2>
-          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
-            We use only the highest quality blanks from trusted brands like Stanley/Stella and WATC.
+          <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
+            We use only the highest quality blanks from trusted brands like&nbsp;Stanley/Stella&nbsp;and&nbsp;WATC.
           </p>
         </motion.div>
 

@@ -255,8 +255,8 @@ export function ConfiguratorSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Design <span className="gradient-text">Configurator</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Upload your design and see it come to life in real-time. Get an instant quote and place your order.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Upload your design and see it come to life in real-time. Get&nbsp;an&nbsp;instant&nbsp;quote and&nbsp;place&nbsp;your&nbsp;order.
           </p>
         </motion.div>
 

@@ -143,7 +143,7 @@ export function ContactSection() {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
-            Ready to start your project? Fill&nbsp;out&nbsp;the&nbsp;form below and we&apos;ll get&nbsp;back&nbsp;to&nbsp;you within 24&nbsp;hours.
+            Ready to start your project? Fill&nbsp;out&nbsp;the&nbsp;form&nbsp;below and we&apos;ll get&nbsp;back&nbsp;to&nbsp;you within&nbsp;24&nbsp;hours.
           </p>
         </motion.div>
 

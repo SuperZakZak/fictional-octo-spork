@@ -130,7 +130,7 @@ export function TechnologiesSection() {
               </div>
 
               <p className="text-glass-700 mb-8 text-lg leading-relaxed">
-                Perfect for bold, simple designs with solid colors. Ideal&nbsp;for text, logos, and geometric patterns.
+                Perfect for bold, simple designs with solid colors. Ideal&nbsp;for&nbsp;text, logos, and geometric patterns.
               </p>
 
               {/* Animated Cutting Process */}
