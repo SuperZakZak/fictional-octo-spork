@@ -596,11 +596,11 @@ export function ConfiguratorSection() {
             {/* Info Box */}
             <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-6">
               <h4 className="font-bold text-gray-900 mb-3">💡 Design Tips</h4>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li>• Use high-resolution images (300 DPI minimum)</li>
-                <li>• PNG files with transparent backgrounds work best</li>
-                <li>• Vector files (SVG) ensure perfect quality at any size</li>
-                <li>• Avoid very thin lines (minimum 0.5mm)</li>
+              <ul className="space-y-2 text-sm text-gray-700 leading-relaxed">
+                <li>• Use high-resolution images (300&nbsp;DPI minimum)</li>
+                <li>• PNG files with transparent backgrounds&nbsp;work&nbsp;best</li>
+                <li>• Vector files (SVG) ensure perfect quality at&nbsp;any&nbsp;size</li>
+                <li>• Avoid very thin lines (minimum&nbsp;0.5mm)</li>
               </ul>
             </div>
           </motion.div>

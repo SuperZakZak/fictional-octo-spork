@@ -54,6 +54,16 @@ body {
     text-wrap: balance;
   }
   
+  /* Better text wrapping for mobile */
+  .text-wrap-pretty {
+    text-wrap: pretty;
+  }
+  
+  .text-no-orphans {
+    orphans: 2;
+    widows: 2;
+  }
+  
   /* Liquid Glass Effects */
   .glass-card {
     @apply bg-white/40 backdrop-blur-2xl border border-white/20 shadow-xl;
@@ -289,14 +299,4 @@ body {
   svg {
     display: none;
   }
-}
-
-/* Hide scrollbar for gallery on mobile */
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
 }

@@ -93,9 +93,10 @@ export function TechnologiesSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
             Choose Your <span className="gradient-text">Technology</span>
           </h2>
-          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
+          <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
             We offer two professional printing methods, each with unique advantages.
-            Let us help you choose the perfect one for your project.
+            <br className="hidden md:block" />
+            Let&nbsp;us help you choose the perfect one for your&nbsp;project.
           </p>
         </motion.div>
 
@@ -128,8 +129,8 @@ export function TechnologiesSection() {
                 <h3 className="text-3xl font-bold text-charcoal">Vinyl Printing</h3>
               </div>
 
-              <p className="text-glass-700 mb-8 text-lg">
-                Perfect for bold, simple designs with solid colors. Ideal for text, logos, and geometric patterns.
+              <p className="text-glass-700 mb-8 text-lg leading-relaxed">
+                Perfect for bold, simple designs with solid colors. Ideal&nbsp;for text, logos, and geometric patterns.
               </p>
 
               {/* Animated Cutting Process */}

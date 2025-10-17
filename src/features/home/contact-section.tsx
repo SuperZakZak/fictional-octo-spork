@@ -142,8 +142,8 @@ export function ContactSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-xl text-glass-700 max-w-3xl mx-auto">
-            Ready to start your project? Fill out the form below and we&apos;ll get back to you within 24 hours.
+          <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
+            Ready to start your project? Fill out the form below and we&apos;ll get back to you within 24&nbsp;hours.
           </p>
         </motion.div>
 
@@ -465,8 +465,8 @@ export function ContactSection() {
                 <MessageSquare size={24} className="text-charcoal" />
                 <span>Quick Contact</span>
               </h3>
-              <p className="text-gray-600 mb-6">
-                Prefer instant messaging? Reach out to us directly:
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Prefer instant messaging? Reach&nbsp;out to&nbsp;us directly:
               </p>
 
               <div className="space-y-3">

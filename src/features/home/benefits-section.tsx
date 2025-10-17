@@ -15,14 +15,14 @@ import {
 import { useTranslations } from 'next-intl';
 
 const benefitIcons = [
-  { id: 1, icon: Sparkles, gradient: "from-pink-500 to-rose-500", key: "brandRecognition", showOnMobile: true },
-  { id: 2, icon: Users, gradient: "from-purple-500 to-indigo-500", key: "teamUnity", showOnMobile: false },
-  { id: 3, icon: TrendingUp, gradient: "from-blue-500 to-cyan-500", key: "marketingPower", showOnMobile: true },
-  { id: 4, icon: Heart, gradient: "from-red-500 to-pink-500", key: "customerLoyalty", showOnMobile: true },
-  { id: 5, icon: Zap, gradient: "from-yellow-500 to-orange-500", key: "eventImpact", showOnMobile: false },
-  { id: 6, icon: Shield, gradient: "from-green-500 to-emerald-500", key: "professionalImage", showOnMobile: true },
-  { id: 7, icon: Award, gradient: "from-indigo-500 to-purple-500", key: "qualityGuarantee", showOnMobile: true },
-  { id: 8, icon: Target, gradient: "from-orange-500 to-red-500", key: "revenueStream", showOnMobile: false },
+  { id: 1, icon: Sparkles, gradient: "from-pink-500 to-rose-500", key: "brandRecognition" },
+  { id: 2, icon: Users, gradient: "from-purple-500 to-indigo-500", key: "teamUnity" },
+  { id: 3, icon: TrendingUp, gradient: "from-blue-500 to-cyan-500", key: "marketingPower" },
+  { id: 4, icon: Heart, gradient: "from-red-500 to-pink-500", key: "customerLoyalty" },
+  { id: 5, icon: Zap, gradient: "from-yellow-500 to-orange-500", key: "eventImpact" },
+  { id: 6, icon: Shield, gradient: "from-green-500 to-emerald-500", key: "professionalImage" },
+  { id: 7, icon: Award, gradient: "from-indigo-500 to-purple-500", key: "qualityGuarantee" },
+  { id: 8, icon: Target, gradient: "from-orange-500 to-red-500", key: "revenueStream" },
 ];
 
 export function BenefitsSection() {
@@ -66,7 +66,7 @@ export function BenefitsSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={`group ${benefit.showOnMobile ? '' : 'hidden md:block'}`}
+                className="group"
               >
                 <div className="relative h-full glass-card rounded-2xl p-6 border border-white/30 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
                   {/* Icon with Gradient Background */}

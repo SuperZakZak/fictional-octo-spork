@@ -145,10 +145,10 @@ export function HeroSection() {
           <span className="gradient-text">{t('titleHighlight')}</span>
         </h1>
 
-        <p className="hero-subtitle text-xl md:text-2xl text-glass-700 mb-12 max-w-3xl mx-auto">
-          {t('subtitle')}
+        <p className="hero-subtitle text-xl md:text-2xl text-glass-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <span className="inline-block">{t('subtitle')}</span>
           <br />
-          {t('subtitleSecond')}
+          <span className="inline-block">{t('subtitleSecond')}</span>
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
