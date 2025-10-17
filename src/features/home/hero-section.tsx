@@ -154,7 +154,7 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#configurator"
-            className="hero-cta group px-8 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium shadow-2xl hover:shadow-3xl flex items-center space-x-2"
+            className="hero-cta group px-8 py-4 bg-gray-900 text-[#FF5828] rounded-full hover:bg-gray-800 transition-all duration-300 font-medium shadow-2xl hover:shadow-3xl flex items-center space-x-2"
           >
             <Palette size={20} />
             <span>{t('createDesign')}</span>
@@ -163,14 +163,14 @@ export function HeroSection() {
 
           <a
             href="#pricing"
-            className="hero-cta glass-card px-8 py-4 text-charcoal border border-white/30 rounded-full hover:bg-white/60 transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
+            className="hero-cta px-8 py-4 bg-white text-gray-900 border-2 border-gray-900 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
           >
             <span>{t('getQuote')}</span>
           </a>
 
           <a
             href="#contact"
-            className="hero-cta glass-card px-8 py-4 text-charcoal border border-white/30 rounded-full hover:bg-white/60 transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
+            className="hero-cta px-8 py-4 bg-[#FF5828] text-white rounded-full hover:bg-[#e64d23] transition-all duration-300 font-medium shadow-xl hover:shadow-2xl flex items-center space-x-2"
           >
             <Package size={20} />
             <span>{t('orderSamples')}</span>
