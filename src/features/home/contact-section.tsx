@@ -143,7 +143,7 @@ export function ContactSection() {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
-            Ready to start your project? Fill out the form below and we&apos;ll get back to you within 24&nbsp;hours.
+            Ready to start your project? Fill&nbsp;out&nbsp;the&nbsp;form below and we&apos;ll get&nbsp;back&nbsp;to&nbsp;you within 24&nbsp;hours.
           </p>
         </motion.div>
 
@@ -466,7 +466,7 @@ export function ContactSection() {
                 <span>Quick Contact</span>
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Prefer instant messaging? Reach&nbsp;out to&nbsp;us directly:
+                Prefer instant messaging? Reach&nbsp;out&nbsp;to&nbsp;us&nbsp;directly:
               </p>
 
               <div className="space-y-3">
