@@ -106,21 +106,6 @@ export function TechnologiesSection() {
             ref={vinylCardRef}
             className="relative glass-card rounded-3xl p-8 text-charcoal overflow-hidden shadow-2xl border border-white/30"
           >
-            {/* Animated Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <motion.path
-                  d="M0,50 Q25,30 50,50 T100,50"
-                  stroke="currentColor"
-                  strokeWidth="0.5"
-                  fill="none"
-                  initial={{ pathLength: 0 }}
-                  animate={isInView ? { pathLength: 1 } : {}}
-                  transition={{ duration: 2, ease: "easeInOut" }}
-                />
-              </svg>
-            </div>
-
             <div className="relative z-10">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-12 h-12 bg-charcoal rounded-full flex items-center justify-center">
@@ -222,7 +207,7 @@ export function TechnologiesSection() {
 
             <div className="relative z-10">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-charcoal rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#FF5828] to-[#ff7a52] rounded-full flex items-center justify-center shadow-lg">
                   <Printer className="text-white" size={24} />
                 </div>
                 <h3 className="text-3xl font-bold text-charcoal">DTF Printing</h3>
