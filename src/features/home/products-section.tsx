@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Shirt, ShoppingBag, Palette, Wind } from "lucide-react";
 import { useRef } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 // Маппинг hex цветов к названиям файлов
 const colorToFileName: Record<string, string> = {
@@ -61,6 +62,7 @@ const products = [
 ];
 
 export function ProductsSection() {
+  const t = useTranslations('products');
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
@@ -92,10 +94,10 @@ export function ProductsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
-            Premium <span className="gradient-text">Products</span>
+            {t('title').split(' ').slice(0, -1).join(' ')} <span className="gradient-text">{t('titleHighlight')}</span>
           </h2>
           <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
-            We use only the highest quality blanks from trusted brands like&nbsp;Stanley/Stella&nbsp;and&nbsp;WATC.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -155,7 +157,7 @@ export function ProductsSection() {
               className="hidden md:flex absolute top-4 right-4 glass-morphism rounded-full px-4 py-2 shadow-lg items-center space-x-2"
             >
               <Palette className="text-charcoal" size={16} />
-              <span className="text-sm font-medium text-charcoal">Premium Quality</span>
+              <span className="text-sm font-medium text-charcoal">{t('premiumQuality')}</span>
             </motion.div>
           </motion.div>
 
@@ -196,7 +198,7 @@ export function ProductsSection() {
               </h3>
               {selectedProduct.priceFrom && (
                 <p className="text-lg text-glass-700 mb-3">
-                  from €{selectedProduct.priceFrom}
+                  {t('startFrom')}{selectedProduct.priceFrom}
                 </p>
               )}
               <p className="text-glass-700">{selectedProduct.description}</p>
@@ -205,7 +207,7 @@ export function ProductsSection() {
             {/* Color Picker */}
             <div className="mb-8">
               <label className="block text-sm font-medium text-charcoal mb-3">
-                Choose Color
+                {t('chooseColor')}
               </label>
               <div className="flex flex-wrap gap-3">
                 {selectedProduct.colors.map((color) => (
@@ -223,14 +225,14 @@ export function ProductsSection() {
                 ))}
               </div>
               <p className="mt-3 text-sm text-glass-600 italic">
-                💡 Need other colors or models? Just ask us!
+                {t('needOtherColors')}
               </p>
             </div>
 
             {/* Sizes */}
             <div className="mb-8">
               <label className="block text-sm font-medium text-charcoal mb-3">
-                Available Sizes
+                {t('availableSizes')}
               </label>
               <div className="flex flex-wrap gap-2">
                 {selectedProduct.sizes.map((size) => (
@@ -246,24 +248,14 @@ export function ProductsSection() {
 
             {/* Features */}
             <div className="glass-card rounded-3xl p-6 mb-8 border border-white/30">
-              <h4 className="font-bold text-charcoal mb-4">Product Features</h4>
+              <h4 className="font-bold text-charcoal mb-4">{t('productFeatures')}</h4>
               <ul className="space-y-2 text-glass-700">
-                <li className="flex items-start space-x-2">
-                  <span className="text-charcoal mt-1">✓</span>
-                  <span>100% organic cotton (or premium canvas for bags)</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-charcoal mt-1">✓</span>
-                  <span>Ethically sourced and sustainably produced</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-charcoal mt-1">✓</span>
-                  <span>Pre-shrunk and machine washable</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-charcoal mt-1">✓</span>
-                  <span>Perfect for DTF and Vinyl printing</span>
-                </li>
+                {(t.raw('features') as string[]).map((feature: string, index: number) => (
+                  <li key={index} className="flex items-start space-x-2">
+                    <span className="text-charcoal mt-1">✓</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -272,7 +264,7 @@ export function ProductsSection() {
               href="#configurator"
               className="block w-full text-center px-8 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium shadow-xl hover:shadow-2xl"
             >
-              Customize This Product
+              {t('customizeProduct')}
             </a>
           </motion.div>
         </div>

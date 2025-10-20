@@ -25,53 +25,113 @@
   },
   "technologies": {
     "title": "Our Printing Technologies",
-    "subtitle": "Choose the perfect method for your project",
-    "dtf": {
-      "title": "DTF Printing",
-      "description": "Direct-to-Film technology for vibrant, detailed prints on any fabric color. Perfect for complex designs with multiple colors.",
-      "features": {
-        "colors": "Unlimited Colors",
-        "detail": "High Detail",
-        "durability": "Excellent Durability",
-        "fabrics": "Works on All Fabrics"
-      }
-    },
+    "titleHighlight": "Technology",
+    "subtitle": "We offer two professional printing methods, each with unique advantages.",
+    "subtitleSecond": "Let us help you choose the perfect one for your project.",
     "vinyl": {
       "title": "Vinyl Printing",
-      "description": "Heat-transfer vinyl for bold, solid designs. Ideal for text, logos, and simple graphics with a premium feel.",
-      "features": {
-        "finish": "Matte or Glossy",
-        "bold": "Bold Colors",
-        "professional": "Professional Look",
-        "quick": "Quick Production"
-      }
-    }
+      "description": "Perfect for bold, simple designs with solid colors. Ideal for text, logos, and geometric patterns.",
+      "cuttingProcess": "Cutting Process",
+      "heatTransfer": "Heat Transfer Process",
+      "bestFor": "Best for:",
+      "logos": "Logos",
+      "text": "Text",
+      "simpleGraphics": "Simple Graphics",
+      "features": [
+        "Perfect for simple designs",
+        "Matte finish",
+        "Durable and long-lasting",
+        "Special effect options (Velvet, metallic, reflective and more)",
+        "Best for 1-3 colors",
+        "No photo-realistic prints"
+      ]
+    },
+    "dtf": {
+      "title": "DTF Printing",
+      "description": "Advanced direct-to-film technology for photo-realistic, full-color designs with unlimited detail.",
+      "preparation": "DTF Preparation",
+      "heatTransfer": "Heat Transfer Process",
+      "bestFor": "Best for:",
+      "photos": "Photos",
+      "complexArt": "Complex Art",
+      "gradients": "Gradients",
+      "fullColor": "Full Color",
+      "features": [
+        "Full-color photo quality",
+        "Vibrant gradients",
+        "Soft, flexible feel",
+        "Complex designs welcome",
+        "Unlimited colors",
+        "Fast production"
+      ]
+    },
+    "cta": "Not sure? Take our quiz"
   },
   "products": {
     "title": "Our Products",
-    "subtitle": "Premium quality apparel and accessories",
+    "titleHighlight": "Products",
+    "subtitle": "We use only the highest quality blanks from trusted brands like Stanley/Stella and WATC.",
+    "premiumQuality": "Premium Quality",
+    "chooseColor": "Choose Color",
+    "availableSizes": "Available Sizes",
+    "productFeatures": "Product Features",
+    "customizeProduct": "Customize This Product",
+    "needOtherColors": "💡 Need other colors or models? Just ask us!",
     "tshirt": {
-      "name": "T-Shirts",
-      "description": "100% organic cotton, Stanley/Stella quality"
+      "name": "T-Shirt",
+      "brand": "Stanley/Stella",
+      "description": "Premium organic cotton t-shirt, perfect for any design",
+      "priceFrom": "10"
     },
     "hoodie": {
-      "name": "Hoodies",
-      "description": "Soft, warm, and durable sweatshirts"
+      "name": "Hoodie",
+      "brand": "Stanley/Stella",
+      "description": "Comfortable heavyweight hoodie with kangaroo pocket",
+      "priceFrom": "43"
     },
     "tote": {
-      "name": "Tote Bags",
-      "description": "Eco-friendly canvas bags for everyday use"
+      "name": "Tote Bag",
+      "brand": "Stanley/Stella",
+      "description": "Durable canvas tote bag for everyday use",
+      "priceFrom": "7"
     },
-    "viewDetails": "View Details",
-    "startFrom": "Starting from"
+    "features": [
+      "100% organic cotton (or premium canvas for bags)",
+      "Ethically sourced and sustainably produced",
+      "Pre-shrunk and machine washable",
+      "Perfect for DTF and Vinyl printing"
+    ],
+    "startFrom": "from €"
   },
   "pricing": {
     "title": "Transparent Pricing",
-    "subtitle": "No hidden fees. Volume discounts available.",
-    "downloadPriceList": "Download Full Price List",
-    "requestQuote": "Request Custom Quote",
-    "perUnit": "per unit",
+    "titleHighlight": "Pricing",
+    "subtitle": "Calculate your project cost instantly. No hidden fees, no surprises.",
+    "calculator": "Price Calculator",
+    "selectSize": "Select Print Size",
     "quantity": "Quantity",
+    "vinylPrinting": "Vinyl Printing",
+    "dtfPrinting": "DTF Printing",
+    "perPrint": "per print",
+    "bestValue": "BEST VALUE",
+    "cleanGraphics": "Clean one-color graphics",
+    "fullColor": "Full-color, even photos",
+    "wantAllPricing": "Want to see all pricing options?",
+    "getPriceList": "Get our complete price list with all sizes and volume discounts",
+    "getFullPriceList": "Get Full Price List",
+    "enterEmail": "Enter your email to download",
+    "sendPriceList": "We'll send you the complete price list right away",
+    "emailPlaceholder": "your@email.com",
+    "download": "Download",
+    "sending": "Sending...",
+    "back": "← Back",
+    "openingFolder": "Opening price list folder!",
+    "folderOpened": "A new tab has been opened with our complete price list",
+    "startDesign": "Start Your Design",
+    "requestQuote": "Request Custom Quote",
+    "customQuoteRequired": "Quantities over 50 require a custom quote",
+    "downloadPriceList": "Download Full Price List",
+    "perUnit": "per unit",
     "pricePerUnit": "Price per Unit"
   },
   "benefits": {
@@ -114,9 +174,43 @@
   },
   "configurator": {
     "title": "Design Your Product",
-    "subtitle": "Create custom designs in real-time",
+    "titleHighlight": "Configurator",
+    "subtitle": "Upload your design and see it come to life in real-time. Get an instant quote and place your order.",
+    "uploadToPreview": "Upload your design to preview",
+    "clickToUpload": "Click here to upload",
+    "adjustDesign": "Adjust Design",
+    "size": "Size",
+    "horizontal": "Horizontal",
+    "vertical": "Vertical",
+    "removeDesign": "Remove Design",
+    "step1": "1. Choose Product",
+    "step2": "2. Choose Color",
+    "step3": "3. Enter Quantity",
+    "step4": "4. Get Your Quote",
     "selectProduct": "Select Product",
     "selectColor": "Select Color",
+    "needOtherColors": "💡 Need other colors or models? Just ask us!",
+    "numberOfItems": "Number of items",
+    "enterQuantity": "Enter quantity",
+    "minimumOrder": "Minimum order: 5 items",
+    "canRequestWithout": "💡 You can request a quote even without uploading a design",
+    "sendMeQuote": "Send Me Quote",
+    "yourPhone": "Your Phone Number",
+    "phonePlaceholder": "+351 922 280 992",
+    "send": "Send",
+    "sending": "Sending...",
+    "cancel": "Cancel",
+    "quoteSent": "Quote Request Sent!",
+    "contactSoon": "We'll contact you soon with a personalized quote for your design.",
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram",
+    "designTips": "💡 Design Tips",
+    "tips": [
+      "Use high-resolution images (300 DPI minimum)",
+      "PNG files with transparent backgrounds work best",
+      "Vector files (SVG) ensure perfect quality at any size",
+      "Avoid very thin lines (minimum 0.5mm)"
+    ],
     "uploadDesign": "Upload Design",
     "addText": "Add Text",
     "preview": "Preview",
@@ -125,18 +219,136 @@
   },
   "quiz": {
     "title": "Find Your Perfect Product",
-    "subtitle": "Answer a few questions to get personalized recommendations",
+    "titleHighlight": "Method to Choose?",
+    "subtitle": "Take our quick quiz and we'll recommend the perfect printing method for your project.",
+    "question": "Question",
+    "of": "of",
+    "quizComplete": "Quiz Complete!",
+    "weRecommend": "We Recommend:",
+    "whyWorks": "Why this works for you:",
+    "startDesign": "Start Your Design",
+    "contactUs": "Contact Us",
+    "retakeQuiz": "Retake Quiz",
+    "previousQuestion": "Previous Question",
+    "questions": [
+      {
+        "question": "How many colors does your design have?",
+        "options": [
+          "1-3 solid colors",
+          "4+ colors or gradients",
+          "Not sure yet"
+        ]
+      },
+      {
+        "question": "What type of design are you printing?",
+        "options": [
+          "Logo or text only",
+          "Photo or complex artwork",
+          "Mix of both"
+        ]
+      },
+      {
+        "question": "What's your order quantity?",
+        "options": [
+          "1-20 pieces",
+          "20-100 pieces",
+          "100+ pieces"
+        ]
+      },
+      {
+        "question": "What finish do you prefer?",
+        "options": [
+          "Matte and durable",
+          "Soft and flexible",
+          "No preference"
+        ]
+      }
+    ],
+    "results": {
+      "vinyl": {
+        "method": "Vinyl Printing",
+        "icon": "✂️",
+        "description": "Perfect for your needs! Vinyl printing is ideal for simple, bold designs with solid colors.",
+        "benefits": [
+          "Cost-effective for your design type",
+          "Durable matte finish",
+          "Great for text and logos",
+          "Fast production time"
+        ]
+      },
+      "dtf": {
+        "method": "DTF Printing",
+        "icon": "🔥",
+        "description": "DTF is your best choice! Perfect for complex, colorful designs with photo-realistic quality.",
+        "benefits": [
+          "Unlimited colors and gradients",
+          "Soft, comfortable feel",
+          "Photo-realistic quality",
+          "Great for detailed artwork"
+        ]
+      },
+      "both": {
+        "method": "Both Methods Work!",
+        "icon": "✨",
+        "description": "You have flexibility! Both methods can work well for your project. Let's discuss which fits your budget and timeline better.",
+        "benefits": [
+          "Multiple options available",
+          "We can recommend the best fit",
+          "Flexible pricing options",
+          "Contact us for personalized advice"
+        ]
+      }
+    },
     "startQuiz": "Start Quiz"
   },
   "contact": {
     "title": "Get in Touch",
-    "subtitle": "Have questions? We're here to help!",
-    "name": "Name",
-    "email": "Email",
+    "titleHighlight": "Touch",
+    "subtitle": "Ready to start your project? Fill out the form below and we'll get back to you within 24 hours.",
+    "sendMessage": "Send Us a Message",
+    "thankYou": "Thank You!",
+    "receivedMessage": "We've received your message and will contact you soon.",
+    "thankYouReaching": "Thank you for reaching out to us!",
+    "yourName": "Your Name *",
+    "namePlaceholder": "John Doe",
+    "email": "Email *",
+    "emailPlaceholder": "john@example.com",
     "phone": "Phone",
+    "phonePlaceholder": "+351922280992",
+    "productType": "Product Type *",
+    "selectProduct": "Select product",
+    "tshirt": "T-Shirt",
+    "hoodie": "Hoodie",
+    "tote": "Tote Bag",
+    "other": "Other",
+    "quantity": "Quantity *",
+    "selectQuantity": "Select quantity",
+    "quantity1-20": "1-20 pieces",
+    "quantity20-50": "20-50 pieces",
+    "quantity50-100": "50-100 pieces",
+    "quantity100+": "100+ pieces",
+    "projectDetails": "Project Details *",
+    "projectPlaceholder": "Tell us about your project, design requirements, timeline, etc.",
+    "sendMessageBtn": "Send Message",
+    "sending": "Sending...",
+    "contactInformation": "Contact Information",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone / WhatsApp / Telegram",
+    "location": "Location",
+    "quickContact": "Quick Contact",
+    "preferInstant": "Prefer instant messaging? Reach out to us directly:",
+    "messageWhatsApp": "Message on WhatsApp",
+    "messageTelegram": "Message on Telegram",
+    "businessHours": "Business Hours",
+    "mondayFriday": "Monday - Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "hours9-6": "9:00 AM - 6:00 PM",
+    "hours10-2": "10:00 AM - 2:00 PM",
+    "closed": "Closed",
+    "name": "Name",
     "message": "Message",
     "send": "Send Message",
-    "sending": "Sending...",
     "success": "Message sent successfully!",
     "error": "Failed to send message. Please try again."
   },

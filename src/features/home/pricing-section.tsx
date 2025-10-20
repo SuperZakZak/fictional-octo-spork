@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calculator, TrendingDown, AlertCircle, Download, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   PrintSize,
   SIZE_DIMENSIONS,
@@ -21,6 +22,7 @@ const sizes: Array<{ id: string; name: PrintSize }> = [
 ];
 
 export function PricingSection() {
+  const t = useTranslations('pricing');
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   
@@ -114,10 +116,10 @@ export function PricingSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
-            Transparent <span className="gradient-text">Pricing</span>
+            {t('title').split(' ').slice(0, -1).join(' ')} <span className="gradient-text">{t('titleHighlight')}</span>
           </h2>
           <p className="text-xl text-glass-700 max-w-3xl mx-auto">
-            Calculate your project cost instantly. No hidden fees, no surprises.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -133,13 +135,13 @@ export function PricingSection() {
               <div className="w-12 h-12 bg-charcoal rounded-full flex items-center justify-center">
                 <Calculator className="text-white" size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-charcoal">Price Calculator</h3>
+              <h3 className="text-2xl font-bold text-charcoal">{t('calculator')}</h3>
             </div>
 
             {/* Size Selection */}
             <div className="mb-8">
               <label className="block text-sm font-medium text-charcoal mb-4">
-                Select Print Size
+                {t('selectSize')}
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {sizes.map((size) => {
@@ -174,7 +176,7 @@ export function PricingSection() {
             <div className="mb-8">
               <div className="flex justify-between items-center mb-4">
                 <label className="text-sm font-medium text-charcoal">
-                  Quantity
+                  {t('quantity')}
                 </label>
                 <div className="text-2xl font-bold text-charcoal">{quantity}</div>
               </div>
@@ -196,7 +198,7 @@ export function PricingSection() {
                 {needsQuote && (
                   <div className="flex items-center justify-center gap-1 text-vibrant-purple font-medium">
                     <AlertCircle size={14} />
-                    <span>Quantities over 50 require a custom quote</span>
+                    <span>{t('customQuoteRequired')}</span>
                   </div>
                 )}
               </div>
@@ -221,15 +223,15 @@ export function PricingSection() {
                   </div>
                 )}
                 <div className="text-center">
-                  <div className="text-gray-600 font-medium mb-2">Vinyl Printing</div>
+                  <div className="text-gray-600 font-medium mb-2">{t('vinylPrinting')}</div>
                   <div className="text-4xl font-bold text-black mb-2">
                     €{vinylTotal.toFixed(2)}
                   </div>
                   <div className="text-sm text-gray-600">
-                    €{priceComparison.vinyl.perUnit.toFixed(2)} per print
+                    €{priceComparison.vinyl.perUnit.toFixed(2)} {t('perPrint')}
                   </div>
                   <div className="text-xs text-gray-500 mt-2">
-                    Clean one-color graphics
+                    {t('cleanGraphics')}
                   </div>
                 </div>
               </motion.div>
@@ -247,19 +249,19 @@ export function PricingSection() {
                 {cheaperOption === "dtf" && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-vibrant-green text-white text-xs font-bold rounded-full flex items-center space-x-1">
                     <TrendingDown size={12} />
-                    <span>BEST VALUE</span>
+                    <span>{t('bestValue')}</span>
                   </div>
                 )}
                 <div className="text-center">
-                  <div className="text-gray-600 font-medium mb-2">DTF Printing</div>
+                  <div className="text-gray-600 font-medium mb-2">{t('dtfPrinting')}</div>
                   <div className="text-4xl font-bold text-black mb-2">
                     €{dtfTotal.toFixed(2)}
                   </div>
                   <div className="text-sm text-gray-600">
-                    €{priceComparison.dtf.perUnit.toFixed(2)} per print
+                    €{priceComparison.dtf.perUnit.toFixed(2)} {t('perPrint')}
                   </div>
                   <div className="text-xs text-gray-500 mt-2">
-                    Full-color, even photos
+                    {t('fullColor')}
                   </div>
                 </div>
               </motion.div>
@@ -269,16 +271,16 @@ export function PricingSection() {
             <div className="bg-gray-50 border-2 border-black rounded-2xl p-6">
               {!showEmailForm ? (
                 <div className="text-center">
-                  <h4 className="font-bold text-black mb-3">Want to see all pricing options?</h4>
+                  <h4 className="font-bold text-black mb-3">{t('wantAllPricing')}</h4>
                   <p className="text-sm text-gray-600 mb-4">
-                    Get our complete price list with all sizes and volume discounts
+                    {t('getPriceList')}
                   </p>
                   <button
                     onClick={() => setShowEmailForm(true)}
                     className="inline-flex items-center space-x-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-all font-medium"
                   >
                     <Download size={20} />
-                    <span>Get Full Price List</span>
+                    <span>{t('getFullPriceList')}</span>
                   </button>
                 </div>
               ) : (
@@ -286,9 +288,9 @@ export function PricingSection() {
                   {!emailSubmitted ? (
                     <form onSubmit={handleDownloadPriceList} className="space-y-4">
                       <div>
-                        <h4 className="font-bold text-black mb-2">Enter your email to download</h4>
+                        <h4 className="font-bold text-black mb-2">{t('enterEmail')}</h4>
                         <p className="text-sm text-gray-600 mb-4">
-                          We'll send you the complete price list right away
+                          {t('sendPriceList')}
                         </p>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-3">
@@ -298,7 +300,7 @@ export function PricingSection() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="your@email.com"
+                            placeholder={t('emailPlaceholder')}
                             required
                             className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-full focus:border-black focus:outline-none"
                           />
@@ -311,12 +313,12 @@ export function PricingSection() {
                           {isSubmitting ? (
                             <>
                               <span className="animate-spin">⏳</span>
-                              <span>Sending...</span>
+                              <span>{t('sending')}</span>
                             </>
                           ) : (
                             <>
                               <Download size={20} />
-                              <span>Download</span>
+                              <span>{t('download')}</span>
                             </>
                           )}
                         </button>
@@ -326,15 +328,15 @@ export function PricingSection() {
                         onClick={() => setShowEmailForm(false)}
                         className="text-sm text-gray-600 hover:text-black transition-colors"
                       >
-                        ← Back
+                        {t('back')}
                       </button>
                     </form>
                   ) : (
                     <div className="text-center py-4">
                       <div className="text-4xl mb-3">✅</div>
-                      <h4 className="font-bold text-black mb-2">Opening price list folder!</h4>
+                      <h4 className="font-bold text-black mb-2">{t('openingFolder')}</h4>
                       <p className="text-sm text-gray-600">
-                        A new tab has been opened with our complete price list
+                        {t('folderOpened')}
                       </p>
                     </div>
                   )}
@@ -348,13 +350,13 @@ export function PricingSection() {
                 href="#configurator"
                 className="flex-1 text-center px-8 py-4 bg-black text-white rounded-full hover:bg-gray-900 transition-all font-medium shadow-lg hover:shadow-xl"
               >
-                Start Your Design
+                {t('startDesign')}
               </a>
               <a
                 href="#contact"
                 className="flex-1 text-center px-8 py-4 bg-white text-black border-2 border-black rounded-full hover:bg-gray-100 transition-all font-medium"
               >
-                Request Custom Quote
+                {t('requestQuote')}
               </a>
             </div>
           </motion.div>

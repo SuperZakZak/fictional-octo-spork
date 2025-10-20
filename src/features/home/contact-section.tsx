@@ -6,6 +6,7 @@ import { Send, Mail, Phone, MapPin, MessageSquare, CheckCircle } from "lucide-re
 import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
 import { PrivacyConsentCheckbox } from "@/components/privacy-consent-checkbox";
 import { MarketingConsentCheckbox } from "@/components/marketing-consent-checkbox";
+import { useTranslations } from "next-intl";
 
 interface FormData {
   name: string;
@@ -19,6 +20,7 @@ interface FormData {
 }
 
 export function ContactSection() {
+  const t = useTranslations('contact');
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
@@ -140,10 +142,10 @@ export function ContactSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
-            Get In <span className="gradient-text">Touch</span>
+            {t('title').split(' ').slice(0, -1).join(' ')} <span className="gradient-text">{t('titleHighlight')}</span>
           </h2>
           <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
-            Ready to start your project? Fill&nbsp;out&nbsp;the&nbsp;form&nbsp;below and we&apos;ll get&nbsp;back&nbsp;to&nbsp;you within&nbsp;24&nbsp;hours.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -155,7 +157,7 @@ export function ContactSection() {
             transition={{ duration: 0.8 }}
           >
             <div className="glass-card rounded-3xl shadow-2xl p-8 border border-white/30">
-              <h3 className="text-2xl font-bold text-charcoal mb-6">Send Us a Message</h3>
+              <h3 className="text-2xl font-bold text-charcoal mb-6">{t('sendMessage')}</h3>
 
               {isSubmitted ? (
                 <motion.div
@@ -166,12 +168,12 @@ export function ContactSection() {
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="text-green-500" size={40} />
                   </div>
-                  <h4 className="text-2xl font-bold text-charcoal mb-2">Thank You!</h4>
+                  <h4 className="text-2xl font-bold text-charcoal mb-2">{t('thankYou')}</h4>
                   <p className="text-gray-600 mb-2">
-                    We&apos;ve received your message and will contact you soon.
+                    {t('receivedMessage')}
                   </p>
                   <p className="text-sm text-gray-500">
-                    Thank you for reaching out to us!
+                    {t('thankYouReaching')}
                   </p>
                 </motion.div>
               ) : (
@@ -179,7 +181,7 @@ export function ContactSection() {
                   {/* Step 1: Personal Info */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Your Name *
+                      {t('yourName')}
                     </label>
                     <input
                       type="text"
@@ -188,14 +190,14 @@ export function ContactSection() {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
-                      placeholder="John Doe"
+                      placeholder={t('namePlaceholder')}
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
+                        {t('email')}
                       </label>
                       <input
                         type="email"
@@ -204,13 +206,13 @@ export function ContactSection() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
-                        placeholder="john@example.com"
+                        placeholder={t('emailPlaceholder')}
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone
+                        {t('phone')}
                       </label>
                       <input
                         type="tel"
@@ -218,7 +220,7 @@ export function ContactSection() {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
-                        placeholder="+351922280992"
+                        placeholder={t('phonePlaceholder')}
                       />
                     </div>
                   </div>
@@ -227,7 +229,7 @@ export function ContactSection() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Product Type *
+                        {t('productType')}
                       </label>
                       <select
                         name="product"
@@ -236,17 +238,17 @@ export function ContactSection() {
                         required
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
                       >
-                        <option value="">Select product</option>
-                        <option value="tshirt">T-Shirt</option>
-                        <option value="hoodie">Hoodie</option>
-                        <option value="tote">Tote Bag</option>
-                        <option value="other">Other</option>
+                        <option value="">{t('selectProduct')}</option>
+                        <option value="tshirt">{t('tshirt')}</option>
+                        <option value="hoodie">{t('hoodie')}</option>
+                        <option value="tote">{t('tote')}</option>
+                        <option value="other">{t('other')}</option>
                       </select>
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Quantity *
+                        {t('quantity')}
                       </label>
                       <select
                         name="quantity"
@@ -255,11 +257,11 @@ export function ContactSection() {
                         required
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
                       >
-                        <option value="">Select quantity</option>
-                        <option value="1-20">1-20 pieces</option>
-                        <option value="20-50">20-50 pieces</option>
-                        <option value="50-100">50-100 pieces</option>
-                        <option value="100+">100+ pieces</option>
+                        <option value="">{t('selectQuantity')}</option>
+                        <option value="1-20">{t('quantity1-20')}</option>
+                        <option value="20-50">{t('quantity20-50')}</option>
+                        <option value="50-100">{t('quantity50-100')}</option>
+                        <option value="100+">{t('quantity100+')}</option>
                       </select>
                     </div>
                   </div>
@@ -267,7 +269,7 @@ export function ContactSection() {
                   {/* Step 3: Message */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Details *
+                      {t('projectDetails')}
                     </label>
                     <textarea
                       name="message"
@@ -276,7 +278,7 @@ export function ContactSection() {
                       required
                       rows={5}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors resize-none"
-                      placeholder="Tell us about your project, design requirements, timeline, etc."
+                      placeholder={t('projectPlaceholder')}
                     />
                   </div>
 
@@ -317,12 +319,12 @@ export function ContactSection() {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
-                        <span>Sending...</span>
+                        <span>{t('sending')}</span>
                       </>
                     ) : (
                       <>
                         <Send size={20} />
-                        <span>Send Message</span>
+                        <span>{t('sendMessageBtn')}</span>
                       </>
                     )}
                   </button>
@@ -356,7 +358,7 @@ export function ContactSection() {
               </div>
 
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-6 text-charcoal">Contact Information</h3>
+                <h3 className="text-2xl font-bold mb-6 text-charcoal">{t('contactInformation')}</h3>
 
                 <div className="space-y-4">
                   {/* Email */}
@@ -371,7 +373,7 @@ export function ContactSection() {
                         <Mail size={20} className="text-white" />
                       </div>
                       <div className="flex-1">
-                        <div className="font-medium mb-1 text-glass-700">Email</div>
+                        <div className="font-medium mb-1 text-glass-700">{t('emailLabel')}</div>
                         <a href={`mailto:${SITE_CONFIG.email}`} className="text-charcoal hover:text-charcoal-light transition-all duration-300 break-all">
                           {SITE_CONFIG.email}
                         </a>
@@ -404,7 +406,7 @@ export function ContactSection() {
                         <Phone size={20} className="text-white" />
                       </div>
                       <div className="flex-1">
-                        <div className="font-medium mb-1 text-glass-700">Phone / WhatsApp / Telegram</div>
+                        <div className="font-medium mb-1 text-glass-700">{t('phoneLabel')}</div>
                         <a href={`tel:${SITE_CONFIG.phone}`} className="text-charcoal hover:text-charcoal-light transition-all duration-300">
                           {SITE_CONFIG.phone}
                         </a>
@@ -437,7 +439,7 @@ export function ContactSection() {
                         <MapPin size={20} className="text-white" />
                       </div>
                       <div className="flex-1">
-                        <div className="font-medium mb-1 text-glass-700">Location</div>
+                        <div className="font-medium mb-1 text-glass-700">{t('location')}</div>
                         <p className="text-charcoal">{SITE_CONFIG.location}</p>
                       </div>
                     </div>
@@ -463,10 +465,10 @@ export function ContactSection() {
             <div className="glass-card rounded-3xl shadow-xl p-8 border border-white/30">
               <h3 className="text-xl font-bold text-charcoal mb-4 flex items-center space-x-2">
                 <MessageSquare size={24} className="text-charcoal" />
-                <span>Quick Contact</span>
+                <span>{t('quickContact')}</span>
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Prefer instant messaging? Reach&nbsp;out&nbsp;to&nbsp;us&nbsp;directly:
+                {t('preferInstant')}
               </p>
 
               <div className="space-y-3">
@@ -477,7 +479,7 @@ export function ContactSection() {
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                   </svg>
-                  <span>Message on WhatsApp</span>
+                  <span>{t('messageWhatsApp')}</span>
                 </button>
 
                 <button
@@ -487,26 +489,26 @@ export function ContactSection() {
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                   </svg>
-                  <span>Message on Telegram</span>
+                  <span>{t('messageTelegram')}</span>
                 </button>
               </div>
             </div>
 
             {/* Business Hours */}
             <div className="glass-card rounded-3xl p-8 border border-white/30">
-              <h3 className="text-xl font-bold text-charcoal mb-4">Business Hours</h3>
+              <h3 className="text-xl font-bold text-charcoal mb-4">{t('businessHours')}</h3>
               <div className="space-y-2 text-glass-700">
                 <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span className="font-medium">9:00 AM - 6:00 PM</span>
+                  <span>{t('mondayFriday')}</span>
+                  <span className="font-medium">{t('hours9-6')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span className="font-medium">10:00 AM - 2:00 PM</span>
+                  <span>{t('saturday')}</span>
+                  <span className="font-medium">{t('hours10-2')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span className="font-medium">Closed</span>
+                  <span>{t('sunday')}</span>
+                  <span className="font-medium">{t('closed')}</span>
                 </div>
               </div>
             </div>

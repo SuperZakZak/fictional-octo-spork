@@ -6,6 +6,7 @@ import { Upload, Download, Send, Shirt, ShoppingBag, X, Wind, Phone, CheckCircle
 import { useDropzone } from "react-dropzone";
 import html2canvas from "html2canvas";
 import { parsePhoneNumber, isValidPhoneNumber } from "libphonenumber-js";
+import { useTranslations } from "next-intl";
 
 const products = [
   { id: "tshirt", name: "T-Shirt", icon: Shirt, mockup: "👕" },
@@ -43,6 +44,7 @@ const toteColors = [
 ];
 
 export function ConfiguratorSection() {
+  const t = useTranslations('configurator');
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -126,18 +128,14 @@ export function ConfiguratorSection() {
   };
 
   const handleSendMeQuote = () => {
-    if (!uploadedImage) {
-      alert("Please upload a design first!");
-      return;
-    }
     setShowPhoneInput(true);
     setSubmitSuccess(false);
     setSubmitError(null);
   };
 
-  const captureScreenshot = async (): Promise<string> => {
-    if (!previewRef.current) {
-      throw new Error("Preview element not found");
+  const captureScreenshot = async (): Promise<string | null> => {
+    if (!previewRef.current || !uploadedImage) {
+      return null;
     }
 
     try {
@@ -153,7 +151,7 @@ export function ConfiguratorSection() {
       return canvas.toDataURL("image/jpeg", 0.85);
     } catch (error) {
       console.error("Screenshot capture failed:", error);
-      throw new Error("Failed to capture design screenshot");
+      return null;
     }
   };
 
@@ -253,10 +251,10 @@ export function ConfiguratorSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Design <span className="gradient-text">Configurator</span>
+            {t('title').split(' ')[0]} <span className="gradient-text">{t('titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Upload your design and see it come to life in real-time. Get&nbsp;an&nbsp;instant&nbsp;quote and&nbsp;place&nbsp;your&nbsp;order.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -322,9 +320,9 @@ export function ConfiguratorSection() {
                     onClick={handleUploadClick}
                   >
                     <div className="text-center text-gray-600 bg-white/80 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/90 transition-all">
-                      <Upload size={48} className="mx-auto mb-4 text-primary-500" />
-                      <p className="font-medium">Upload your design to preview</p>
-                      <p className="text-sm text-gray-500 mt-2">Click here to upload</p>
+                      <Upload size={48} className="mx-auto mb-4 text-charcoal" />
+                      <p className="font-medium">{t('uploadToPreview')}</p>
+                      <p className="text-sm text-gray-500 mt-2">{t('clickToUpload')}</p>
                     </div>
                   </div>
                 )}
@@ -337,43 +335,43 @@ export function ConfiguratorSection() {
                   animate={{ y: 0, opacity: 1 }}
                   className="mt-6 bg-white rounded-2xl p-6 shadow-lg"
                 >
-                  <h4 className="font-bold text-gray-900 mb-4">Adjust Design</h4>
+                  <h4 className="font-bold text-gray-900 mb-4">{t('adjustDesign')}</h4>
                   
                   {/* Size Slider */}
                   <div className="mb-4">
-                    <label className="text-sm text-gray-600 mb-2 block">Size</label>
+                    <label className="text-sm text-gray-600 mb-2 block">{t('size')}</label>
                     <input
                       type="range"
                       min="10"
                       max="60"
                       value={designSize}
                       onChange={(e) => setDesignSize(parseInt(e.target.value))}
-                      className="w-full accent-primary-500"
+                      className="w-full accent-charcoal"
                     />
                   </div>
 
                   {/* Position Sliders */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-gray-600 mb-2 block">Horizontal</label>
+                      <label className="text-sm text-gray-600 mb-2 block">{t('horizontal')}</label>
                       <input
                         type="range"
                         min="20"
                         max="80"
                         value={designPosition.x}
                         onChange={(e) => setDesignPosition(prev => ({ ...prev, x: parseInt(e.target.value) }))}
-                        className="w-full accent-primary-500"
+                        className="w-full accent-charcoal"
                       />
                     </div>
                     <div>
-                      <label className="text-sm text-gray-600 mb-2 block">Vertical</label>
+                      <label className="text-sm text-gray-600 mb-2 block">{t('vertical')}</label>
                       <input
                         type="range"
                         min="20"
                         max="80"
                         value={designPosition.y}
                         onChange={(e) => setDesignPosition(prev => ({ ...prev, y: parseInt(e.target.value) }))}
-                        className="w-full accent-primary-500"
+                        className="w-full accent-charcoal"
                       />
                     </div>
                   </div>
@@ -383,7 +381,7 @@ export function ConfiguratorSection() {
                     className="mt-4 w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center space-x-2"
                   >
                     <X size={16} />
-                    <span>Remove Design</span>
+                    <span>{t('removeDesign')}</span>
                   </button>
                 </motion.div>
               )}
@@ -399,7 +397,7 @@ export function ConfiguratorSection() {
           >
             {/* Product Selection */}
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">1. Choose Product</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">{t('step1')}</h3>
               <div className="grid grid-cols-3 gap-4">
                 {products.map((product) => {
                   const Icon = product.icon;
@@ -409,7 +407,7 @@ export function ConfiguratorSection() {
                       onClick={() => setSelectedProduct(product)}
                       className={`p-4 rounded-xl border-2 transition-all ${
                         selectedProduct.id === product.id
-                          ? "border-primary-500 bg-primary-50"
+                          ? "border-charcoal bg-glass-100"
                           : "border-gray-200 hover:border-gray-300"
                       }`}
                     >
@@ -423,7 +421,7 @@ export function ConfiguratorSection() {
 
             {/* Color Selection */}
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">2. Choose Color</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">{t('step2')}</h3>
               <div className="flex flex-wrap gap-3">
                 {availableColors.map((color) => (
                   <button
@@ -431,7 +429,7 @@ export function ConfiguratorSection() {
                     onClick={() => setSelectedColor(color)}
                     className={`w-14 h-14 rounded-full border-4 transition-all hover:scale-110 ${
                       selectedColor.id === color.id
-                        ? "border-primary-500 shadow-lg"
+                        ? "border-charcoal shadow-lg"
                         : "border-gray-200"
                     }`}
                     style={{ backgroundColor: color.hex }}
@@ -440,7 +438,7 @@ export function ConfiguratorSection() {
                 ))}
               </div>
               <p className="mt-3 text-sm text-gray-500 italic">
-                💡 Need other colors or models? Just ask us!
+                {t('needOtherColors')}
               </p>
             </div>
 
@@ -451,10 +449,10 @@ export function ConfiguratorSection() {
 
             {/* Quantity Input */}
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">3. Enter Quantity</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">{t('step3')}</h3>
               <div className="bg-white border-2 border-gray-300 rounded-2xl p-6">
                 <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Number of items
+                  {t('numberOfItems')}
                 </label>
                 <input
                   type="number"
@@ -462,28 +460,32 @@ export function ConfiguratorSection() {
                   max="1000"
                   value={quantity}
                   onChange={(e) => setQuantity(Math.max(5, parseInt(e.target.value) || 5))}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-lg font-medium text-gray-900 focus:border-primary-500 focus:outline-none transition-colors"
-                  placeholder="Enter quantity"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-lg font-medium text-gray-900 focus:border-charcoal focus:outline-none transition-colors"
+                  placeholder={t('enterQuantity')}
                 />
                 <p className="mt-3 text-sm text-gray-500">
-                  Minimum order: 5 items
+                  {t('minimumOrder')}
                 </p>
               </div>
             </div>
 
             {/* Actions */}
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">4. Get Your Quote</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">{t('step4')}</h3>
+              {!uploadedImage && (
+                <p className="text-sm text-gray-500 mb-3 italic">
+                  {t('canRequestWithout')}
+                </p>
+              )}
               <div className="space-y-3">
                 {/* Main Quote Button */}
                 {!showPhoneInput && (
                   <button
                     onClick={handleSendMeQuote}
-                    disabled={!uploadedImage}
-                    className="w-full px-6 py-4 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-all font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    className="w-full px-6 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all font-medium shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
                   >
                     <Send size={20} />
-                    <span>Send Me Quote</span>
+                    <span>{t('sendMeQuote')}</span>
                   </button>
                 )}
 
@@ -498,11 +500,11 @@ export function ConfiguratorSection() {
                       className="overflow-hidden"
                     >
                       {!submitSuccess ? (
-                        <div className="bg-white border-2 border-primary-200 rounded-2xl p-6 space-y-4">
+                        <div className="bg-white border-2 border-glass-300 rounded-2xl p-6 space-y-4">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               <Phone size={16} className="inline mr-2" />
-                              Your Phone Number
+                              {t('yourPhone')}
                             </label>
                             <input
                               type="tel"
@@ -511,8 +513,8 @@ export function ConfiguratorSection() {
                                 setPhoneNumber(e.target.value);
                                 setSubmitError(null);
                               }}
-                              placeholder="+351 922 280 992"
-                              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-gray-900 focus:border-primary-500 focus:outline-none transition-colors"
+                              placeholder={t('phonePlaceholder')}
+                              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-gray-900 focus:border-charcoal focus:outline-none transition-colors"
                               disabled={isSubmitting}
                             />
                             {submitError && (
@@ -524,17 +526,17 @@ export function ConfiguratorSection() {
                             <button
                               onClick={handleSubmitQuote}
                               disabled={isSubmitting}
-                              className="flex-1 px-6 py-3 bg-primary-500 text-white rounded-xl hover:bg-primary-600 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                              className="flex-1 px-6 py-3 bg-charcoal text-white rounded-xl hover:bg-charcoal-light transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                             >
                               {isSubmitting ? (
                                 <>
                                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                  <span>Sending...</span>
+                                  <span>{t('sending')}</span>
                                 </>
                               ) : (
                                 <>
                                   <Send size={18} />
-                                  <span>Send</span>
+                                  <span>{t('send')}</span>
                                 </>
                               )}
                             </button>
@@ -547,7 +549,7 @@ export function ConfiguratorSection() {
                               disabled={isSubmitting}
                               className="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 transition-all font-medium disabled:opacity-50"
                             >
-                              Cancel
+                              {t('cancel')}
                             </button>
                           </div>
                         </div>
@@ -559,10 +561,10 @@ export function ConfiguratorSection() {
                         >
                           <CheckCircle2 size={48} className="mx-auto mb-4 text-green-600" />
                           <h4 className="text-xl font-bold text-gray-900 mb-2">
-                            Quote Request Sent!
+                            {t('quoteSent')}
                           </h4>
                           <p className="text-gray-700">
-                            We'll contact you soon with a personalized quote for your design.
+                            {t('contactSoon')}
                           </p>
                         </motion.div>
                       )}
@@ -578,7 +580,7 @@ export function ConfiguratorSection() {
                       className="px-6 py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-all font-medium flex items-center justify-center space-x-2"
                     >
                       <Send size={18} />
-                      <span>WhatsApp</span>
+                      <span>{t('whatsapp')}</span>
                     </button>
 
                     <button
@@ -586,7 +588,7 @@ export function ConfiguratorSection() {
                       className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all font-medium flex items-center justify-center space-x-2"
                     >
                       <Send size={18} />
-                      <span>Telegram</span>
+                      <span>{t('telegram')}</span>
                     </button>
                   </div>
                 )}
@@ -594,13 +596,12 @@ export function ConfiguratorSection() {
             </div>
 
             {/* Info Box */}
-            <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-6">
-              <h4 className="font-bold text-gray-900 mb-3">💡 Design Tips</h4>
+            <div className="bg-gradient-to-br from-glass-100 to-accent-50 rounded-2xl p-6">
+              <h4 className="font-bold text-gray-900 mb-3">{t('designTips')}</h4>
               <ul className="space-y-2 text-sm text-gray-700 leading-relaxed">
-                <li>• Use high-resolution images (300&nbsp;DPI minimum)</li>
-                <li>• PNG files with transparent backgrounds&nbsp;work&nbsp;best</li>
-                <li>• Vector files (SVG) ensure perfect quality at&nbsp;any&nbsp;size</li>
-                <li>• Avoid very thin lines (minimum&nbsp;0.5mm)</li>
+                {(t.raw('tips') as string[]).map((tip: string, index: number) => (
+                  <li key={index}>• {tip}</li>
+                ))}
               </ul>
             </div>
           </motion.div>

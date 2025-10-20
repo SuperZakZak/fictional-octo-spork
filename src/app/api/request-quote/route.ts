@@ -10,7 +10,7 @@ const quoteRequestSchema = z.object({
   product: z.string().min(1, "Product is required"),
   color: z.string().min(1, "Color is required"),
   quantity: z.number().min(5, "Minimum quantity is 5"),
-  designScreenshot: z.string().min(1, "Design screenshot is required"),
+  designScreenshot: z.string().optional().nullable(),
   siteLocale: z.string().optional(),
   browserLocale: z.string().optional(),
 });
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
         product: data.product,
         color: data.color,
         quantity: data.quantity,
-        screenshot: data.designScreenshot, // Base64 image data
+        screenshot: data.designScreenshot || null, // Base64 image data (optional)
       },
       locale: {
         site: data.siteLocale || "en",

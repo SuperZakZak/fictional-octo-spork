@@ -25,53 +25,113 @@
   },
   "technologies": {
     "title": "As Nossas Tecnologias de Impressão",
-    "subtitle": "Escolha o método perfeito para o seu projeto",
-    "dtf": {
-      "title": "Impressão DTF",
-      "description": "Tecnologia Direct-to-Film para impressões vibrantes e detalhadas em qualquer cor de tecido. Perfeito para designs complexos com múltiplas cores.",
-      "features": {
-        "colors": "Cores Ilimitadas",
-        "detail": "Alto Detalhe",
-        "durability": "Excelente Durabilidade",
-        "fabrics": "Funciona em Todos os Tecidos"
-      }
-    },
+    "titleHighlight": "Tecnologia",
+    "subtitle": "Oferecemos dois métodos de impressão profissionais, cada um com vantagens únicas.",
+    "subtitleSecond": "Deixe-nos ajudá-lo a escolher o perfeito para o seu projeto.",
     "vinyl": {
       "title": "Impressão em Vinil",
-      "description": "Vinil de transferência térmica para designs arrojados e sólidos. Ideal para texto, logótipos e gráficos simples com um acabamento premium.",
-      "features": {
-        "finish": "Mate ou Brilhante",
-        "bold": "Cores Vibrantes",
-        "professional": "Aspeto Profissional",
-        "quick": "Produção Rápida"
-      }
-    }
+      "description": "Perfeito para designs arrojados e simples com cores sólidas. Ideal para texto, logótipos e padrões geométricos.",
+      "cuttingProcess": "Processo de Corte",
+      "heatTransfer": "Processo de Transferência Térmica",
+      "bestFor": "Melhor para:",
+      "logos": "Logótipos",
+      "text": "Texto",
+      "simpleGraphics": "Gráficos Simples",
+      "features": [
+        "Perfeito para designs simples",
+        "Acabamento mate",
+        "Durável e de longa duração",
+        "Opções de efeitos especiais (Veludo, metálico, refletor e mais)",
+        "Melhor para 1-3 cores",
+        "Sem impressões fotorrealistas"
+      ]
+    },
+    "dtf": {
+      "title": "Impressão DTF",
+      "description": "Tecnologia avançada direct-to-film para designs fotorrealistas a cores com detalhe ilimitado.",
+      "preparation": "Preparação DTF",
+      "heatTransfer": "Processo de Transferência Térmica",
+      "bestFor": "Melhor para:",
+      "photos": "Fotos",
+      "complexArt": "Arte Complexa",
+      "gradients": "Gradientes",
+      "fullColor": "Cor Completa",
+      "features": [
+        "Qualidade fotográfica a cores",
+        "Gradientes vibrantes",
+        "Toque suave e flexível",
+        "Designs complexos bem-vindos",
+        "Cores ilimitadas",
+        "Produção rápida"
+      ]
+    },
+    "cta": "Não tem certeza? Faça o nosso questionário"
   },
   "products": {
     "title": "Os Nossos Produtos",
-    "subtitle": "Vestuário e acessórios de qualidade premium",
+    "titleHighlight": "Produtos",
+    "subtitle": "Usamos apenas produtos de base da mais alta qualidade de marcas confiáveis como Stanley/Stella e WATC.",
+    "premiumQuality": "Qualidade Premium",
+    "chooseColor": "Escolher Cor",
+    "availableSizes": "Tamanhos Disponíveis",
+    "productFeatures": "Características do Produto",
+    "customizeProduct": "Personalizar Este Produto",
+    "needOtherColors": "💡 Precisa de outras cores ou modelos? Pergunte-nos!",
     "tshirt": {
-      "name": "T-Shirts",
-      "description": "100% algodão orgânico, qualidade Stanley/Stella"
+      "name": "T-Shirt",
+      "brand": "Stanley/Stella",
+      "description": "T-shirt premium de algodão orgânico, perfeita para qualquer design",
+      "priceFrom": "10"
     },
     "hoodie": {
-      "name": "Hoodies",
-      "description": "Sweatshirts macias, quentes e duráveis"
+      "name": "Hoodie",
+      "brand": "Stanley/Stella",
+      "description": "Hoodie confortável de peso médio com bolso canguru",
+      "priceFrom": "43"
     },
     "tote": {
-      "name": "Sacos Tote",
-      "description": "Sacos de lona ecológicos para uso diário"
+      "name": "Saco Tote",
+      "brand": "Stanley/Stella",
+      "description": "Saco de lona durável para uso diário",
+      "priceFrom": "7"
     },
-    "viewDetails": "Ver Detalhes",
-    "startFrom": "A partir de"
+    "features": [
+      "100% algodão orgânico (ou lona premium para sacos)",
+      "Obtido eticamente e produzido de forma sustentável",
+      "Pré-encolhido e lavável à máquina",
+      "Perfeito para impressão DTF e Vinil"
+    ],
+    "startFrom": "a partir de €"
   },
   "pricing": {
     "title": "Preços Transparentes",
-    "subtitle": "Sem taxas ocultas. Descontos por volume disponíveis.",
-    "downloadPriceList": "Descarregar Lista de Preços Completa",
-    "requestQuote": "Solicitar Orçamento Personalizado",
-    "perUnit": "por unidade",
+    "titleHighlight": "Preços",
+    "subtitle": "Calcule o custo do seu projeto instantaneamente. Sem taxas ocultas, sem surpresas.",
+    "calculator": "Calculadora de Preços",
+    "selectSize": "Selecionar Tamanho de Impressão",
     "quantity": "Quantidade",
+    "vinylPrinting": "Impressão em Vinil",
+    "dtfPrinting": "Impressão DTF",
+    "perPrint": "por impressão",
+    "bestValue": "MELHOR VALOR",
+    "cleanGraphics": "Gráficos limpos de uma cor",
+    "fullColor": "Cor completa, até fotos",
+    "wantAllPricing": "Quer ver todas as opções de preços?",
+    "getPriceList": "Obtenha a nossa lista de preços completa com todos os tamanhos e descontos por volume",
+    "getFullPriceList": "Obter Lista de Preços Completa",
+    "enterEmail": "Insira o seu email para descarregar",
+    "sendPriceList": "Enviaremos a lista de preços completa imediatamente",
+    "emailPlaceholder": "seu@email.com",
+    "download": "Descarregar",
+    "sending": "A enviar...",
+    "back": "← Voltar",
+    "openingFolder": "A abrir pasta da lista de preços!",
+    "folderOpened": "Foi aberto um novo separador com a nossa lista de preços completa",
+    "startDesign": "Iniciar o Seu Design",
+    "requestQuote": "Solicitar Orçamento Personalizado",
+    "customQuoteRequired": "Quantidades acima de 50 requerem um orçamento personalizado",
+    "downloadPriceList": "Descarregar Lista de Preços Completa",
+    "perUnit": "por unidade",
     "pricePerUnit": "Preço por Unidade"
   },
   "benefits": {
@@ -114,9 +174,43 @@
   },
   "configurator": {
     "title": "Desenhe o Seu Produto",
-    "subtitle": "Crie designs personalizados em tempo real",
+    "titleHighlight": "Configurador",
+    "subtitle": "Carregue o seu design e veja-o ganhar vida em tempo real. Obtenha um orçamento instantâneo e faça a sua encomenda.",
+    "uploadToPreview": "Carregue o seu design para pré-visualizar",
+    "clickToUpload": "Clique aqui para carregar",
+    "adjustDesign": "Ajustar Design",
+    "size": "Tamanho",
+    "horizontal": "Horizontal",
+    "vertical": "Vertical",
+    "removeDesign": "Remover Design",
+    "step1": "1. Escolher Produto",
+    "step2": "2. Escolher Cor",
+    "step3": "3. Inserir Quantidade",
+    "step4": "4. Obter Orçamento",
     "selectProduct": "Selecionar Produto",
     "selectColor": "Selecionar Cor",
+    "needOtherColors": "💡 Precisa de outras cores ou modelos? Pergunte-nos!",
+    "numberOfItems": "Número de itens",
+    "enterQuantity": "Inserir quantidade",
+    "minimumOrder": "Encomenda mínima: 5 itens",
+    "canRequestWithout": "💡 Pode solicitar um orçamento mesmo sem carregar um design",
+    "sendMeQuote": "Enviar Orçamento",
+    "yourPhone": "O Seu Número de Telefone",
+    "phonePlaceholder": "+351 922 280 992",
+    "send": "Enviar",
+    "sending": "A enviar...",
+    "cancel": "Cancelar",
+    "quoteSent": "Pedido de Orçamento Enviado!",
+    "contactSoon": "Entraremos em contacto em breve com um orçamento personalizado para o seu design.",
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram",
+    "designTips": "💡 Dicas de Design",
+    "tips": [
+      "Use imagens de alta resolução (mínimo 300 DPI)",
+      "Ficheiros PNG com fundos transparentes funcionam melhor",
+      "Ficheiros vetoriais (SVG) garantem qualidade perfeita em qualquer tamanho",
+      "Evite linhas muito finas (mínimo 0,5mm)"
+    ],
     "uploadDesign": "Carregar Design",
     "addText": "Adicionar Texto",
     "preview": "Pré-visualizar",
@@ -125,18 +219,136 @@
   },
   "quiz": {
     "title": "Encontre o Seu Produto Perfeito",
-    "subtitle": "Responda a algumas perguntas para obter recomendações personalizadas",
+    "titleHighlight": "Método a Escolher?",
+    "subtitle": "Faça o nosso questionário rápido e recomendaremos o método de impressão perfeito para o seu projeto.",
+    "question": "Questão",
+    "of": "de",
+    "quizComplete": "Questionário Completo!",
+    "weRecommend": "Recomendamos:",
+    "whyWorks": "Porque isto funciona para si:",
+    "startDesign": "Iniciar o Seu Design",
+    "contactUs": "Contacte-nos",
+    "retakeQuiz": "Refazer Questionário",
+    "previousQuestion": "Questão Anterior",
+    "questions": [
+      {
+        "question": "Quantas cores tem o seu design?",
+        "options": [
+          "1-3 cores sólidas",
+          "4+ cores ou gradientes",
+          "Ainda não tenho certeza"
+        ]
+      },
+      {
+        "question": "Que tipo de design vai imprimir?",
+        "options": [
+          "Apenas logótipo ou texto",
+          "Foto ou arte complexa",
+          "Mistura de ambos"
+        ]
+      },
+      {
+        "question": "Qual é a quantidade da sua encomenda?",
+        "options": [
+          "1-20 peças",
+          "20-100 peças",
+          "100+ peças"
+        ]
+      },
+      {
+        "question": "Que acabamento prefere?",
+        "options": [
+          "Mate e durável",
+          "Suave e flexível",
+          "Sem preferência"
+        ]
+      }
+    ],
+    "results": {
+      "vinyl": {
+        "method": "Impressão em Vinil",
+        "icon": "✂️",
+        "description": "Perfeito para as suas necessidades! A impressão em vinil é ideal para designs simples e arrojados com cores sólidas.",
+        "benefits": [
+          "Económico para o seu tipo de design",
+          "Acabamento mate durável",
+          "Ótimo para texto e logótipos",
+          "Tempo de produção rápido"
+        ]
+      },
+      "dtf": {
+        "method": "Impressão DTF",
+        "icon": "🔥",
+        "description": "DTF é a sua melhor escolha! Perfeito para designs complexos e coloridos com qualidade fotorrealista.",
+        "benefits": [
+          "Cores e gradientes ilimitados",
+          "Toque suave e confortável",
+          "Qualidade fotorrealista",
+          "Ótimo para arte detalhada"
+        ]
+      },
+      "both": {
+        "method": "Ambos os Métodos Funcionam!",
+        "icon": "✨",
+        "description": "Tem flexibilidade! Ambos os métodos podem funcionar bem para o seu projeto. Vamos discutir qual se adequa melhor ao seu orçamento e prazo.",
+        "benefits": [
+          "Múltiplas opções disponíveis",
+          "Podemos recomendar a melhor opção",
+          "Opções de preços flexíveis",
+          "Contacte-nos para aconselhamento personalizado"
+        ]
+      }
+    },
     "startQuiz": "Iniciar Questionário"
   },
   "contact": {
     "title": "Entre em Contacto",
-    "subtitle": "Tem questões? Estamos aqui para ajudar!",
-    "name": "Nome",
-    "email": "Email",
+    "titleHighlight": "Contacto",
+    "subtitle": "Pronto para iniciar o seu projeto? Preencha o formulário abaixo e entraremos em contacto dentro de 24 horas.",
+    "sendMessage": "Envie-nos uma Mensagem",
+    "thankYou": "Obrigado!",
+    "receivedMessage": "Recebemos a sua mensagem e entraremos em contacto em breve.",
+    "thankYouReaching": "Obrigado por nos contactar!",
+    "yourName": "O Seu Nome *",
+    "namePlaceholder": "João Silva",
+    "email": "Email *",
+    "emailPlaceholder": "joao@exemplo.com",
     "phone": "Telefone",
+    "phonePlaceholder": "+351922280992",
+    "productType": "Tipo de Produto *",
+    "selectProduct": "Selecionar produto",
+    "tshirt": "T-Shirt",
+    "hoodie": "Hoodie",
+    "tote": "Saco Tote",
+    "other": "Outro",
+    "quantity": "Quantidade *",
+    "selectQuantity": "Selecionar quantidade",
+    "quantity1-20": "1-20 peças",
+    "quantity20-50": "20-50 peças",
+    "quantity50-100": "50-100 peças",
+    "quantity100+": "100+ peças",
+    "projectDetails": "Detalhes do Projeto *",
+    "projectPlaceholder": "Conte-nos sobre o seu projeto, requisitos de design, prazos, etc.",
+    "sendMessageBtn": "Enviar Mensagem",
+    "sending": "A enviar...",
+    "contactInformation": "Informações de Contacto",
+    "emailLabel": "Email",
+    "phoneLabel": "Telefone / WhatsApp / Telegram",
+    "location": "Localização",
+    "quickContact": "Contacto Rápido",
+    "preferInstant": "Prefere mensagens instantâneas? Contacte-nos diretamente:",
+    "messageWhatsApp": "Mensagem no WhatsApp",
+    "messageTelegram": "Mensagem no Telegram",
+    "businessHours": "Horário de Funcionamento",
+    "mondayFriday": "Segunda - Sexta",
+    "saturday": "Sábado",
+    "sunday": "Domingo",
+    "hours9-6": "9:00 - 18:00",
+    "hours10-2": "10:00 - 14:00",
+    "closed": "Fechado",
+    "name": "Nome",
     "message": "Mensagem",
     "send": "Enviar Mensagem",
-    "sending": "A enviar...",
     "success": "Mensagem enviada com sucesso!",
     "error": "Falha ao enviar mensagem. Por favor, tente novamente."
   },

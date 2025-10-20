@@ -5,30 +5,14 @@ import { motion, useInView } from "framer-motion";
 import { Scissors, Printer, Check, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from "next-intl";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const vinylFeatures = [
-  { text: "Perfect for simple designs", available: true },
-  { text: "Matte finish", available: true },
-  { text: "Durable and long-lasting", available: true },
-  { text: "Special effect options (Velvet, metallic, reflective and more)", available: true },
-  { text: "Best for 1-3 colors", available: true },
-  { text: "No photo-realistic prints", available: false },
-];
-
-const dtfFeatures = [
-  { text: "Full-color photo quality", available: true },
-  { text: "Vibrant gradients", available: true },
-  { text: "Soft, flexible feel", available: true },
-  { text: "Complex designs welcome", available: true },
-  { text: "Unlimited colors", available: true },
-  { text: "Fast production", available: true },
-];
-
 export function TechnologiesSection() {
+  const t = useTranslations('technologies');
   const sectionRef = useRef<HTMLDivElement>(null);
   const vinylCardRef = useRef<HTMLDivElement>(null);
   const dtfCardRef = useRef<HTMLDivElement>(null);
@@ -91,12 +75,12 @@ export function TechnologiesSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-4">
-            Choose Your <span className="gradient-text">Technology</span>
+            {t('title').split(' ').slice(0, -1).join(' ')} <span className="gradient-text">{t('titleHighlight')}</span>
           </h2>
           <p className="text-xl text-glass-700 max-w-3xl mx-auto leading-relaxed">
-            We offer two professional printing methods, each with unique advantages.
+            {t('subtitle')}
             <br className="hidden md:block" />
-            Let&nbsp;us help you choose the perfect one for your&nbsp;project.
+            {t('subtitleSecond')}
           </p>
         </motion.div>
 
@@ -111,18 +95,18 @@ export function TechnologiesSection() {
                 <div className="w-12 h-12 bg-charcoal rounded-full flex items-center justify-center">
                   <Scissors className="text-white" size={24} />
                 </div>
-                <h3 className="text-3xl font-bold text-charcoal">Vinyl Printing</h3>
+                <h3 className="text-3xl font-bold text-charcoal">{t('vinyl.title')}</h3>
               </div>
 
               <p className="text-glass-700 mb-8 text-lg leading-relaxed">
-                Perfect for bold, simple designs with solid colors. Ideal&nbsp;for&nbsp;text, logos, and geometric patterns.
+                {t('vinyl.description')}
               </p>
 
               {/* Animated Cutting Process */}
               <div className="mb-4 p-6 glass-card rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="w-2 h-2 bg-charcoal rounded-full animate-pulse" />
-                  <span className="text-sm text-charcoal font-medium">Cutting Process</span>
+                  <span className="text-sm text-charcoal font-medium">{t('vinyl.cuttingProcess')}</span>
                 </div>
                 <motion.div
                   className="h-2 bg-glass-200 rounded-full overflow-hidden"
@@ -154,7 +138,7 @@ export function TechnologiesSection() {
               </div>
 
               <ul className="space-y-3">
-                {vinylFeatures.map((feature, index) => (
+                {(t.raw('vinyl.features') as string[]).map((feature: string, index: number) => (
                   <motion.li
                     key={index}
                     initial={{ x: -20, opacity: 0 }}
@@ -162,24 +146,24 @@ export function TechnologiesSection() {
                     transition={{ delay: 0.1 * index, duration: 0.4 }}
                     className="flex items-center space-x-3"
                   >
-                    {feature.available ? (
+                    {index < 5 ? (
                       <Check className="text-charcoal flex-shrink-0" size={20} />
                     ) : (
                       <X className="text-glass-500 flex-shrink-0" size={20} />
                     )}
-                    <span className={feature.available ? "text-charcoal" : "text-glass-500"}>
-                      {feature.text}
+                    <span className={index < 5 ? "text-charcoal" : "text-glass-500"}>
+                      {feature}
                     </span>
                   </motion.li>
                 ))}
               </ul>
 
               <div className="mt-8 pt-6 border-t border-glass-300">
-                <div className="text-sm text-glass-700 mb-2 font-medium">Best for:</div>
+                <div className="text-sm text-glass-700 mb-2 font-medium">{t('vinyl.bestFor')}</div>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Logos</span>
-                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">Text</span>
-                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Simple Graphics</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">{t('vinyl.logos')}</span>
+                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">{t('vinyl.text')}</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">{t('vinyl.simpleGraphics')}</span>
                 </div>
               </div>
             </div>
@@ -210,18 +194,18 @@ export function TechnologiesSection() {
                 <div className="w-12 h-12 bg-gradient-to-br from-[#FF5828] to-[#ff7a52] rounded-full flex items-center justify-center shadow-lg">
                   <Printer className="text-white" size={24} />
                 </div>
-                <h3 className="text-3xl font-bold text-charcoal">DTF Printing</h3>
+                <h3 className="text-3xl font-bold text-charcoal">{t('dtf.title')}</h3>
               </div>
 
               <p className="text-glass-700 mb-8 text-lg">
-                Advanced direct-to-film technology for photo-realistic, full-color designs with unlimited detail.
+                {t('dtf.description')}
               </p>
 
               {/* DTF Preparation */}
               <div className="mb-4 p-6 glass-card rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="w-2 h-2 bg-vibrant-blue rounded-full animate-pulse" />
-                  <span className="text-sm text-charcoal font-medium">DTF Preparation</span>
+                  <span className="text-sm text-charcoal font-medium">{t('dtf.preparation')}</span>
                 </div>
                 <div className="relative h-2 bg-glass-200 rounded-full overflow-hidden">
                   <motion.div
@@ -236,7 +220,7 @@ export function TechnologiesSection() {
               <div className="mb-8 p-6 glass-card rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="w-2 h-2 bg-charcoal rounded-full animate-pulse" />
-                  <span className="text-sm text-charcoal font-medium">Heat Transfer Process</span>
+                  <span className="text-sm text-charcoal font-medium">{t('dtf.heatTransfer')}</span>
                 </div>
                 <div className="relative h-2 bg-glass-200 rounded-full overflow-hidden">
                   <motion.div
@@ -248,7 +232,7 @@ export function TechnologiesSection() {
               </div>
 
               <ul className="space-y-3">
-                {dtfFeatures.map((feature, index) => (
+                {(t.raw('dtf.features') as string[]).map((feature: string, index: number) => (
                   <motion.li
                     key={index}
                     initial={{ x: -20, opacity: 0 }}
@@ -257,18 +241,18 @@ export function TechnologiesSection() {
                     className="flex items-center space-x-3"
                   >
                     <Check className="text-charcoal flex-shrink-0" size={20} />
-                    <span className="text-charcoal">{feature.text}</span>
+                    <span className="text-charcoal">{feature}</span>
                   </motion.li>
                 ))}
               </ul>
 
               <div className="mt-8 pt-6 border-t border-glass-300">
-                <div className="text-sm text-glass-700 mb-2 font-medium">Best for:</div>
+                <div className="text-sm text-glass-700 mb-2 font-medium">{t('dtf.bestFor')}</div>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Photos</span>
-                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">Complex Art</span>
-                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">Gradients</span>
-                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">Full Color</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">{t('dtf.photos')}</span>
+                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">{t('dtf.complexArt')}</span>
+                  <span className="px-3 py-1 bg-charcoal text-white rounded-full text-sm font-medium">{t('dtf.gradients')}</span>
+                  <span className="px-3 py-1 bg-charcoal-light text-white rounded-full text-sm font-medium">{t('dtf.fullColor')}</span>
                 </div>
               </div>
             </div>
@@ -286,7 +270,7 @@ export function TechnologiesSection() {
             href="#quiz"
             className="inline-flex items-center space-x-2 px-8 py-4 bg-charcoal text-white rounded-full hover:bg-charcoal-light transition-all duration-300 font-medium shadow-xl hover:shadow-2xl"
           >
-            <span>Not sure? Take our quiz</span>
+            <span>{t('cta')}</span>
             <motion.span
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
