@@ -215,7 +215,18 @@
     "addText": "Adicionar Texto",
     "preview": "Pré-visualizar",
     "saveDesign": "Guardar Design",
-    "orderNow": "Encomendar Agora"
+    "orderNow": "Encomendar Agora",
+    "zoomIn": "Ampliar",
+    "zoomOut": "Reduzir",
+    "dragToMove": "Arraste para mover",
+    "quickControls": "Controlos Rápidos",
+    "mouseWheelZoom": "Roda do rato para ampliar",
+    "dragToReposition": "Arraste o design para reposicionar",
+    "hoverForControls": "Passe o rato sobre a pré-visualização para controlos",
+    "dragCornerToResize": "Arraste o canto para redimensionar",
+    "rotate": "Rodar",
+    "resize": "Redimensionar",
+    "hoverToShowControls": "Passe o rato para mostrar controlos"
   },
   "quiz": {
     "title": "Encontre o Seu Produto Perfeito",
@@ -365,17 +376,32 @@
     "allRightsReserved": "Todos os direitos reservados."
   },
   "cookies": {
-    "title": "Definições de Cookies",
-    "description": "Utilizamos cookies para melhorar a sua experiência de navegação e analisar o nosso tráfego. Pode personalizar as suas preferências abaixo.",
+    "title": "Preferências de Cookies",
+    "description": "Utilizamos cookies para melhorar a sua experiência de navegação e analisar o nosso tráfego. Escolha quais cookies pretende aceitar.",
+    "acceptAll": "Aceitar Todos",
+    "rejectAll": "Rejeitar Todos",
+    "savePreferences": "Guardar Preferências",
     "necessary": "Cookies Necessários",
     "necessaryDescription": "Essenciais para o funcionamento adequado do website. Não podem ser desativados.",
     "analytics": "Cookies de Análise",
     "analyticsDescription": "Ajudam-nos a compreender como os visitantes interagem com o nosso website.",
     "marketing": "Cookies de Marketing",
-    "marketingDescription": "Utilizados para rastrear visitantes através de websites para exibir anúncios relevantes.",
-    "acceptAll": "Aceitar Todos",
-    "rejectAll": "Rejeitar Todos",
-    "savePreferences": "Guardar Preferências",
-    "manageSettings": "Gerir Definições de Cookies"
+    "marketingDescription": "Utilizados para rastrear visitantes em websites para fins publicitários.",
+    "learnMore": "Saiba mais na nossa",
+    "cookiePolicy": "Política de Cookies"
+  },
+  "consent": {
+    "privacy": {
+      "label": "Concordo com a",
+      "link": "Política de Privacidade",
+      "required": "*",
+      "error": "Deve aceitar a Política de Privacidade para continuar",
+      "description": "Os seus dados serão processados de acordo com a nossa Política de Privacidade. Obrigatório para processar encomendas."
+    },
+    "marketing": {
+      "label": "Concordo em receber comunicações de marketing da Blooma. Posso retirar este consentimento a qualquer momento.",
+      "link": "Política de Privacidade",
+      "description": "Opcional. Enviaremos atualizações sobre novos produtos, ofertas especiais e dicas de impressão."
+    }
   }
 }

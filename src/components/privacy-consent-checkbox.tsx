@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface PrivacyConsentCheckboxProps {
   checked: boolean;
@@ -23,6 +24,8 @@ export function PrivacyConsentCheckbox({
   required = true,
   className = "",
 }: PrivacyConsentCheckboxProps) {
+  const t = useTranslations('consent.privacy');
+  
   return (
     <div className={`space-y-2 ${className}`}>
       <label className="flex items-start space-x-3 cursor-pointer group">
@@ -45,27 +48,27 @@ export function PrivacyConsentCheckbox({
           />
         </div>
         <span className={`text-sm leading-relaxed ${error ? "text-red-600" : "text-gray-700"}`}>
-          I agree to the{" "}
+          {t('label')}{" "}
           <Link 
             href="/privacy-policy" 
             target="_blank"
             className="text-primary-500 hover:text-primary-600 underline font-medium"
           >
-            Privacy Policy
+            {t('link')}
           </Link>
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-red-500 ml-1">{t('required')}</span>}
         </span>
       </label>
       
       {error && (
         <div className="flex items-start space-x-2 text-red-600 text-xs">
           <AlertCircle size={14} className="mt-0.5 flex-shrink-0" />
-          <span>You must accept the Privacy Policy to continue</span>
+          <span>{t('error')}</span>
         </div>
       )}
       
       <p className="text-xs text-gray-500 ml-8">
-        Your data will be processed according to our Privacy Policy. Required for order processing.
+        {t('description')}
       </p>
     </div>
   );

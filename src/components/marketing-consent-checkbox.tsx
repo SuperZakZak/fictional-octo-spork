@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface MarketingConsentCheckboxProps {
   checked: boolean;
@@ -18,6 +19,8 @@ export function MarketingConsentCheckbox({
   onChange,
   className = "",
 }: MarketingConsentCheckboxProps) {
+  const t = useTranslations('consent.marketing');
+  
   return (
     <div className={`space-y-2 ${className}`}>
       <label className="flex items-start space-x-3 cursor-pointer group">
@@ -35,19 +38,19 @@ export function MarketingConsentCheckbox({
           />
         </div>
         <span className="text-sm text-gray-700 leading-relaxed">
-          I agree to receive marketing communications from Blooma. I can withdraw this consent at any time.{" "}
+          {t('label')}{" "}
           <Link 
             href="/privacy-policy" 
             target="_blank"
             className="text-primary-500 hover:text-primary-600 underline font-medium"
           >
-            Privacy Policy
+            {t('link')}
           </Link>
         </span>
       </label>
       
       <p className="text-xs text-gray-500 ml-8">
-        Optional. We'll send you updates about new products, special offers, and printing tips.
+        {t('description')}
       </p>
     </div>
   );

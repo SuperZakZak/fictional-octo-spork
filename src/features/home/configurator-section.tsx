@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Upload, Download, Send, Shirt, ShoppingBag, X, Wind, Phone, CheckCircle2 } from "lucide-react";
+import { Upload, Download, Send, Shirt, ShoppingBag, X, Wind, Phone, CheckCircle2, ZoomIn, ZoomOut, Move, RotateCw, Maximize2 } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 import html2canvas from "html2canvas";
 import { parsePhoneNumber, isValidPhoneNumber } from "libphonenumber-js";
@@ -54,6 +54,12 @@ export function ConfiguratorSection() {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [designPosition, setDesignPosition] = useState({ x: 50, y: 40 });
   const [designSize, setDesignSize] = useState(30);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isResizing, setIsResizing] = useState(false);
+  const [resizeStart, setResizeStart] = useState({ size: 30, x: 0, y: 0 });
+  const [rotation, setRotation] = useState(0);
+  const designRef = useRef<HTMLDivElement>(null);
   const [mockupImageSrc, setMockupImageSrc] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(10);
   const [showPhoneInput, setShowPhoneInput] = useState(false);
@@ -237,6 +243,85 @@ export function ConfiguratorSection() {
     window.open(`https://t.me/share/url?url=blooma.pt&text=${message}`, '_blank');
   };
 
+  // Mouse wheel zoom handler
+  const handleWheel = useCallback((e: WheelEvent) => {
+    if (!uploadedImage) return;
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -2 : 2;
+      setDesignSize(prev => Math.max(10, Math.min(60, prev + delta)));
+    }
+  }, [uploadedImage]);
+
+  // Drag handlers for moving
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!uploadedImage || isResizing) return;
+    e.stopPropagation();
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+  }, [uploadedImage, isResizing]);
+
+  // Resize handlers
+  const handleResizeStart = useCallback((e: React.MouseEvent) => {
+    if (!uploadedImage) return;
+    e.stopPropagation();
+    setIsResizing(true);
+    setResizeStart({ size: designSize, x: e.clientX, y: e.clientY });
+  }, [uploadedImage, designSize]);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!previewRef.current) return;
+    
+    // Handle dragging (moving)
+    if (isDragging) {
+      const rect = previewRef.current.getBoundingClientRect();
+      const deltaX = ((e.clientX - dragStart.x) / rect.width) * 100;
+      const deltaY = ((e.clientY - dragStart.y) / rect.height) * 100;
+      
+      setDesignPosition(prev => ({
+        x: Math.max(20, Math.min(80, prev.x + deltaX)),
+        y: Math.max(20, Math.min(80, prev.y + deltaY))
+      }));
+      
+      setDragStart({ x: e.clientX, y: e.clientY });
+    }
+    
+    // Handle resizing
+    if (isResizing) {
+      const rect = previewRef.current.getBoundingClientRect();
+      const deltaX = e.clientX - resizeStart.x;
+      const deltaY = e.clientY - resizeStart.y;
+      const delta = (deltaX + deltaY) / 2; // Average of both directions
+      const sizeChange = (delta / rect.width) * 100;
+      
+      setDesignSize(Math.max(10, Math.min(80, resizeStart.size + sizeChange)));
+    }
+  }, [isDragging, isResizing, dragStart, resizeStart]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+    setIsResizing(false);
+  }, []);
+
+  // Add event listeners
+  useEffect(() => {
+    const preview = previewRef.current;
+    if (!preview) return;
+
+    preview.addEventListener('wheel', handleWheel, { passive: false });
+    
+    if (isDragging || isResizing) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      preview.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [handleWheel, handleMouseMove, handleMouseUp, isDragging, isResizing]);
+
   return (
     <section
       id="configurator"
@@ -296,21 +381,89 @@ export function ConfiguratorSection() {
                 {/* Uploaded Design */}
                 {uploadedImage && (
                   <div
-                    className="absolute"
+                    ref={designRef}
+                    className={`absolute group ${isDragging ? 'cursor-grabbing' : isResizing ? 'cursor-nwse-resize' : 'cursor-grab'}`}
                     style={{
                       left: `${designPosition.x}%`,
                       top: `${designPosition.y}%`,
                       width: `${designSize}%`,
-                      transform: 'translate(-50%, -50%)',
+                      transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
                     }}
+                    onMouseDown={handleMouseDown}
                   >
+                    {/* Border Frame - visible on hover */}
+                    <div className="absolute inset-0 border border-gray-400 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                    
                     <img
                       src={uploadedImage}
                       alt="Your design"
-                      className="w-full h-auto drop-shadow-lg"
+                      className="w-full h-auto drop-shadow-lg pointer-events-none"
                       draggable={false}
                     />
+                    
+                    {/* Control Icons - visible on hover */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                      {/* Delete - Top Left */}
+                      <button
+                        className="absolute -top-2 -left-2 w-6 h-6 bg-white rounded-full border border-gray-300 shadow-md hover:shadow-lg hover:scale-110 transition-all flex items-center justify-center pointer-events-auto"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setUploadedImage(null);
+                        }}
+                        title={t('removeDesign')}
+                      >
+                        <X size={12} className="text-gray-700" />
+                      </button>
+
+                      {/* Rotate - Top Right */}
+                      <button
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full border border-gray-300 shadow-md hover:shadow-lg hover:scale-110 transition-all flex items-center justify-center pointer-events-auto"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setRotation(prev => (prev + 90) % 360);
+                        }}
+                        title={t('rotate')}
+                      >
+                        <RotateCw size={12} className="text-gray-700" />
+                      </button>
+
+                      {/* Resize - Bottom Right */}
+                      <div
+                        className="absolute -bottom-2 -right-2 w-6 h-6 bg-white rounded-full border border-gray-300 shadow-md hover:shadow-lg hover:scale-110 transition-all flex items-center justify-center pointer-events-auto cursor-nwse-resize"
+                        onMouseDown={handleResizeStart}
+                        title={t('resize')}
+                      >
+                        <Maximize2 size={12} className="text-gray-700" />
+                      </div>
+                    </div>
                   </div>
+                )}
+
+                {/* Compact Control Panel */}
+                {uploadedImage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm rounded-full shadow-xl px-4 py-2 flex items-center gap-2 border border-gray-200"
+                  >
+                    {/* Zoom Out */}
+                    <button
+                      onClick={() => setDesignSize(prev => Math.max(10, prev - 5))}
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                      title={t('zoomOut')}
+                    >
+                      <ZoomOut size={18} className="text-gray-700" />
+                    </button>
+                    
+                    {/* Zoom In */}
+                    <button
+                      onClick={() => setDesignSize(prev => Math.min(80, prev + 5))}
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                      title={t('zoomIn')}
+                    >
+                      <ZoomIn size={18} className="text-gray-700" />
+                    </button>
+                  </motion.div>
                 )}
 
                 {/* Instructions Overlay */}
@@ -328,61 +481,32 @@ export function ConfiguratorSection() {
                 )}
               </div>
 
-              {/* Design Controls */}
+              {/* Control Hints */}
               {uploadedImage && (
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  className="mt-6 bg-white rounded-2xl p-6 shadow-lg"
+                  className="mt-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-4 border border-blue-200"
                 >
-                  <h4 className="font-bold text-gray-900 mb-4">{t('adjustDesign')}</h4>
-                  
-                  {/* Size Slider */}
-                  <div className="mb-4">
-                    <label className="text-sm text-gray-600 mb-2 block">{t('size')}</label>
-                    <input
-                      type="range"
-                      min="10"
-                      max="60"
-                      value={designSize}
-                      onChange={(e) => setDesignSize(parseInt(e.target.value))}
-                      className="w-full accent-charcoal"
-                    />
-                  </div>
-
-                  {/* Position Sliders */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm text-gray-600 mb-2 block">{t('horizontal')}</label>
-                      <input
-                        type="range"
-                        min="20"
-                        max="80"
-                        value={designPosition.x}
-                        onChange={(e) => setDesignPosition(prev => ({ ...prev, x: parseInt(e.target.value) }))}
-                        className="w-full accent-charcoal"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm text-gray-600 mb-2 block">{t('vertical')}</label>
-                      <input
-                        type="range"
-                        min="20"
-                        max="80"
-                        value={designPosition.y}
-                        onChange={(e) => setDesignPosition(prev => ({ ...prev, y: parseInt(e.target.value) }))}
-                        className="w-full accent-charcoal"
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => setUploadedImage(null)}
-                    className="mt-4 w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center space-x-2"
-                  >
-                    <X size={16} />
-                    <span>{t('removeDesign')}</span>
-                  </button>
+                  <h4 className="font-bold text-gray-900 mb-3 text-sm">{t('quickControls')}</h4>
+                  <ul className="space-y-2 text-xs text-gray-700">
+                    <li className="flex items-center gap-2">
+                      <div className="w-5 h-5 rounded-full border border-gray-400 flex items-center justify-center">
+                        <Maximize2 size={12} className="text-gray-600" />
+                      </div>
+                      <span>{t('hoverToShowControls')}</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Move size={14} className="text-gray-600" />
+                      <span>{t('dragToReposition')}</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-white rounded border border-gray-300 font-mono text-xs">Ctrl</kbd>
+                      <span>+</span>
+                      <Move size={14} className="text-gray-600" />
+                      <span>{t('mouseWheelZoom')}</span>
+                    </li>
+                  </ul>
                 </motion.div>
               )}
             </div>
