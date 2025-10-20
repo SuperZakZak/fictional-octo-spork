@@ -59,6 +59,7 @@ export function ConfiguratorSection() {
   const [isResizing, setIsResizing] = useState(false);
   const [resizeStart, setResizeStart] = useState({ size: 30, x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number; distance: number } | null>(null);
   const designRef = useRef<HTMLDivElement>(null);
   const [mockupImageSrc, setMockupImageSrc] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(10);
@@ -303,6 +304,68 @@ export function ConfiguratorSection() {
     setIsResizing(false);
   }, []);
 
+  // Touch handlers for mobile
+  const getTouchDistance = (touches: TouchList) => {
+    if (touches.length < 2) return 0;
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (!uploadedImage) return;
+    
+    if (e.touches.length === 1) {
+      // Single touch - drag
+      setIsDragging(true);
+      setDragStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    } else if (e.touches.length === 2) {
+      // Two fingers - pinch to zoom
+      const distance = getTouchDistance(e.touches);
+      setTouchStart({
+        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+        y: (e.touches[0].clientY + e.touches[1].clientY) / 2,
+        distance
+      });
+    }
+  }, [uploadedImage]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!uploadedImage || !previewRef.current) return;
+    
+    if (e.touches.length === 1 && isDragging) {
+      // Single touch - drag
+      const rect = previewRef.current.getBoundingClientRect();
+      const deltaX = ((e.touches[0].clientX - dragStart.x) / rect.width) * 100;
+      const deltaY = ((e.touches[0].clientY - dragStart.y) / rect.height) * 100;
+      
+      setDesignPosition(prev => ({
+        x: Math.max(20, Math.min(80, prev.x + deltaX)),
+        y: Math.max(20, Math.min(80, prev.y + deltaY))
+      }));
+      
+      setDragStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    } else if (e.touches.length === 2 && touchStart) {
+      // Two fingers - pinch to zoom
+      e.preventDefault();
+      const distance = getTouchDistance(e.touches);
+      const scale = distance / touchStart.distance;
+      const newSize = designSize * scale;
+      
+      setDesignSize(Math.max(10, Math.min(80, newSize)));
+      setTouchStart({
+        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+        y: (e.touches[0].clientY + e.touches[1].clientY) / 2,
+        distance
+      });
+    }
+  }, [uploadedImage, isDragging, dragStart, touchStart, designSize]);
+
+  const handleTouchEnd = useCallback(() => {
+    setIsDragging(false);
+    setTouchStart(null);
+  }, []);
+
   // Add event listeners
   useEffect(() => {
     const preview = previewRef.current;
@@ -353,7 +416,7 @@ export function ConfiguratorSection() {
             <div className="sticky top-24">
               <div
                 ref={previewRef}
-                className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white"
+                className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white touch-none"
               >
                 {/* Product Mockup */}
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -390,6 +453,9 @@ export function ConfiguratorSection() {
                       transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
                     }}
                     onMouseDown={handleMouseDown}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
                   >
                     {/* Border Frame - visible on hover */}
                     <div className="absolute inset-0 border border-gray-400 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -481,34 +547,6 @@ export function ConfiguratorSection() {
                 )}
               </div>
 
-              {/* Control Hints */}
-              {uploadedImage && (
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  className="mt-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-4 border border-blue-200"
-                >
-                  <h4 className="font-bold text-gray-900 mb-3 text-sm">{t('quickControls')}</h4>
-                  <ul className="space-y-2 text-xs text-gray-700">
-                    <li className="flex items-center gap-2">
-                      <div className="w-5 h-5 rounded-full border border-gray-400 flex items-center justify-center">
-                        <Maximize2 size={12} className="text-gray-600" />
-                      </div>
-                      <span>{t('hoverToShowControls')}</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Move size={14} className="text-gray-600" />
-                      <span>{t('dragToReposition')}</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-white rounded border border-gray-300 font-mono text-xs">Ctrl</kbd>
-                      <span>+</span>
-                      <Move size={14} className="text-gray-600" />
-                      <span>{t('mouseWheelZoom')}</span>
-                    </li>
-                  </ul>
-                </motion.div>
-              )}
             </div>
           </motion.div>
 
