@@ -18,6 +18,14 @@ export const metadata: Metadata = {
   title: "Blooma - Custom Printed Clothing & Accessories | DTF & Vinyl Printing",
   description: "Professional DTF and Vinyl printing services for custom apparel and accessories. High-quality t-shirts, hoodies, and tote bags with your designs.",
   keywords: "DTF printing, vinyl printing, custom apparel, custom t-shirts, printed clothing, Portugal, Stanley/Stella, WATC",
+  icons: {
+    icon: [
+      { url: '/icon.ico', type: 'image/x-icon' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: "Blooma - We print your vision. Beautifully.",
     description: "Professional DTF and Vinyl printing services for custom apparel",
