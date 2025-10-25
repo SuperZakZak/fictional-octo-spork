@@ -10,8 +10,8 @@
     "createDesign": "Criar Design"
   },
   "hero": {
-    "title": "Imprimimos a sua visão.",
-    "titleHighlight": "Lindamente.",
+    "title": "Transformamos a sua visão",
+    "titleHighlight": "em beleza.",
     "subtitle": "Impressão DTF e Vinil personalizada para t‑shirts, hoodies e acessórios.",
     "subtitleSecond": "Alta qualidade. Entrega rápida. Resultados impressionantes.",
     "createDesign": "Criar Design",
@@ -25,7 +25,7 @@
   },
   "technologies": {
     "title": "As Nossas Tecnologias de Impressão",
-    "titleHighlight": "Tecnologia",
+    "titleHighlight": "Impressão",
     "subtitle": "Oferecemos dois métodos de impressão profissionais, cada um com vantagens únicas.",
     "subtitleSecond": "Deixe-nos ajudá-lo a escolher o perfeito para o seu projeto.",
     "vinyl": {
@@ -364,7 +364,7 @@
     "error": "Falha ao enviar mensagem. Por favor, tente novamente."
   },
   "footer": {
-    "tagline": "Imprimimos a sua visão. Lindamente.",
+    "tagline": "Transformamos a sua visão em beleza.",
     "quickLinks": "Links Rápidos",
     "legal": "Legal",
     "contact": "Contacto",
