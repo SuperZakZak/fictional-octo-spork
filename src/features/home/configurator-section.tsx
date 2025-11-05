@@ -12,6 +12,7 @@ const products = [
   { id: "tshirt", name: "T-Shirt", icon: Shirt, mockup: "👕" },
   { id: "hoodie", name: "Hoodie", icon: Wind, mockup: "🧥" },
   { id: "tote", name: "Tote Bag", icon: ShoppingBag, mockup: "👜" },
+  { id: "shopping-bag", name: "Shopping Bag", icon: ShoppingBag, mockup: "🛍️" },
 ];
 
 // Colors for T-Shirts
@@ -41,6 +42,15 @@ const toteColors = [
   { id: "gray", name: "Gray", hex: "#d1d1d1" },
   { id: "midnight-blue", name: "Midnight Blue", hex: "#3d4f6b" },
   { id: "natural", name: "Natural", hex: "#f8f4e8" },
+];
+
+// Colors for Shopping Bags (with updated file names)
+const shoppingBagColors = [
+  { id: "black-1", name: "Black", hex: "#000000" },
+  { id: "grey", name: "Grey", hex: "#d1d1d1" },
+  { id: "midnight-blue", name: "Midnight Blue", hex: "#3d4f6b" },
+  { id: "natural", name: "Natural", hex: "#f8f4e8" },
+  { id: "white-1", name: "White", hex: "#FFFFFF" },
 ];
 
 export function ConfiguratorSection() {
@@ -73,6 +83,7 @@ export function ConfiguratorSection() {
   // Get colors based on selected product
   const availableColors = 
     selectedProduct.id === "tote" ? toteColors :
+    selectedProduct.id === "shopping-bag" ? shoppingBagColors :
     selectedProduct.id === "hoodie" ? hoodieColors :
     tshirtColors;
   const [selectedColor, setSelectedColor] = useState(availableColors[0]);
@@ -425,7 +436,9 @@ export function ConfiguratorSection() {
                       src={mockupImageSrc}
                       alt={`${selectedProduct.name} - ${selectedColor.name}`}
                       className={`w-full h-full object-contain ${
-                        selectedProduct.id === "tote" ? "scale-90" : "scale-110"
+                        selectedProduct.id === "tote" || selectedProduct.id === "shopping-bag" 
+                          ? "scale-90" 
+                          : "scale-110"
                       }`}
                       onError={(e) => {
                         // Fallback to emoji if image fails to load

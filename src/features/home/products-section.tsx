@@ -20,6 +20,15 @@ const colorToFileName: Record<string, string> = {
   "#f8f4e8": "natural", // Natural/Off-white
 };
 
+// Специальный маппинг для Shopping Bag (другие названия файлов)
+const shoppingBagColorToFileName: Record<string, string> = {
+  "#000000": "black-1",
+  "#FFFFFF": "white-1",
+  "#d1d1d1": "grey",
+  "#3d4f6b": "midnight-blue",
+  "#f8f4e8": "natural",
+};
+
 // Поддерживаемые форматы изображений (в порядке приоритета)
 const IMAGE_FORMATS = ["avif", "webp", "png"];
 
@@ -58,6 +67,16 @@ const products = [
     sizes: ["One Size"],
     description: "Durable canvas tote bag for everyday use",
     priceFrom: "7",
+  },
+  {
+    id: "shopping-bag",
+    name: "Shopping Bag",
+    brand: "Stanley/Stella",
+    icon: ShoppingBag,
+    colors: ["#000000", "#FFFFFF", "#d1d1d1", "#3d4f6b", "#f8f4e8"],
+    sizes: ["One Size"],
+    description: "Eco-friendly shopping bag with handles",
+    priceFrom: "8",
   },
 ];
 
@@ -120,10 +139,12 @@ export function ProductsSection() {
                 <Image
                   src={getImagePath(
                     selectedProduct.id,
-                    colorToFileName[selectedColor],
+                    selectedProduct.id === "shopping-bag" 
+                      ? shoppingBagColorToFileName[selectedColor] 
+                      : colorToFileName[selectedColor],
                     IMAGE_FORMATS[currentFormatIndex]
                   )}
-                  alt={`${selectedProduct.name} in ${colorToFileName[selectedColor]}`}
+                  alt={`${selectedProduct.name} in ${selectedProduct.id === "shopping-bag" ? shoppingBagColorToFileName[selectedColor] : colorToFileName[selectedColor]}`}
                   fill
                   className="object-cover"
                   priority
@@ -134,7 +155,10 @@ export function ProductsSection() {
                       console.log(`Trying next format: ${IMAGE_FORMATS[currentFormatIndex + 1]}`);
                       setCurrentFormatIndex(currentFormatIndex + 1);
                     } else {
-                      console.error(`Failed to load image in all formats for: ${colorToFileName[selectedColor]}`);
+                      const fileName = selectedProduct.id === "shopping-bag" 
+                        ? shoppingBagColorToFileName[selectedColor] 
+                        : colorToFileName[selectedColor];
+                      console.error(`Failed to load image in all formats for: ${fileName}`);
                       setImageError(true);
                     }
                   }}
@@ -245,6 +269,62 @@ export function ProductsSection() {
                 ))}
               </div>
             </div>
+
+            {/* Size Guide - For Tote Bag */}
+            {selectedProduct.id === "tote" && (
+              <div className="mb-8 glass-card rounded-3xl p-6 border border-white/30">
+                <h4 className="font-bold text-charcoal mb-2">
+                  {t('tote.sizeGuide.title')}
+                </h4>
+                <p className="text-sm text-glass-600 mb-4">
+                  {t('tote.sizeGuide.subtitle')} OS
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex items-center justify-between px-4 py-2 bg-white/40 rounded-xl">
+                    <span className="text-sm font-medium text-charcoal">A - {t('tote.sizeGuide.height')}</span>
+                    <span className="text-sm font-bold text-charcoal">39 cm</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2 bg-white/40 rounded-xl">
+                    <span className="text-sm font-medium text-charcoal">C - {t('tote.sizeGuide.width')}</span>
+                    <span className="text-sm font-bold text-charcoal">37 cm</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2 bg-white/40 rounded-xl col-span-2">
+                    <span className="text-sm font-medium text-charcoal">D - {t('tote.sizeGuide.strapLength')}</span>
+                    <span className="text-sm font-bold text-charcoal">65 cm</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Size Guide - For Shopping Bag */}
+            {selectedProduct.id === "shopping-bag" && (
+              <div className="mb-8 glass-card rounded-3xl p-6 border border-white/30">
+                <h4 className="font-bold text-charcoal mb-2">
+                  {t('shoppingBag.sizeGuide.title')}
+                </h4>
+                <p className="text-sm text-glass-600 mb-4">
+                  {t('shoppingBag.sizeGuide.subtitle')}
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex items-center justify-between px-4 py-2 bg-white/40 rounded-xl">
+                    <span className="text-sm font-medium text-charcoal">A - {t('shoppingBag.sizeGuide.height')}</span>
+                    <span className="text-sm font-bold text-charcoal">37 cm</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2 bg-white/40 rounded-xl">
+                    <span className="text-sm font-medium text-charcoal">B - {t('shoppingBag.sizeGuide.length')}</span>
+                    <span className="text-sm font-bold text-charcoal">49 cm</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2 bg-white/40 rounded-xl">
+                    <span className="text-sm font-medium text-charcoal">C - {t('shoppingBag.sizeGuide.width')}</span>
+                    <span className="text-sm font-bold text-charcoal">14 cm</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2 bg-white/40 rounded-xl">
+                    <span className="text-sm font-medium text-charcoal">D - {t('shoppingBag.sizeGuide.strapLength')}</span>
+                    <span className="text-sm font-bold text-charcoal">70 cm</span>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Features */}
             <div className="glass-card rounded-3xl p-6 mb-8 border border-white/30">

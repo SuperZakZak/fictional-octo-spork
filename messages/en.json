@@ -93,7 +93,28 @@
       "name": "Tote Bag",
       "brand": "Stanley/Stella",
       "description": "Durable canvas tote bag for everyday use",
-      "priceFrom": "7"
+      "priceFrom": "7",
+      "sizeGuide": {
+        "title": "Size Guide",
+        "subtitle": "Measurements in cm",
+        "height": "Height",
+        "width": "Width",
+        "strapLength": "Strap Length"
+      }
+    },
+    "shoppingBag": {
+      "name": "Shopping Bag",
+      "brand": "Stanley/Stella",
+      "description": "Eco-friendly shopping bag with handles",
+      "priceFrom": "8",
+      "sizeGuide": {
+        "title": "Size Guide",
+        "subtitle": "Measurements in cm",
+        "height": "Height",
+        "length": "Length",
+        "width": "Width",
+        "strapLength": "Strap Length"
+      }
     },
     "features": [
       "100% organic cotton (or premium canvas for bags)",
@@ -331,6 +352,7 @@
     "tshirt": "T-Shirt",
     "hoodie": "Hoodie",
     "tote": "Tote Bag",
+    "shoppingBag": "Shopping Bag",
     "other": "Other",
     "quantity": "Quantity *",
     "selectQuantity": "Select quantity",

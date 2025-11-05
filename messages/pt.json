@@ -93,7 +93,28 @@
       "name": "Saco Tote",
       "brand": "Stanley/Stella",
       "description": "Saco de lona durável para uso diário",
-      "priceFrom": "7"
+      "priceFrom": "7",
+      "sizeGuide": {
+        "title": "Guia de Tamanhos",
+        "subtitle": "Medidas em cm",
+        "height": "Altura",
+        "width": "Largura",
+        "strapLength": "Comprimento da Alça"
+      }
+    },
+    "shoppingBag": {
+      "name": "Saco de Compras",
+      "brand": "Stanley/Stella",
+      "description": "Saco de compras ecológico com alças",
+      "priceFrom": "8",
+      "sizeGuide": {
+        "title": "Guia de Tamanhos",
+        "subtitle": "Medidas em cm",
+        "height": "Altura",
+        "length": "Comprimento",
+        "width": "Largura",
+        "strapLength": "Comprimento da Alça"
+      }
     },
     "features": [
       "100% algodão orgânico (ou lona premium para sacos)",
@@ -331,6 +352,7 @@
     "tshirt": "T-Shirt",
     "hoodie": "Hoodie",
     "tote": "Saco Tote",
+    "shoppingBag": "Saco de Compras",
     "other": "Outro",
     "quantity": "Quantidade *",
     "selectQuantity": "Selecionar quantidade",
