@@ -76,7 +76,7 @@ const products = [
     colors: ["#000000", "#FFFFFF", "#d1d1d1", "#3d4f6b", "#f8f4e8"],
     sizes: ["One Size"],
     description: "Eco-friendly shopping bag with handles",
-    priceFrom: "8",
+    priceFrom: "9",
   },
 ];
 
